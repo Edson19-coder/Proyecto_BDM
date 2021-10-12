@@ -1,0 +1,51 @@
+:root {
+    --main-color: #2b3c85f3;
+    --second-color: white;
+    --t-color: rgb(173, 173, 173);
+}
+
+body{
+    background-color: whitesmoke;
+    font-family: 'Poppins', sans-serif;
+}
+
+.text-primary {
+    color: var(--main-color);
+}
+
+.navbar{
+    background-color: transparent !important; 
+}
+
+a.nav-link{
+    color: black;
+}
+
+a.nav-link:hover{
+    color: var(--main-color);
+}
+
+.dropdown-menu.categories {
+    min-width: 26rem;
+    padding: .25rem .5rem;
+}
+
+.btn.btn-primary {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.btn.btn-primary:hover {
+    background-color: #3a52c0f3;
+    border-color: #3a52c0f3;
+}
+
+.btn-register {
+    border-color: var(--main-color);
+    color: var(--main-color) !important;
+}
+
+.btn-register:hover {
+    background-color: var(--main-color);
+    color: var(--second-color) !important;
+}

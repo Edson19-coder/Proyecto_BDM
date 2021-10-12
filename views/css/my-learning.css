@@ -1,0 +1,11 @@
+.my-learning .card {
+    margin: 5px;
+}
+
+.my-learning a {
+    padding: 0px !important;
+    margin: 0px !important;
+    width: auto !important;
+    text-decoration: none;
+    color: black;
+}

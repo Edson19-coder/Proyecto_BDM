@@ -1,0 +1,16 @@
+.content-menu {
+    background-color: white;
+    box-shadow: 0px 0px 5px 0px grey;
+}
+
+.options-list a:hover {
+    color: #153ff7 !important;
+}
+
+.un-active {
+    display: none;
+}
+
+.hide {
+    display: none;
+}

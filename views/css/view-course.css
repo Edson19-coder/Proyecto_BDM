@@ -1,0 +1,51 @@
+.video-course {
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 3px 0px grey;
+}
+
+.seactions-course {
+    padding: 10px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+.content-course {
+    margin-top: 10px;
+    box-shadow: 0px 0px 5px 0px grey;
+}
+
+.content-course > .card-body {
+    padding: 5px !important;
+}
+
+.content-course > .card-body p {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 5px !important;
+    width: auto;
+    height: auto;
+}
+
+.video-seen {
+    color: #008000;
+}
+
+.view-course a {
+    text-decoration: none;
+    color: black;
+}
+
+p > i {
+    margin-right: 10px;
+}
+
+.global {
+	height: 470px;
+	width: auto;
+	overflow-y: scroll;
+}

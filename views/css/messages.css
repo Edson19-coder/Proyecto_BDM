@@ -1,0 +1,37 @@
+.card{
+    margin-top: 20px;
+}
+
+.message-f{
+    color: white;
+    background-color: #5e70dae5;
+}
+
+.message-m{
+    color: white;
+    background-color: #30526ef5;
+}
+
+.card-body{
+    background-color: whitesmoke;
+}
+
+.global {
+	height: 470px;
+	width: auto;
+	overflow-y: scroll;
+}
+
+.global-2 {
+	height: 470px;
+	width: auto;
+	overflow-y: scroll;
+}
+
+.message-body {
+    padding: 10px;
+}
+
+.preview {
+    border: 2px solid #2b3c85f3;
+}
