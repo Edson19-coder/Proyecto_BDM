@@ -35,15 +35,28 @@
                     class="rounded-circle" height="200" alt="" loading="lazy">
             </div>
             <div class="col-12" style="padding: 20px;">
-                <h1 id="user-name-view">Edson Lugo Sanchez</h1>
+                <h1 id="user-name-view"><?php 
+                if(isset($_SESSION['secondName'])){
+                    echo $_SESSION['firstName']." ".$_SESSION['secondName']." ".$_SESSION['lastNames'];
+                } else{
+                    echo $_SESSION['firstName']." ".$_SESSION['lastNames'];
+                }
+                 ?></h1>
+                
             </div>
             <div class="col-4" style="margin-left: auto; margin-right: auto;">
                 <div class="row">
                     <div class="col-6">
-                        <h4 id="user-username-view">@Edson19</h4>
+                        <h4 id="user-username-view"><?php echo "@".$_SESSION['username']; ?></h4>
                     </div>
                     <div class="col-6">
-                        <h4 id="user-rol-view">Instructor</h4>
+                        <h4 id="user-rol-view"><?php 
+                        if($_SESSION['accountType'] == "0"){
+                            echo "Estudiante";
+                        }else{
+                            echo "Instructor";
+                        }
+                    ?></h4>
                     </div>
                 </div>
             </div>
