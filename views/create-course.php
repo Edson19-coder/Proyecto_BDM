@@ -19,11 +19,11 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php 
+    <?php
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
-    
+
     <!-- CONTENT -->
     <div class="col-12 container" style="padding: 20px;">
         <div class="row">
@@ -79,10 +79,15 @@
                                     </select>
                                 </div>
                                 <div class="col-2">
+                                  <button type="button" class="btn btn-primary" id="btn-add-course"> <i class="fas fa-plus"></i> </button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#addCategory"> <i class="fas fa-plus"></i> </button>
+                                        data-bs-target="#addCategory"> <i class="fas fa-edit"></i> </button>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="mb-3" id="categories-body">
+
                         </div>
 
                         <!-- Modal Add Category -->
@@ -363,7 +368,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/notification-create-course.js"></script>
-    <script src="js/validation-create-course.js"></script>
+    <script src="js/validation/validation-create-course.js"></script>
     <!-- /JS -->
 </body>
 
