@@ -19,11 +19,11 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php 
+    <?php
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
-    
+
     <!-- CONTENT -->
     <div class="message-body container col-12">
         <div class="row">
@@ -68,10 +68,10 @@
                 <!-- /PREVIEW MESSAGE -->
             </div>
             <div class="col-8" style="padding: 10px; background-color: white; border: 1px solid black;">
-                
+
                 <!-- Body of messages -->
 				<div class="container global" style="padding: 20px 50px 50px 50px;">
-					
+
 					<!-- friend -->
 					<div class="card">
 						<div class="card-header message-f">
@@ -83,6 +83,9 @@
 						<div class="card-body">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tempore temporibus sunt modi praesentium, laborum porro cumque quaerat, minima culpa corporis quibusdam libero, esse voluptas quae? Porro repudiandae odit modi?
 						</div>
+            <div class="card-footer" style="text-align: right;">
+                <p class="card-text"><small class="text-muted">Recivido: 2021-10-13 23:38:35</small></p>
+            </div>
 					</div>
 					<!-- /friend -->
 
@@ -97,6 +100,9 @@
 						<div class="card-body">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt nihil unde excepturi reprehenderit vitae quibusdam accusamus suscipit, a ut iusto voluptatum sequi cumque at corporis quam quos exercitationem autem nobis?
 						</div>
+            <div class="card-footer" style="text-align: right;">
+                <p class="card-text"><small class="text-muted">Enviado: 2021-10-13 23:38:35</small></p>
+            </div>
 					</div>
 					<!-- /Me -->
 
