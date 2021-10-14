@@ -9,7 +9,7 @@ $(document).ready( () => {
             $( "#btn-next-course-information" ).prop( "disabled", false );
         }
     })
-
+    
 
     $('#InputTitle').keyup( () => {
         if($('#InputTitle').val().length <= 0) {
@@ -49,7 +49,7 @@ $(document).ready( () => {
             $( "#btn-add-lesson" ).prop( "disabled", false );
         }
     })
-
+    
 
     $('#InputLessonTitle').keyup( () => {
         if($('#InputLessonTitle').val().length <= 0) {
@@ -80,9 +80,6 @@ $(document).ready( () => {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    $('#btn-add-course').click( () => {
-      var category = $('#InputCategory').val();
-      $('#categories-body').append('<span class="badge bg-primary" style="margin-right: 5px;">'+category+'</span>');
-    });
+    
 
 });

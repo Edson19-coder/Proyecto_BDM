@@ -4,7 +4,7 @@
 class Connection{
 
 public static function connect() {
-		$databasehost = "localhost";
+		$databasehost = "127.0.0.1:3307";
 		$databasename = "bdm_pia";
 		$databaseuser = "root";
 		$databasepass = "";
