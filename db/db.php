@@ -9,11 +9,26 @@ public static function connect() {
 		$databaseuser = "root";
 		$databasepass = "";
 
+		$attemp = true;
+		$tries = 0;
 
-		$mysqli = new mysqli($databasehost, $databaseuser, $databasepass, $databasename);
-		if ($mysqli->connect_errno) {
-			echo "Error con la conexion a la base de datos";
-		}
+		do{
+			$mysqli = new mysqli($databasehost, $databaseuser, $databasepass, $databasename);
+			if ($mysqli->connect_errno) {
+				$databasehost = "localhost:3307";
+				$mysqli = new mysqli($databasehost, $databaseuser, $databasepass, $databasename);
+				if($mysqli->connect_errno && $tries > 0){
+					echo "Error con la conexion a la base de datos";
+				}else{
+					$attemp = false;
+				}
+			}else{
+				$attemp = false;
+			}
+
+			$tries++;
+		}while($attemp);
+
 		return $mysqli;
 	}
 
