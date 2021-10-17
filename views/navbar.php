@@ -42,13 +42,7 @@
                     <a href="" class="nav-link navbar-tool d-none d-lg-flex">My course</a>
 
                     <a href="" class="nav-link navbar-tool d-none d-lg-flex">My learning</a>
-
-                    <a href="#" class="nav-link navbar-tool d-none d-lg-flex">
-                        <i class="fas fa-shopping-cart">
-                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                        </i>
-                    </a>
-
+                    
                     <div class="dropdown navbar-tool">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,8 +53,10 @@
                             <li><a class="dropdown-item" href="profile.php"><span class="fas fa-user-alt"></span> Profile</a></li>
                             <li><a class="dropdown-item" href="#"><span class="fas fa-user-circle"></span> Account</a></li>
                             <li><a class="dropdown-item" href="#"><span class="fas fa-comment"></span> Chat</a></li>
-                            <li><a class="dropdown-item" href="#"><span class="fas fa-plus"></span> Create course</a></li>
+                            <?php if($_SESSION['accountType'] == "1"){ ?>
+                            <li><a class="dropdown-item" href="create-course.php"><span class="fas fa-plus"></span> Create course</a></li>
                             <li><a class="dropdown-item" href="#"><span class="fas fa-project-diagram"></span> Report</a></li>
+                            <?php } ?>
                             <li><a class="dropdown-item" href="../controllers/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a></li>
                         </ul>
                     </div>
