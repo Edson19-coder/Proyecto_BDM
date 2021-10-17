@@ -4,11 +4,11 @@
 class Connection{
 
 public static function connect() {
-		$databasehost = "127.0.0.1:3307";
+		$databasehost = "localhost";
 		$databasename = "bdm_pia";
 		$databaseuser = "root";
 		$databasepass = "";
-		
+
 
 		$mysqli = new mysqli($databasehost, $databaseuser, $databasepass, $databasename);
 		if ($mysqli->connect_errno) {

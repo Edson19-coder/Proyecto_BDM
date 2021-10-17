@@ -43,7 +43,7 @@ $(document).ready( () => {
     $( "#btn-add-lesson" ).prop( "disabled", true );
 
     $('.content-menu').keyup( () => {
-        if($('#InputLessonTitle').val().length <= 0 || $('#InputLessonDescription').val().length <= 0 || $('#InputLessonPrice').val().length <= 0) {
+        if($('#InputLessonTitleAdd').val().length <= 0 || $('#InputLessonDescriptionAdd').val().length <= 0 || $('#InputLessonPriceAdd').val().length <= 0) {
             $( "#btn-add-lesson" ).prop( "disabled", true );
         } else {
             $( "#btn-add-lesson" ).prop( "disabled", false );
@@ -80,6 +80,5 @@ $(document).ready( () => {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
 
 });

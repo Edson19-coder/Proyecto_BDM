@@ -71,18 +71,18 @@
                             <div class="row">
                                 <div class="col-10">
                                     <select class="form-control" id="InputCategory">
-                                        <option>Programación</option>
-                                        <option>Diseño grafico</option>
-                                        <option>Marketing</option>
-                                        <option>Base de datos</option>
-                                        <option>Idiomas</option>
                                     </select>
                                 </div>
                                 <div class="col-2">
+                                  <button type="button" class="btn btn-primary" id="btn-add-course"> <i class="fas fa-plus"></i> </button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#addCategory"> <i class="fas fa-plus"></i> </button>
+                                        data-bs-target="#addCategory"> <i class="fas fa-edit"></i> </button>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="mb-3" id="categories-body">
+
                         </div>
 
                         <!-- Modal Add Category -->
@@ -115,7 +115,7 @@
 
                         <div class="mb-3 form-group">
                             <label for="miniature-course">Miniature of the course</label>
-                            <input type="file" class="form-control-file form-control" id="miniature-course">
+                            <input type="file" class="form-control-file form-control" accept="image/*" id="miniature-course">
                         </div>
                         <div class="text-end">
                             <button type="button" id="btn-next-course-information" class="btn btn-primary">Next</button>
@@ -149,33 +149,37 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="InputLessonTitle" class="form-label">Lesson title</label>
-                                            <input type="text" class="form-control" id="InputLessonTitle">
+                                            <label for="InputLessonTitleAdd" class="form-label">Lesson title</label>
+                                            <input type="text" class="form-control" id="InputLessonTitleAdd">
                                             <span class="hide" id="span-lesson-title" style="color: red">*Lesson title is required</span>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="InputLessonDescription" class="form-label">Description</label>
-                                            <textarea class="form-control" id="InputLessonDescription"></textarea>
+                                            <label for="InputLessonDescriptionAdd" class="form-label">Description</label>
+                                            <textarea class="form-control" id="InputLessonDescriptionAdd"></textarea>
                                             <span class="hide" id="span-lessson-description" style="color: red">*Description is required</span>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="InputLessonPrice" class="form-label">Price</label>
-                                            <input type="number" min="0" class="form-control" name="" id="InputLessonPrice">
+                                            <label for="InputLessonPriceAdd" class="form-label">Price</label>
+                                            <input type="number" min="0" class="form-control" name="" id="InputLessonPriceAdd">
                                             <span class="hide" id="span-lessson-price" style="color: red">*Price is required</span>
                                             <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
                                         </div>
                                         <div class="mb-3 form-group">
-                                            <label for="InputVideoLesson">Video lesson</label>
-                                            <input type="file" class="form-control-file" id="InputVideoLesson">
+                                            <label for="InputVideoLessonAdd">Video lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="video/*" id="InputVideoLessonAdd">
                                         </div>
                                         <div class="mb-3 form-group">
-                                            <label for="InputFileLesson">File lesson</label>
-                                            <input type="file" class="form-control-file" id="InputFileLesson">
+                                            <label for="InputImageLessonAdd">Image lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="image/*" id="InputImageLessonAdd">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputFileLessonAdd">File lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf" id="InputFileLessonAdd">
                                         </div>
                                         <div class="text-end">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" id="btn-add-lesson">Add</button>
+                                            <button type="button" class="btn btn-primary" id="btn-add-lesson">Add</button>
                                         </div>
                                     </form>
                                 </div>
@@ -192,77 +196,13 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Introduccion al curso.</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm px-3">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Titulo numero dos.</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm px-3">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Titulo numero tres.</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm px-3">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Titulo numero cuatro.</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm px-3">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Titulo numero cinco.</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm px-3">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody id="lessonTBody">
+                            
                         </tbody>
                     </table>
 
                     <!-- Modal Edit Lesson -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    <div class="modal fade" id="editLesson" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -275,17 +215,39 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="InputLessonTitle" class="form-label">Lesson title</label>
-                                            <input type="text" class="form-control" id="InputLessonTitle">
+                                            <label for="InputLessonTitleAdd" class="form-label">Lesson title</label>
+                                            <input type="text" class="form-control" id="InputLessonTitleEdit">
+                                            <span class="hide" id="span-lesson-title" style="color: red">*Lesson title is required</span>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="InputLessonDescription" class="form-label">Description</label>
-                                            <textarea class="form-control" id="InputLessonDescription"></textarea>
+                                            <label for="InputLessonDescriptionAdd" class="form-label">Description</label>
+                                            <textarea class="form-control" id="InputLessonDescriptionEdit"></textarea>
+                                            <span class="hide" id="span-lessson-description" style="color: red">*Description is required</span>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="InputLessonPriceAdd" class="form-label">Price</label>
+                                            <input type="number" min="0" class="form-control" name="" id="InputLessonPriceEdit">
+                                            <span class="hide" id="span-lessson-price" style="color: red">*Price is required</span>
+                                            <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
+                                        </div>
+                                        <!--
+                                        <div class="mb-3 form-group">
+                                            <label for="InputVideoLessonAdd">Video lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="video/*" id="InputVideoLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputImageLessonAdd">Image lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="image/*" id="InputImageLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputFileLessonAdd">File lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf" id="InputFileLessonEdit">
+                                        </div>
+                                        -->
                                         <div class="text-end">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-primary" id="btn-edit-lesson">Edit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -362,8 +324,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="js/notification-create-course.js"></script>
-    <script src="js/validation-create-course.js"></script>
+    <script src="js/validation/notification-create-course.js"></script>
+    <script src="js/validation/validation-create-course.js"></script>
+    <script src="models/lesson.js"></script>
+    <script src="js/create-course.js"></script>
     <!-- /JS -->
 </body>
 
