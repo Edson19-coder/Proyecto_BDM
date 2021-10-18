@@ -1,5 +1,7 @@
 <?php
 
+	require_once('../db/db.php');
+
 	class Course {
 
 		private $db;
@@ -32,6 +34,38 @@
 
 			return $result;
 			
+			Connection::disconnect($db);
+		}
+
+		public static function selectAllFromCourses(){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SA', null, null, null, null, null, null, null);");
+
+			if($result){
+				while ($lastId = $result->fetch_assoc()){
+					return $lastId;
+				}
+			}else{
+				echo("Error.");
+				return null;
+			}
+			Connection::disconnect($db);
+		}
+
+		public static function selectNewestCourses(){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SANI', null, null, null, null, null, null, null);");
+			//print_r($result);
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
 			Connection::disconnect($db);
 		}
 	}

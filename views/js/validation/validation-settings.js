@@ -6,7 +6,8 @@ $(document).ready( () => {
 
     $('#InputImageSettings').change(() => {
         check();
-    })
+    });
+
 
     function check() {
         if(fileInput.files.length == 0) {

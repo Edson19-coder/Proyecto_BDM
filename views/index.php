@@ -15,12 +15,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <!-- /CSS -->
+
 </head>
 
 <body>
     
     <!-- NAVBAR -->
     <?php 
+        require_once '../models/course.php';
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
@@ -129,79 +131,27 @@
         <div class="col-12 in-progress-learning" style="padding: 10px;">
 
             <div class="row" style="display: flex; justify-content:start;">
+                <?php
+                    $courses = Course::selectNewestCourses();
+                    //print_r($courses);
+                    foreach ($courses as $key => $value) {
+                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                <div class="card p-0" style="width: 18rem;">
+                                    <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                        class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                        <p class="card-text">
+                                            '.$value["SHORT_DESCRIPTION"].'
+                                        </p>
+                                        <p class="card-text" style="text-align: right;"><small class="cost">'.$value["PRICE"].'</small></p>
+                                    </div>
+                                </div>
+                            </a>';
+                    }
 
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;">
-                        <img src="src/image/angular.png"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Desarrollando en Angular 10</h5>
-                            <p class="card-text">
-                                Utiliza Angular, ASP.NET Core, Entity Framework Core, Material Design, JWT, Leaflet, 
-                                para crear una aplicación completa
-                            </p>
-                            <p class="card-text" style="text-align: right;"><small class="cost">$1500 MX</small></p>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <a class="btn btn-primary add-cart" id="liveToastBtn">Add to cart</a>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;"> 
-                        <img src="src/image/inteligencia-artificial.png"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Artificial Intelligence</h5>
-                            <p class="card-text">
-                                Combine the power of Data Science, Machine Learning and Deep
-                                Learning to create powerful AI for Real-World applications!
-                            </p>
-                            <p class="card-text" style="text-align: right;"><small class="cost">FREE</small></p>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <a class="btn btn-primary add-cart">Add to cart</a>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;">
-                        <img src="src/image/javascript.png"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Aprende JavaScript y Jquery de 0 a 100</h5>
-                            <p class="card-text">
-                                Programación en JavaScript y Jquery de 0 a 100 para crear paginas web 
-                                aprende todo desde el inicio.
-                            </p>
-                            <p class="card-text" style="text-align: right;"><small class="cost">FREE</small></p>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <a class="btn btn-primary add-cart">Add to cart</a>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;">
-                        <img src="src/image/vue-firebase.png"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Aprende Vue + Firebase ACTUALIZADO 2020</h5>
-                            <p class="card-text">
-                                Aprende todo lo necesario para ser un buen programador en Vue, 
-                                actualiza tus herramientas.
-                            </p>
-                            <p class="card-text" style="text-align: right;"><small class="cost">$1500 MX</small></p>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <a class="btn btn-primary add-cart">Add to cart</a>
-                        </div>
-                    </div>
+                ?>
             </div>
-
         </div>
 
         <div class="card-footer" style="text-align: right;">

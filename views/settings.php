@@ -24,15 +24,21 @@
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
-
+    <input type="hidden" class="sesion" id="sesion" value="<?php echo $_SESSION['id'] ?>"></input>
     <!-- Content -->
 
     <div class="container col-12 text-center" style="padding: 30px;">
 
         <div class="settings-content">
             <div class="col-12">
-                <img id="user-image-view" src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                    height="200" alt="" loading="lazy" />
+                <?php
+                if(isset($_SESSION['profilePicture'])){
+                    echo '<img id="user-image-view" src="data:image/jpeg;base64,'.base64_encode($_SESSION['profilePicture']).'" class="rounded-circle" height="200" alt="..." loading="lazy" />';
+                    }else{
+                        echo "PAPUS";
+                    }
+                ?>
+                
             </div>
             <div class="col-12" style="padding: 20px;">
                 <div class="mb-3">
@@ -41,10 +47,10 @@
             </div>
             <div class="form-content col-6" style="margin-left: auto; margin-right: auto;">
                 
-                <form class="col-10" action="../services/upload-image.php" method="POST" enctype="multipart/form-data">
+                <form class="col-10" action="#" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="InputUserNameSettings" class="form-label">User image</label>
-                        <input type="file" class="form-control" name="foto" onclick="check()" id="InputImageSettings">
+                        <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" name="foto" onclick="check()" id="InputImageSettings">
                     </div>
                     <button id="btn-update-image" type="submit" class="col-12 btn btn-primary"
                         style="margin-bottom: 20px ;">Update image</button>
@@ -151,7 +157,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="js/validation-settings.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/validation/validation-settings.js"></script>
     <!-- /JS -->
 </body>
 
