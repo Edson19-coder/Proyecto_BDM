@@ -21,10 +21,16 @@
     <!-- NAVBAR -->
     <?php 
         include 'navbar.php';
+
+        if(isset($_GET['course'])){
+
+        }
     ?>
     <!-- /NAVBAR -->
 
     <!-- CONTENT -->
+
+
     <div class="container col-12" style="padding: 20px;">
         <div class="row">
             <div class="col-md-8 description-course">
@@ -109,7 +115,6 @@
                         </div>
 
                         <div class="col-12">
-                            <a href="#" class="col-12 btn-shop btn btn-primary add-cart">Add to cart</a>
                             <button type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalBuyNow">
                                 Buy now

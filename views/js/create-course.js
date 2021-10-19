@@ -60,7 +60,7 @@ $(document).ready(() => {
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
-           dataType: 'json',
+           //dataType: 'json',
             success: function(data) {
                 $('#InputCategory').empty();
                 getAllCategories();
@@ -87,7 +87,7 @@ $(document).ready(() => {
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
-           dataType: 'json',
+           //dataType: 'json',
             success: function(data) {
                 if(data == null) {
                     createCategory(categoryName);
@@ -190,7 +190,7 @@ $(document).ready(() => {
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
-           dataType: 'json',
+           //dataType: 'json',
             success: function(data) {
                data.forEach(category => {
                     $('#InputCategory').append($('<option>', {

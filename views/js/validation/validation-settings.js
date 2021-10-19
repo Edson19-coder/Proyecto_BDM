@@ -6,7 +6,8 @@ $(document).ready( () => {
 
     $('#InputImageSettings').change(() => {
         check();
-    })
+    });
+
 
     function check() {
         if(fileInput.files.length == 0) {
@@ -94,7 +95,7 @@ $(document).ready( () => {
     {
         if(password.length >= 8)
         {
-            debugger
+            //debugger
             var capitalLetter = false;
             var lowerCase = false;
             var number = false;
