@@ -15,7 +15,7 @@
 
 			$resp["PROFILE_PICTURE"] = null;
 		}else{
-			echo "OH NO PAPO";
+			echo "Error en el servicio";
 		}
 	}
 	else if($action == 'U'){
@@ -31,7 +31,7 @@
 
 			print_r($resp);
 		}else{
-			echo "VALIO COLA";
+			echo "Error en el servicio";
 		}
 	}
 	echo json_encode($resp);

@@ -10,9 +10,9 @@
         }
 
 
-		public static function createUser($userName, $userPassword, $email, $firstName, $secondName, $lastName, $accountType) {
+		public static function createUser($userName, $userPassword, $email, $firstName, $secondName, $lastName, $accountType, $imageDefault) {
 			$db = Connection::connect();
-			$db->query("CALL proc_user('I', null, '".$userName."', '".$userPassword."', '".$email."', '".$firstName."', '".$secondName."', '".$lastName."', null, null, null, null, null, '".$accountType."', null)");
+			$db->query("CALL proc_user('I', null, '".$userName."', '".$userPassword."', '".$email."', '".$firstName."', '".$secondName."', '".$lastName."', null, null, null, null, '".$imageDefault."', '".$accountType."', null)");
 			Connection::disconnect($db);
 		}
 

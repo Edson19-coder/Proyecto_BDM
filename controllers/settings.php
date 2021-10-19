@@ -23,7 +23,7 @@
 			unset($_SESSION['InputImageSettings']);
 
 		}else{
-			echo "PAPUS";
+			echo "Error en el servicio";
 		}
 	}
 	else if($action == "UUI"){ //Update User Information

@@ -19,7 +19,9 @@
 		$_SESSION['lastNames'] = $resp['LAST_NAME'];
 		$_SESSION['profilePicture'] = $resp['PROFILE_PICTURE'];
 		$_SESSION['accountType'] = $resp['ACCOUNT_TYPE'];
-	}
+
+		$resp = true;
+	} 
 
 	echo json_encode($resp);
 

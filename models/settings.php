@@ -17,7 +17,7 @@
 					return $profilePic;
 				}
 			}else{
-				echo("Hay pedo en la db.");
+				echo("Error en la db.");
 				return null;
 			}
 			Connection::disconnect($db);
