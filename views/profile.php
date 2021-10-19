@@ -31,7 +31,7 @@
 
         <div class="profile-content">
             <div class="col-12">
-                <img id="user-image-view" src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                <img id="user-image-view" src="<?php echo 'data:image/jpeg;base64,'.base64_encode($_SESSION["profilePicture"]); ?>"
                     class="rounded-circle" height="200" alt="" loading="lazy">
             </div>
             <div class="col-12" style="padding: 20px;">

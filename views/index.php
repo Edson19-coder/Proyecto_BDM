@@ -35,7 +35,7 @@
         <div class="home welcome col-12">
             <div class="row" style="padding: 12px;">
                 <div class="col-12 col-xl-3" style="display: flex; justify-content: center; align-items: center;">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
+                    <img src="<?php echo 'data:image/jpeg;base64,'.base64_encode($_SESSION["profilePicture"]); ?>" class="rounded-circle"
                         height="150px" alt="" loading="lazy" />
                 </div>
                 <div class="text-welcome col-12 col-xl-9" style="display: flex; align-items: center;">

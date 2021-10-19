@@ -21,7 +21,9 @@
 
     <!-- NAVBAR -->
     <?php 
-        include 'navbar.php';
+
+        require_once '../models/user.php';
+        include 'navbar.php';    
     ?>
     <!-- /NAVBAR -->
     <input type="hidden" class="sesion" id="sesion" value="<?php echo $_SESSION['id'] ?>"></input>
@@ -32,8 +34,9 @@
         <div class="settings-content">
             <div class="col-12">
                 <?php
+
                 if(isset($_SESSION['profilePicture'])){
-                    echo '<img id="user-image-view" src="data:image/jpeg;base64,'.base64_encode($_SESSION['profilePicture']).'" class="rounded-circle" height="200" alt="..." loading="lazy" />';
+                    echo '<img id="user-image-view" src="data:image/jpg;base64,'.base64_encode($_SESSION['profilePicture']).'" class="rounded-circle" height="200" alt="..." loading="lazy" />';
                     }else{
                         echo "PAPUS";
                     }
@@ -47,14 +50,15 @@
             </div>
             <div class="form-content col-6" style="margin-left: auto; margin-right: auto;">
                 
-                <form class="col-10" action="#" method="POST" enctype="multipart/form-data">
+                <form class="col-10" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="InputUserNameSettings" class="form-label">User image</label>
                         <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" name="foto" onclick="check()" id="InputImageSettings">
                     </div>
+                    
                     <button id="btn-update-image" type="submit" class="col-12 btn btn-primary"
                         style="margin-bottom: 20px ;">Update image</button>
-                    </from>
+                </from>
 
                     <form class="col-10">
                         <div class="mb-3">

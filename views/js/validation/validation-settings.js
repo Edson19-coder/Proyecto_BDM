@@ -95,7 +95,7 @@ $(document).ready( () => {
     {
         if(password.length >= 8)
         {
-            debugger
+            //debugger
             var capitalLetter = false;
             var lowerCase = false;
             var number = false;

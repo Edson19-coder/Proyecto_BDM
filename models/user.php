@@ -30,6 +30,36 @@
 
 			Connection::disconnect($db);
 		}
+
+		public static function getAllUserData($userId){
+
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_user('S', '".$userId."', null, null, null, null, null, null, null, null, null, null, null, null, null);");
+			if($result){
+				while ($user = $result->fetch_assoc()) { 
+                    return $user;
+                }
+			}else{
+				echo("No existe este usuario en la DB.");
+	             return null;
+			}
+			Connection::disconnect($db);
+		}
+
+		public static function updateUserInformation($id, $un, $fn, $sn, $ln, $co, $st, $ci, $pc, $em, 
+			$pa, $at){
+			$db = Connection::connect();
+			$db->query("CALL proc_user('U', '".$id."', '".$un."', '".$pa."', '".$em."', '".$fn."', '".$sn."', '".$ln."', '".$co."', '".$st."', '".$ci."', '".$pc."', null, '".$at."', null);");
+
+			$result = User::getAllUserData($id);
+			if($result){
+                return $result;
+			}else{
+				echo("No existe este usuario en la DB.");
+	             return null;
+			}
+			Connection::disconnect($db);
+		}
 	}
 
 ?>

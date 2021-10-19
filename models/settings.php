@@ -2,6 +2,7 @@
 
 	class Settings{
 		private $db;
+		private $profilePic = null;
 
 		public function __construct(){
 
@@ -9,7 +10,7 @@
 
 		public static function updateProfilePicture($user, $image){
 			$db = Connection::connect();
-			$result = $db->query("UPDATE USERS SET PROFILE_PICTURE = '".$image."' WHERE USER_ID = ".$user.";");
+			$result = $db->query("CALL proc_user('UPP', '".$user."', null, null, null, null, null, null, null, null, null, null, '".$image."', null, null);");
 
 			if($result){
 				while($profilePic = $result->fetch_assoc()){

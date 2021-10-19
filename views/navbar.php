@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start(); ?>
 <?php if(isset($_SESSION['email'])) { ?>
     <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
@@ -46,7 +46,7 @@
                     <div class="dropdown navbar-tool">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
+                            <img src="<?php echo 'data:image/jpeg;base64,'.base64_encode($_SESSION["profilePicture"]); ?>" class="rounded-circle"
                                 height="30" alt="" loading="lazy" />
                         </a>
                         <ul class="dropdown-menu">
