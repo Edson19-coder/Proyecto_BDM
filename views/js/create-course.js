@@ -182,7 +182,7 @@ $(document).ready(() => {
     $('#btn-create-course').on('click', (event) => {
         event.preventDefault();
 
-        createCourse($('#InputTitle').val(), $('#InputShortDescription').val(), $('#InputLongDescription').val(), $('#InputPrice').val(), <?php echo $_SESSION['id'] ?>);
+        createCourse($('#InputTitle').val(), $('#InputShortDescription').val(), $('#InputLongDescription').val(), $('#InputPrice').val(), userId);
     });
 
     var lastIdCourse;
