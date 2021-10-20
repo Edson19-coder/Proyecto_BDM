@@ -20,37 +20,57 @@
 <body>
     <!-- NAVBAR -->
     <?php 
+        require_once('../models/course.php');
+        require_once('../models/lesson.php');
+
         include 'navbar.php';
 
         if(isset($_GET['course'])){
-
+            echo '<input type="hidden" class="InputCourseIdHidden" id="InputCourseIdHidden" value="'.$_GET['course'].'"></input>';
+        }
+        if(isset($_SESSION['id'])){
+            echo '<input type="hidden" class="InputUserIdHidden" id="InputUserIdHidden" value="'.$_SESSION['id'].'"></input>';
         }
     ?>
     <!-- /NAVBAR -->
 
     <!-- CONTENT -->
 
+    <?php
+        $course = Course::selectCourseById($_GET['course']);
+    ?>
 
     <div class="container col-12" style="padding: 20px;">
         <div class="row">
             <div class="col-md-8 description-course">
-                <h2>Aprende JavaScript y Jquery de 0 a 100</h2>
-                <p><i class="fas fa-user-alt"></i>Edson Lugo</p>
-                <p><i class="fas fa-calendar"></i>Created 12/01/2021</p>
-                <p><i class="fas fa-calendar"></i>Last update 12/01/2021</p>
-                <p><i class="fas fa-user-graduate"></i>1200 paticipants</p>
-                <p><i class="fas fa-thumbs-up"></i>8.5/10</p>
+                <h2><?php echo $course["TITLE"]; ?></h2>
+                <p><i class="fas fa-user-alt"></i><?php echo $course["FIRST_NAME"]." ".$course["LAST_NAME"]; ?></p>
+                <p><i class="fas fa-calendar"></i>Created <?php 
+                $creation_date = date_create($course["CREATION_DATE"]);
+                echo date_format($creation_date, 'd/m/Y'); ?></p>
+                <p><i class="fas fa-calendar"></i>Last update <?php
+                $last_update_date = date_create($course["LAST_UPDATE_DATE"]);
+                echo date_format($last_update_date, 'd/m/Y'); ?></p>
+                <p><i class="fas fa-user-graduate"></i><?php
+                if($course["PARTICIPANTS"] != 0){
+                    echo $course["PARTICIPANTS"]; 
+                }else{
+                    echo "Este curso aún no tiene estudiantes inscritos.";
+                }
+                ?></p>
+                <p><i class="fas fa-thumbs-up"></i><?php 
+                if($course["QUALIFICATION"] != null){
+                    echo $course["QUALIFICATION"]."/10"; 
+                }else{
+                    echo "Este curso aún no tiene calificaciones.";
+                }
+                ?></p>
                 <h5>
-                    Programación en JavaScript y Jquery de 0 a 100 para crear paginas web
-                    aprende todo desde el inicio.
+                    <?php echo $course["SHORT_DESCRIPTION"]; ?>
                 </h5>
                 <p>
                 <p class="fw-bold">Description:</p>
-                En este curso aprenderás a programar en JavaScript, da igual si no tienes nociones de programación
-                porque te lo enseñaré desde el principio.
-                Aprenderás todos los conceptos de la programación en JavaScript y el FrameWork más usado Jquery.
-                Si ya sabes programar pero quieres ampliar tus conocimientos no dejes de visitarlo porque te
-                sorprenderas.
+                <?php echo $course["LONG_DESCRIPTION"]; ?>
                 </p>
                 <hr>
                 <div class="col-12">
@@ -63,7 +83,8 @@
                                 <div class="card-header message-m">
                                     <div class="col-12" style="text-align: right;">Edson19 <img
                                             src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                            class="rounded-circle" height="50" alt="" loading="lazy"> </div>
+                                            class="rounded-circle" height="50" alt="" loading="lazy"> 
+                                    </div>
                                 </div>
                                 <div class="card-body">Este es un bonito comentario - 2021-05-22</div>
                             </div>
@@ -94,13 +115,13 @@
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="../src/image/javascript.png" class="card-img-top" alt="...">
+                    <img src="<?php echo 'data:image/jpeg;base64,'.base64_encode($course["COURSE_PICTURE"]); ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">Course:</div>
                                 <div class="col-6">
-                                    <h5 class="card-title" style="text-align: center; color: green;">$1500 MX</h5>
+                                    <h5 class="card-title" style="text-align: center; color: green;">$<?php echo $course["PRICE"]; ?> MXN</h5>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +130,11 @@
                             <div class="row">
                                 <div class="col-6">Lesson:</div>
                                 <div class="col-6">
-                                    <h5 class="card-title" style="text-align: center; color: green;">$520 MX</h5>
+                                    <?php
+                                    $lessonCourse = Lesson::getAllLessonsFromCourse($_GET['course']);
+                                    ?>
+                                    <input type="hidden" id="IndividualLessonPrice" value="<?php echo $lessonCourse[0]["PRICE"]; ?>">
+                                    <h5 class="card-title" style="text-align: center; color: green;">$<?php echo $lessonCourse[0]["PRICE"]; ?> MXN</h5>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +164,7 @@
                                                             <h5>Price:</h5>
                                                         </div>
                                                         <div class="col-6 text-end">
-                                                            <h5 style="color: green;">$1500 MX</h5>
+                                                            <h5 class="LessonsPrice" id="LessonsPrice" style="color: green;"></h5>
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -204,48 +229,22 @@
 
                             <br>
 
-                            <div class="card content-course">
-                                <div class="card-body col-12 video-seen">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <p>1. Introducción</p>
+                            <?php
+                            foreach ($lessonCourse as $key => $value) {
+                                echo '<div class="card content-course">
+                                        <div class="card-body col-12 video-seen">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <p>'.$value["TITLE"].'</p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <input class="form-check-input" type="checkbox" value="'.$value["LESSON_ID"].'"
+                                                        id="flexCheckDefault" onchange="checkprice()">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-4">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card content-course">
-                                <div class="card-body col-12 video-seen">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <p>2. Leccion 1</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card content-course">
-                                <div class="card-body col-12 video-seen">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <p>3. Leccion 2</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                                    </div>';
+                                }?>
                             <br>
 
                             <button type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
@@ -266,7 +265,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="js/course-notifications.js"></script>
+    <script src="js/validation/course-notifications.js"></script>
+    <script src="js/course.js"></script>
     <!-- /JS -->
 </body>
 

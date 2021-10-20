@@ -68,5 +68,18 @@
 			}
 			Connection::disconnect($db);
 		}
+
+		public static function selectCourseById($idCourse){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SCID', '".$idCourse."', null, null, null, null, null, null);");
+			if($result){
+				while($course = $result->fetch_assoc()){
+					return $course;
+				}
+			}else{
+				echo("Error, este curso no existe.");
+				return null;
+			}
+		}
 	}
 ?>

@@ -24,5 +24,23 @@
 
 			Connection::disconnect($db);
 		}
+
+		public static function getAllLessonsFromCourse($idCourse){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_lesson('ST', null, null, null, null, '".$idCourse."');");
+
+			if($result){
+				$lessons = array();
+
+				while($lesson = $result->fetch_assoc()){
+					$lessons[] = $lesson;
+				}
+				return $lessons;
+
+			}else{
+				echo('No hay lecciones de este curso');
+			}
+			Connection::disconnect($db);
+		}
 	}
 ?>
