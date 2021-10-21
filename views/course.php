@@ -121,6 +121,7 @@
                             <div class="row">
                                 <div class="col-6">Course:</div>
                                 <div class="col-6">
+                                    <input type="hidden" id="CoursePrice" value="<?php echo $course["PRICE"]; ?>">
                                     <h5 class="card-title" style="text-align: center; color: green;">$<?php echo $course["PRICE"]; ?> MXN</h5>
                                 </div>
                             </div>
@@ -140,12 +141,11 @@
                         </div>
 
                         <div class="col-12">
-                            <button type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalBuyNow">
+                            <button id="btn-buy-course" type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBuyNow">
                                 Buy now
                             </button>
 
-                            <!-- Modal Edit Lesson -->
+                            <!-- Modal Buy Lesson -->
                             <div class="modal fade" id="modalBuyNow" data-bs-backdrop="static" data-bs-keyboard="false"
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -164,40 +164,31 @@
                                                             <h5>Price:</h5>
                                                         </div>
                                                         <div class="col-6 text-end">
-                                                            <h5 class="LessonsPrice" id="LessonsPrice" style="color: green;"></h5>
+                                                            <h5 class="SubtotalPrice" id="SubtotalPrice" style="color: green;"></h5>
                                                         </div>
                                                     </div>
                                                     <hr>
                                                     <h5>Card</h5>
                                                     <form class="credit-card-div">
                                                         <div class="col-12 mb-3">
-                                                            <input type="number" class="form-control" name=""
-                                                                id="card-number" placeholder="Enter Card Number">
+                                                            <input type="number" class="form-control" name="" id="card-number" placeholder="Enter Card Number">
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-4 mb-3">
-                                                                <span class="help-block text-muted small-font">Expiry
-                                                                    Month</span>
-                                                                <input type="number" minlength="0" max="2" name=""
-                                                                    id="card-mouth" class="form-control"
-                                                                    placeholder="MM">
+                                                                <span class="help-block text-muted small-font">Expiration Month</span>
+                                                                <input type="number" minlength="0" max="2" name="" id="card-mouth" class="form-control" placeholder="MM">
                                                             </div>
                                                             <div class="col-4 mb-3">
-                                                                <span class="help-block text-muted small-font">Expiry
-                                                                    Year</span>
-                                                                <input type="number" name="" id="card-year"
-                                                                    class="form-control" placeholder="YYYY">
+                                                                <span class="help-block text-muted small-font">Expiration Year</span>
+                                                                <input type="number" name="" id="card-year" class="form-control" placeholder="YYYY">
                                                             </div>
                                                             <div class="col-4 mb-3">
-                                                                <span
-                                                                    class="help-block text-muted small-font">CCV</span>
-                                                                <input type="number" name="" id="card-ccv"
-                                                                    class="form-control" placeholder="CCV">
+                                                                <span class="help-block text-muted small-font">CCV</span>
+                                                                <input type="number" name="" id="card-ccv" class="form-control" placeholder="CCV">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <input type="text" class="form-control" name=""
-                                                                id="card-titular" placeholder="Name On The Card">
+                                                            <input type="text" class="form-control" name="" id="card-titular" placeholder="Name On The Card">
                                                         </div>
                                                     </form>
                                                     <hr>
@@ -221,33 +212,37 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- /Modal Edit Lesson -->
+                            <!-- /Modal Buy Lesson -->
 
                             <hr>
-
                             <h3 style="text-align: center;">Lessons</h3>
-
                             <br>
-
+                            <form id="formCheckBoxes">
                             <?php
+                            $i = 1;
                             foreach ($lessonCourse as $key => $value) {
                                 echo '<div class="card content-course">
                                         <div class="card-body col-12 video-seen">
                                             <div class="row">
-                                                <div class="col-8">
+                                                <div class="col-6">
                                                     <p>'.$value["TITLE"].'</p>
                                                 </div>
                                                 <div class="col-4">
                                                     <input class="form-check-input" type="checkbox" value="'.$value["LESSON_ID"].'"
-                                                        id="flexCheckDefault" onchange="checkprice()">
+                                                        id="flexCheckDefault'.$i.'">
+                                                </div>
+                                                <div id="lessonIndividualPrice'.$i.'" value="'.$value["PRICE"].'" class="col-2">
+                                                    <p>'.$value["PRICE"].'</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>';
+                                    $i++;
                                 }?>
+                            </form>
                             <br>
 
-                            <button type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
+                            <button id="btn-buy-lessons" type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalBuyNow">
                                 Buy Lesson(s)
                             </button>

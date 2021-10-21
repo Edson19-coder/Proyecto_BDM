@@ -24,16 +24,24 @@
 
 			$resp["PROFILE_PICTURE"] = null;
 
-			/* --> ME FALTA AQUI COMPLETAR EL REESCRIBIR LAS VARIABLES DE SESIÓN */
-
 			$_SESSION['username'] = $resp["USERNAME"];
+			$_SESSION['firstName'] = $resp['FIRST_NAME'];
+			if($resp['SECOND_NAME'] != null){
+				$_SESSION['secondName'] = $resp['SECOND_NAME'];
+			}
 			$_SESSION['country'] = $resp["COUNTRY"];
+			$_SESSION['state'] = $resp['STATE'];
+			$_SESSION['city'] = $resp['CITY'];
+			$_SESSION['postalCode'] = $resp['POSTAL_CODE'];
+			$_SESSION['email'] = $resp['EMAIL'];
+			$_SESSION['userPassword'] = $resp['USER_PASSWORD'];
+			$_SESSION['accountType'] = $resp['ACCOUNT_TYPE'];
 
-			print_r($resp);
+			//print_r($resp);
 		}else{
 			echo "Error en el servicio";
 		}
 	}
-	echo json_encode($resp);
 
+	echo json_encode($resp);
 ?>
