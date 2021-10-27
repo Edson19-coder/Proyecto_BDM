@@ -48,9 +48,9 @@ $(document).ready(() => {
 	$("#btn-buy-course").on('click', (event) => {
 		cant = $(":checkbox:checked").length;
 		if(!(cant > 0)){
-		price = $("#CoursePrice").val();
-		price = parseInt(price, 10);
-		$("#SubtotalPrice").text(price);
+			price = $("#CoursePrice").val();
+			price = parseInt(price, 10);
+			$("#SubtotalPrice").text(price);
 		}
 	});
 
@@ -60,9 +60,7 @@ $(document).ready(() => {
 			var lessons = new Array();
 			$(":checkbox:checked").each(function(){
 				lessons.push($(this).attr('value'));
-				//alert("Id: " + $(this).attr('value'));
 			});
-			//console.log(lessons);
 		}
 	});
 
@@ -100,7 +98,7 @@ $(document).ready(() => {
             	}
 			});
 		}else{
-
+			
 		}
 
 	});

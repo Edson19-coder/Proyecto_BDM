@@ -252,7 +252,7 @@
                                         </div>
                                     </div>';
                                     $i++;
-                                }?>
+                                } ?>
                             </form>
                             <br>
                             <?php if($userHasCourse["Bool"] == 0){ ?>
