@@ -38,6 +38,13 @@
 
     <?php
         $course = Course::selectCourseById($_GET['course']);
+        if(isset($_SESSION['id'])){
+            $userHasCourse = Course::userHasCourse($_GET['course'], $_SESSION['id']);
+        }else{
+            $userHasCourse["Bool"] = 0;
+        }
+        
+        print_r($userHasCourse["Bool"]);
     ?>
 
     <div class="container col-12" style="padding: 20px;">
@@ -139,12 +146,19 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="col-12">
+                            <?php
+                                if($userHasCourse["Bool"] == 0){
+                            ?>
                             <button id="btn-buy-course" type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBuyNow">
                                 Buy now
                             </button>
-
+                            <?php }else if($userHasCourse["Bool"] == 1){ ?>
+                             <button id="btn-course-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
+                                You already have this course
+                            </button>   
+                        <?php } ?>
                             <!-- Modal Buy Lesson -->
                             <div class="modal fade" id="modalBuyNow" data-bs-backdrop="static" data-bs-keyboard="false"
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -227,9 +241,9 @@
                                                 <div class="col-6">
                                                     <p>'.$value["TITLE"].'</p>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-4" id="divCheckbox">
                                                     <input class="form-check-input" type="checkbox" value="'.$value["LESSON_ID"].'"
-                                                        id="flexCheckDefault'.$i.'">
+                                                        id="flexCheckDefault'.$i.'"'; if($userHasCourse["Bool"] != 0){ echo ' checked disabled';}  echo '>
                                                 </div>
                                                 <div id="lessonIndividualPrice'.$i.'" value="'.$value["PRICE"].'" class="col-2">
                                                     <p>'.$value["PRICE"].'</p>
@@ -241,11 +255,16 @@
                                 }?>
                             </form>
                             <br>
-
+                            <?php if($userHasCourse["Bool"] == 0){ ?>
                             <button id="btn-buy-lessons" type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalBuyNow">
                                 Buy Lesson(s)
                             </button>
+                            <?php }else {?>
+                                <button id="btn-lessons-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
+                                You already have this lessons
+                            </button>
+                            <?php } ?>
 
                         </div>
                     </div>

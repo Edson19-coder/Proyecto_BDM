@@ -81,5 +81,18 @@
 				return null;
 			}
 		}
+
+		public static function userHasCourse($idCourse, $idUser){
+			$db = Connection::connect();
+			$result = $db->query(" CALL proc_purchases('UHC', ".$idCourse.", null, ".$idUser.");");
+			if($result){
+				while($course = $result->fetch_assoc()){
+					return $course;
+				}
+			}else{
+				echo("Error, este curso no existe.");
+				return 0;
+			}
+		}
 	}
 ?>

@@ -28,6 +28,6 @@
 			echo "Error en el servicio";
 		}
 	}
-
+	
 	echo json_encode($resp);
 ?>

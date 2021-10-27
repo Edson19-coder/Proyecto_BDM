@@ -3,31 +3,47 @@ $(document).ready(() => {
 	var courseId = $("#InputCourseIdHidden").val();
 	var price = 0;
 
+	console.log(userId);
 	var cant = 0;
 	var total = 0;
 
-	if($(":checkbox:checked").length == 0){
+	if(userId != undefined){
+		if($(":checkbox:checked").length == 0){
+			$("#btn-buy-lessons").prop('disabled', true);
+		}
+	}else{
 		$("#btn-buy-lessons").prop('disabled', true);
 	}
 
-	$("#formCheckBoxes").on('change', function(){
-		if($(":checkbox:checked").length == 0){
-			$("#btn-buy-lessons").prop('disabled', true);
-		}else{
-			$("#btn-buy-lessons").removeAttr('disabled');
-		}
+	if(userId === undefined){
+		$("#btn-buy-course").prop('disabled', true);
+	}else{
+		$("#btn-buy-course").prop('disabled', false);
+	}
 
-		var checkCant = document.getElementById('formCheckBoxes');
-		var inputsCant = checkCant.getElementsByTagName('input').length;
-		total = 0;
-		for (var i = 1; i <= inputsCant; i++) {
-			price = $('#flexCheckDefault' + i).val();
-			if($('#flexCheckDefault' + i).prop('checked')){
-				total += parseInt($('#lessonIndividualPrice' + i).attr('value'), 10);
+	if(userId === undefined){
+		$("#divCheckbox .form-check-input").prop('disabled', true);
+	}
+
+	if(userId != undefined){
+		$("#formCheckBoxes").on('change', function(){
+			if($(":checkbox:checked").length == 0){
+				$("#btn-buy-lessons").prop('disabled', true);
+			}else{
+				$("#btn-buy-lessons").removeAttr('disabled');
 			}
-		}
-		$("#SubtotalPrice").text(total);
-	});
+			var checkCant = document.getElementById('formCheckBoxes');
+			var inputsCant = checkCant.getElementsByTagName('input').length;
+			total = 0;
+			for (var i = 1; i <= inputsCant; i++) {
+				price = $('#flexCheckDefault' + i).val();
+				if($('#flexCheckDefault' + i).prop('checked') && $('#flexCheckDefault' + i).prop('disabled', false)){
+					total += parseInt($('#lessonIndividualPrice' + i).attr('value'), 10);
+				}
+			}
+			$("#SubtotalPrice").text(total);
+		});
+	}
 
 	$("#btn-buy-course").on('click', (event) => {
 		cant = $(":checkbox:checked").length;
@@ -46,7 +62,7 @@ $(document).ready(() => {
 				lessons.push($(this).attr('value'));
 				//alert("Id: " + $(this).attr('value'));
 			});
-			console.log(lessons);
+			//console.log(lessons);
 		}
 	});
 
