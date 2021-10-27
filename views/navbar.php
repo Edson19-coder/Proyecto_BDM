@@ -52,7 +52,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="profile.php"><span class="fas fa-user-alt"></span> Profile</a></li>
                             <li><a class="dropdown-item" href="settings.php"><span class="fas fa-user-circle"></span> Account</a></li>
-                            <li><a class="dropdown-item" href="#"><span class="fas fa-comment"></span> Chat</a></li>
+                            <li><a class="dropdown-item" href="chat.php"><span class="fas fa-comment"></span> Chat</a></li>
                             <?php if($_SESSION['accountType'] == "1"){ ?>
                             <li><a class="dropdown-item" href="create-course.php"><span class="fas fa-plus"></span> Create course</a></li>
                             <li><a class="dropdown-item" href="#"><span class="fas fa-project-diagram"></span> Report</a></li>

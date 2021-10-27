@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    
+
     <!-- NAVBAR -->
-    <?php 
+    <?php
         require_once '../models/course.php';
         include 'navbar.php';
     ?>
@@ -133,7 +133,7 @@
             <div class="row" style="display: flex; justify-content:start;">
                 <?php
                     $courses = Course::selectNewestCourses();
-                    //print_r($courses);
+                    
                     foreach ($courses as $key => $value) {
                         echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
                                 <div class="card p-0" style="width: 18rem;">
@@ -178,7 +178,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Desarrollando en Angular 10</h5>
                             <p class="card-text">
-                                Utiliza Angular, ASP.NET Core, Entity Framework Core, Material Design, JWT, Leaflet, 
+                                Utiliza Angular, ASP.NET Core, Entity Framework Core, Material Design, JWT, Leaflet,
                                 para crear una aplicación completa
                             </p>
                             <p class="card-text" style="text-align: right;"><small class="cost">$1500 MX</small></p>
@@ -190,7 +190,7 @@
                 </a>
 
                 <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;"> 
+                    <div class="card p-0" style="width: 18rem;">
                         <img src="src/image/inteligencia-artificial.png"
                             class="card-img-top" alt="...">
                         <div class="card-body">
@@ -214,7 +214,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Aprende JavaScript y Jquery de 0 a 100</h5>
                             <p class="card-text">
-                                Programación en JavaScript y Jquery de 0 a 100 para crear paginas web 
+                                Programación en JavaScript y Jquery de 0 a 100 para crear paginas web
                                 aprende todo desde el inicio.
                             </p>
                             <p class="card-text" style="text-align: right;"><small class="cost">FREE</small></p>
@@ -232,7 +232,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Aprende Vue + Firebase ACTUALIZADO 2020</h5>
                             <p class="card-text">
-                                Aprende todo lo necesario para ser un buen programador en Vue, 
+                                Aprende todo lo necesario para ser un buen programador en Vue,
                                 actualiza tus herramientas.
                             </p>
                             <p class="card-text" style="text-align: right;"><small class="cost">$1500 MX</small></p>
