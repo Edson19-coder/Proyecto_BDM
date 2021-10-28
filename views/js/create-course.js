@@ -1,9 +1,11 @@
 $(document).ready(() => {
 
+    var userId = String($(".sesion").val());
+
     var lessonCategories = [];
     var lessonList = [];
     var indiceEditActive = -1;
-	
+    
     getAllCategories();
 
     /* GESTIÓN DE CATEGORIAS DEL CURSO */
@@ -19,7 +21,7 @@ $(document).ready(() => {
         }
     });
 
-	$('#btn-add-course').click( () => {
+    $('#btn-add-course').click( () => {
         var categoryId = $('#InputCategory').val();
         lessonCategories.push(categoryId);
         var categoryName = $('#InputCategory option:selected').text();
@@ -60,7 +62,7 @@ $(document).ready(() => {
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
-           //dataType: 'json',
+           dataType: 'json',
             success: function(data) {
                 $('#InputCategory').empty();
                 getAllCategories();
@@ -87,7 +89,7 @@ $(document).ready(() => {
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
-           //dataType: 'json',
+           dataType: 'json',
             success: function(data) {
                 if(data == null) {
                     createCategory(categoryName);
@@ -140,8 +142,6 @@ $(document).ready(() => {
         var indiceString = $(this).parents('td').parents('tr').children('td.titleCol').html();
         var indice = lessonList.findIndex(function(o) { return o.lessonTitle === indiceString; })
         lessonList.splice(indice , 1);
-
-        console.log(lessonList);
     });
 
     /* Edición de lecciones */
@@ -157,8 +157,6 @@ $(document).ready(() => {
         var videoLesson = document.getElementById('InputVideoLessonAdd');
         var imageLesson = document.getElementById('InputImageLessonAdd');
         var docLesson = document.getElementById('InputFileLessonAdd');
-
-        console.log(lessonList[indiceEditActive]);
     });
 
     $('#btn-edit-lesson').on('click', (event) => {
@@ -179,6 +177,136 @@ $(document).ready(() => {
         $('#editLesson').modal('toggle');
     });
 
+    /* CREACIÓN DEL CURSO */
+
+    $('#btn-create-course').on('click', (event) => {
+        event.preventDefault();
+
+        createCourse($('#InputTitle').val(), $('#InputShortDescription').val(), $('#InputLongDescription').val(), $('#InputPrice').val(), userId);
+    });
+
+    var lastIdCourse;
+
+    function createCourse(titleCourse, shortDescriptionCourse, longDescriptionCourse, priceCourse, instructorCourse) {
+        var imageCourse = $('#miniature-course')[0].files[0];
+
+        var formData = new FormData();
+        formData.append('vAction','I');
+        formData.append('InputTitle', titleCourse);
+        formData.append('InputShortDescription', shortDescriptionCourse);
+        formData.append('InputLongDescription', longDescriptionCourse);
+        formData.append('InputPrice', priceCourse);
+        formData.append('InputImage', imageCourse);
+        formData.append('InstructorCourse', parseInt(instructorCourse));
+
+        $.ajax({     
+           url: "../controllers/create-course.php",
+           async: true,
+           type: "POST",
+           data: formData,
+           processData: false, 
+            contentType: false,
+            dataType: 'json',
+            success: function(data) {
+                lastIdCourse = data.LAST_ID;
+
+                if(lastIdCourse != null) {
+                    createCourseCategories();
+                    createLesson();
+                }
+           },
+           error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            }  
+        });
+    }
+
+    /* CREACIÓN DE CATEGORIAS DEL CURSO */
+
+     function createCourseCategories() {
+
+        for(let category of lessonCategories) {
+
+           var lessonData = {
+                vAction: 'ICC',
+                InputCategoryId: category,
+                InputCourseId: lastIdCourse
+            };
+
+            var promsie = $.ajax({     
+               url: "../controllers/create-course.php",
+               type: "POST",
+               data: lessonData,
+               dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                }  
+            });
+        }
+    }
+
+    /* CREACIÓN DE LECCIONES DEL CURSO */
+
+    function createLesson() {
+        var lastIdLesson;
+
+        for(let lesson of lessonList) {
+
+            var lessonData = {
+                vAction: 'IL',
+                InputLessonTitle: lesson.lessonTitle,
+                InputLessonDescription: lesson.lessonDescription,
+                InputLessonPrice: lesson.lessonPrice,
+                InputCourseId: lastIdCourse
+            };
+
+            var promsie = $.ajax({     
+               url: "../controllers/create-course.php",
+               type: "POST",
+               data: lessonData,
+               dataType: 'json',
+                success: function(data) {
+                    createMediLesson(data.LAST_LESSON_ID, lesson);
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                }  
+            });
+
+
+        }
+    }
+
+    /* Creación de material multimedia de la lección */
+
+    function createMediLesson(lastIdLesson, lesson) {
+
+        var formData = new FormData();
+        formData.append('vAction','IML');
+        formData.append('InputVideoLesson', lesson.lessonVideo);
+        formData.append('InputImageLesson', lesson.lessonImage);
+        formData.append('InputFileLesson', lesson.lessonFile);
+        formData.append('InputLessonId', lastIdLesson);
+
+        $.ajax({     
+           url: "../controllers/create-course.php",
+           async: true,
+           type: "POST",
+           data: formData,
+           processData: false, 
+            contentType: false,
+            success: function(data) {
+                console.log(data);
+           },
+           error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            }  
+        });
+    }
+
     /* TRAER TODAS LAS CATEGORIAS */
 
     function getAllCategories() {
@@ -190,7 +318,7 @@ $(document).ready(() => {
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
-           //dataType: 'json',
+           dataType: 'json',
             success: function(data) {
                data.forEach(category => {
                     $('#InputCategory').append($('<option>', {

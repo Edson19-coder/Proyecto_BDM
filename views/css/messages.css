@@ -35,3 +35,17 @@
 .preview {
     border: 2px solid #2b3c85f3;
 }
+
+a {
+  text-decoration: none;
+}
+
+.card-footer {
+  text-align: right;
+}
+
+div.text-muted {
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
