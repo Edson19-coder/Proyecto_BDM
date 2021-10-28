@@ -20,10 +20,9 @@
 	else if($action == 'IL'){
 		if(isset($_POST['userId'])){
 			$user = $_POST['userId'];
-			$course = $_POST['courseId'];
 			$lesson = $_POST['lessonId'];
 
-			$resp = Purchase::purchaseLesson($course, $lesson, $user);
+			$resp = Purchase::purchaseLesson($lesson, $user);
 		}else{
 			echo "Error en el servicio";
 		}

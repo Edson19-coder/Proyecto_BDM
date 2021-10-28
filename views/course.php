@@ -43,8 +43,6 @@
         }else{
             $userHasCourse["Bool"] = 0;
         }
-        
-        print_r($userHasCourse["Bool"]);
     ?>
 
     <div class="container col-12" style="padding: 20px;">
@@ -235,6 +233,14 @@
                             <?php
                             $i = 1;
                             foreach ($lessonCourse as $key => $value) {
+                                if(isset($_SESSION["id"])){
+                                    $userHasLesson = Lesson::userHasLesson($value["LESSON_ID"], $_SESSION["id"]);
+                                }else{
+                                    $userHasLesson["Bool"] = 0;
+                                }
+                                //print_r($userHasCourse["Bool"]);
+                                //print_r($userHasLesson["Bool"]);
+                                if($userHasLesson["Bool"] == 0){
                                 echo '<div class="card content-course">
                                         <div class="card-body col-12 video-seen">
                                             <div class="row">
@@ -243,7 +249,7 @@
                                                 </div>
                                                 <div class="col-4" id="divCheckbox">
                                                     <input class="form-check-input" type="checkbox" value="'.$value["LESSON_ID"].'"
-                                                        id="flexCheckDefault'.$i.'"'; if($userHasCourse["Bool"] != 0){ echo ' checked disabled';}  echo '>
+                                                        id="flexCheckDefault'.$i.'"'; if($userHasCourse["Bool"] != 0 || $userHasLesson["Bool"] != 0){ echo ' checked disabled';}  echo '>
                                                 </div>
                                                 <div id="lessonIndividualPrice'.$i.'" value="'.$value["PRICE"].'" class="col-2">
                                                     <p>'.$value["PRICE"].'</p>
@@ -251,7 +257,9 @@
                                             </div>
                                         </div>
                                     </div>';
+                                
                                     $i++;
+                                    }
                                 } ?>
                             </form>
                             <br>

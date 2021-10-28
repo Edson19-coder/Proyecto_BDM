@@ -27,18 +27,31 @@ $(document).ready(() => {
 
 	if(userId != undefined){
 		$("#formCheckBoxes").on('change', function(){
-			if($(":checkbox:checked").length == 0){
-				$("#btn-buy-lessons").prop('disabled', true);
-			}else{
-				$("#btn-buy-lessons").removeAttr('disabled');
-			}
 			var checkCant = document.getElementById('formCheckBoxes');
 			var inputsCant = checkCant.getElementsByTagName('input').length;
+
+			for (var i = 1; i <= inputsCant; i++) {
+				if($('#flexCheckDefault' + i).attr('checked') && $('#flexCheckDefault' + i).attr('disabled')){
+					console.log($('#flexCheckDefault' + i).val() + ' disabled');
+					$('#flexCheckDefault' + i).removeAttr('disabled');
+					$('#flexCheckDefault' + i).attr('disabled', true);
+				}
+			}
+
+			if($(":checkbox:checked").length == 0){
+				$("#btn-buy-lessons").prop('disabled', true);
+			}else if ($(":checkbox:checked").length > 0){
+				$("#btn-buy-lessons").removeAttr('disabled');
+			}
+
 			total = 0;
 			for (var i = 1; i <= inputsCant; i++) {
 				price = $('#flexCheckDefault' + i).val();
-				if($('#flexCheckDefault' + i).prop('checked') && $('#flexCheckDefault' + i).prop('disabled', false)){
+				console.log("i: " + i);
+				//if($('#flexCheckDefault' + i).attr('checked')){
+				if($('#flexCheckDefault' + i + ':checked')){
 					total += parseInt($('#lessonIndividualPrice' + i).attr('value'), 10);
+					console.log(total + " total");
 				}
 			}
 			$("#SubtotalPrice").text(total);
@@ -58,9 +71,12 @@ $(document).ready(() => {
 		cant = $(":checkbox:checked").length;
 		if(cant > 0){
 			var lessons = new Array();
-			$(":checkbox:checked").each(function(){
-				lessons.push($(this).attr('value'));
-			});
+				//if(!($(":checkbox:disabled"))){
+					$(":checkbox:checked").each(function(){
+					lessons.push($(this).attr('value'));
+				});
+			//}
+			//console.log(lessons);
 		}
 	});
 
@@ -98,7 +114,36 @@ $(document).ready(() => {
             	}
 			});
 		}else{
-			
+			for(var index = 1; index <= $(":checkbox:checked").length; index++){
+					var idLesson = $('#flexCheckDefault' + index).attr('value');
+					userId = $("#InputUserIdHidden").val();
+					console.log(idLesson);
+
+					var lessonBought = {
+						vAction: 'IL',
+						userId: userId,
+						lessonId: idLesson
+					};
+
+					$.ajax({
+					url: '../controllers/purchase.php',
+					type: 'POST',
+					data: lessonBought,
+					dataType: 'json',
+					success: function(data){
+						Swal.fire(
+	                      'You bought this course.',
+	                      '',
+	                      'success'
+	                    )
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) { 
+					console.warn(XMLHttpRequest.responseText);
+	                alert("Status de papu: " + textStatus); 
+	                alert("Error papu: " + errorThrown); 
+	            	}
+				});
+			}
 		}
 
 	});

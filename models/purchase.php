@@ -13,9 +13,10 @@
 			Connection::disconnect($db);
 		}
 
-		public static function purchaseLesson($courseId, $lessonId, $userId){
+		public static function purchaseLesson($lessonId, $userId){
 			$db = Connection::connect();
-			$db->query("CALL proc_purchases('IL', ".$courseId.", ".$lessonId.", ".$userId.");");
+			$return = $db->query("CALL proc_purchases('IL', null, ".$lessonId.", ".$userId.");");
+			return $return;
 			Connection::disconnect($db);
 		}
 	}
