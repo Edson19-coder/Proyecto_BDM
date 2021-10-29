@@ -81,6 +81,7 @@
     <script src="js/validation/messages.js"></script>
     <script src="models/message.js"></script>
     <script src="js/chat.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

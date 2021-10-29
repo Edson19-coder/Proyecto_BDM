@@ -312,7 +312,7 @@
     <script src="js/validation/validation-create-course.js"></script>
     <script src="models/lesson.js"></script>
     <script src="js/create-course.js"></script>
-
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

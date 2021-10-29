@@ -116,6 +116,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="models/lesson.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 </html>

@@ -261,6 +261,7 @@
     crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/validation/notifications.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

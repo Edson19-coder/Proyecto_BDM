@@ -41,7 +41,7 @@
                 <!-- Search-->
                 <div class="input-group d-lg-none my-3"><i
                         class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
-                    <input class="form-control rounded-start" type="text" placeholder="Search for courses">
+                    <input class="form-control rounded-start" id="InputSearch" type="text" placeholder="Search for courses">
                 </div>
                 <!-- Primary menu-->
                 <ul class="navbar-nav">
