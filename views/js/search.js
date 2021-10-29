@@ -1,44 +1,26 @@
 $(document).ready(() => {
 
-    var lessonCategories = [];
-
     getAllCategories();
 
+    var categoryId = null;
 
     /* GESTIÓN DE CATEGORIAS DEL CURSO */
 
     $('#InputCategory').click(() => {
-        var categoryId = $('option:selected').val();
-
-        if(lessonCategories.includes(categoryId)) {
-            $('#btn-add-category').prop('disabled', true);
-
-        } else {
-            $('#btn-add-category').prop('disabled', false);        
-        }
+        categoryId = $('option:selected').val();
     });
 
-    $('#btn-add-category').click( () => {
-        var categoryId = $('#InputCategory').val();
-        lessonCategories.push(categoryId);
-        var categoryName = $('#InputCategory option:selected').text();
-        $('#categories-body').append('<span class="badge bg-primary" style="margin-right: 5px;">'+categoryName+'  <i class="fas fa-times btn-delete-category" data-categoryid="'+categoryId+'"></i> </span>');
-        $('#btn-add-category').prop('disabled', true);
-    });
+    /* FILTROS */
 
-    $('#categories-body').on('click', '.btn-delete-category', function() {
-        $(this).closest('span').remove();
-        var toRemove = $(this).data("categoryid");
+    $('#btnSearchFilters').on('click', (event) => {
+        event.preventDefault();
+        
+        var title = $('#InputTitleCourse').val() != '' ? $('#InputTitleCourse').val() : null;
+        var ownerName = $('#InputOwnerName').val() != '' ? $('#InputOwnerName').val() : null;
+        var fromDate = $('#InputInicioDate').val() != '' ? $('#InputInicioDate').val() : null;
+        var toDate = $('#InputFinDate').val() != '' ? $('#InputFinDate').val() : null;
 
-        lessonCategories = lessonCategories.filter(function(item) {
-            return parseInt(item,10) !== toRemove
-        });
-
-        var categoryId = $('#InputCategory').val();
-
-        if(categoryId == toRemove) {
-            $('#btn-add-category').prop('disabled', false);   
-        }
+        searchForFilters(title, ownerName, fromDate, toDate);
     });
 
     function getAllCategories() {
@@ -63,5 +45,37 @@ $(document).ready(() => {
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
             }  
         });
+    }
+
+    function searchForFilters(title, ownerName, fromDate, toDate) {
+        console.log(title);
+        console.log(ownerName);
+        console.log(fromDate);
+        console.log(toDate);
+        console.log(categoryId);
+
+        var path = "search.php?";
+
+        if(title != null) {
+            path = path + "search=" + title;
+        } 
+
+        if(ownerName != null) {
+            path = path + "&owner=" + ownerName;
+        }
+
+        if(fromDate != null) {
+            path = path + "&from=" + fromDate;
+        }
+
+        if(toDate != null) {
+            path = path + "&to=" + toDate;
+        }
+
+        if(categoryId != null) {
+            path = path + "&category=" + categoryId;
+        }
+
+        window.location.href= path;
     }
 })
