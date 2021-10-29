@@ -41,14 +41,37 @@
                         <source src="../../api/src/videos/1675prueba.mp4" type="video/mp4">
                     </video>
                     <hr>
-                    <h3>Documento de la clase: </h3><a href="../../api/src/files/1821DocumentoDePrueba.docx"
-                        class="btn btn-primary" style="color:white;" download="Documento">Descargar Archivo</a>
+
+                    <!-- RESOURCES -->
+                    <div class="accordion accordion-flush" id="accordionLessonResources">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    Lesson Resources
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionLessonResources">
+                                <div class="accordion-body">
+
+                                    <h5>Lesson document: </h3>
+                                    <a href="../../api/src/files/1821DocumentoDePrueba.docx" class="btn btn-primary" style="color:white;" download="Documento">Descargar Archivo</a>
+                                    <br>
+                                    <br>
+                                    <h5>Imagen de la lección: </h3>
+                                    <img src="./src/image/angular.png" style="max-width: 815px; max-height: 476px;" class="card-img-top" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /RESOURCES -->
+
                     <hr>
                     <h5 class="fw-bold">Description:</h5>
                     <p>Esta es la descripcion de la leccion numero 1</p>
                 </div>
-
-
 
             </div>
 
@@ -64,10 +87,13 @@
                             <div class="card-body col-12 video-seen">
                                 <div class="row">
                                     <div class="col-10">
-                                        <p>Leccion numero 1</p>
-                                        <p></p>
+                                        <p class="lessonName">Leccion numero 1</p>
                                     </div>
-                                    <div class="col-2"></div>
+                                    <div class="col-2">
+                                        <div id="divCheckbox">
+                                            <input class="form-check-input" type="checkbox" value="1">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
