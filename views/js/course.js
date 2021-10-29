@@ -45,13 +45,11 @@ $(document).ready(() => {
 			}
 
 			total = 0;
+			var lmao = 1;
 			for (var i = 1; i <= inputsCant; i++) {
 				price = $('#flexCheckDefault' + i).val();
-				console.log("i: " + i);
-				//if($('#flexCheckDefault' + i).attr('checked')){
-				if($('#flexCheckDefault' + i + ':checked')){
+				if($('#flexCheckDefault' + i).is(":checked")){
 					total += parseInt($('#lessonIndividualPrice' + i).attr('value'), 10);
-					console.log(total + " total");
 				}
 			}
 			$("#SubtotalPrice").text(total);
@@ -64,19 +62,6 @@ $(document).ready(() => {
 			price = $("#CoursePrice").val();
 			price = parseInt(price, 10);
 			$("#SubtotalPrice").text(price);
-		}
-	});
-
-	$("#btn-buy-lessons").on('click', (event) => {
-		cant = $(":checkbox:checked").length;
-		if(cant > 0){
-			var lessons = new Array();
-				//if(!($(":checkbox:disabled"))){
-					$(":checkbox:checked").each(function(){
-					lessons.push($(this).attr('value'));
-				});
-			//}
-			//console.log(lessons);
 		}
 	});
 
@@ -94,7 +79,6 @@ $(document).ready(() => {
 				courseId: courseId
 			};
 
-			console.log(courseBought);
 			$.ajax({
 				url: '../controllers/purchase.php',
 				type: 'POST',
@@ -117,7 +101,6 @@ $(document).ready(() => {
 			for(var index = 1; index <= $(":checkbox:checked").length; index++){
 					var idLesson = $('#flexCheckDefault' + index).attr('value');
 					userId = $("#InputUserIdHidden").val();
-					console.log(idLesson);
 
 					var lessonBought = {
 						vAction: 'IL',

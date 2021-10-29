@@ -69,6 +69,21 @@
 			Connection::disconnect($db);
 		}
 
+		public static function selectPopularCourses(){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SAPI', null, null, null, null, null, null, null);");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
+
 		public static function selectCourseById($idCourse){
 			$db = Connection::connect();
 			$result = $db->query("CALL proc_course('SCID', '".$idCourse."', null, null, null, null, null, null);");
