@@ -14,19 +14,19 @@ $(document).ready(() => {
         var categoryId = $('option:selected').val();
 
         if(lessonCategories.includes(categoryId)) {
-            $('#btn-add-course').prop('disabled', true);
+            $('#btn-add-category').prop('disabled', true);
 
         } else {
-            $('#btn-add-course').prop('disabled', false);        
+            $('#btn-add-category').prop('disabled', false);        
         }
     });
 
-    $('#btn-add-course').click( () => {
+    $('#btn-add-category').click( () => {
         var categoryId = $('#InputCategory').val();
         lessonCategories.push(categoryId);
         var categoryName = $('#InputCategory option:selected').text();
         $('#categories-body').append('<span class="badge bg-primary" style="margin-right: 5px;">'+categoryName+'  <i class="fas fa-times btn-delete-category" data-categoryid="'+categoryId+'"></i> </span>');
-        $('#btn-add-course').prop('disabled', true);
+        $('#btn-add-category').prop('disabled', true);
     });
 
     $('#categories-body').on('click', '.btn-delete-category', function() {
@@ -40,7 +40,7 @@ $(document).ready(() => {
         var categoryId = $('#InputCategory').val();
 
         if(categoryId == toRemove) {
-            $('#btn-add-course').prop('disabled', false);   
+            $('#btn-add-category').prop('disabled', false);   
         }
     });
 

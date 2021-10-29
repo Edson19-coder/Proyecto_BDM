@@ -74,7 +74,7 @@
                                     </select>
                                 </div>
                                 <div class="col-2">
-                                  <button type="button" class="btn btn-primary" id="btn-add-course"> <i class="fas fa-plus"></i> </button>
+                                  <button type="button" class="btn btn-primary" id="btn-add-category"> <i class="fas fa-plus"></i> </button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#addCategory"> <i class="fas fa-edit"></i> </button>
                                 </div>
@@ -230,20 +230,6 @@
                                             <span class="hide" id="span-lessson-price" style="color: red">*Price is required</span>
                                             <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
                                         </div>
-                                        <!--
-                                        <div class="mb-3 form-group">
-                                            <label for="InputVideoLessonAdd">Video lesson</label>
-                                            <input type="file" class="form-control-file form-control" accept="video/*" id="InputVideoLessonEdit">
-                                        </div>
-                                        <div class="mb-3 form-group">
-                                            <label for="InputImageLessonAdd">Image lesson</label>
-                                            <input type="file" class="form-control-file form-control" accept="image/*" id="InputImageLessonEdit">
-                                        </div>
-                                        <div class="mb-3 form-group">
-                                            <label for="InputFileLessonAdd">File lesson</label>
-                                            <input type="file" class="form-control-file form-control" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf" id="InputFileLessonEdit">
-                                        </div>
-                                        -->
                                         <div class="text-end">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
