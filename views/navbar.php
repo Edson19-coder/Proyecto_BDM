@@ -62,7 +62,7 @@
                 <a href="index.php" class="navbar-brand fw-bold d-none-d-sm-block flex-shrink-0">Crealink Digital<span
                         class="text-primary">.</span></a>
                 <div class="input-group d-none d-lg-flex mx-4">
-                    <input type="text" class="form-control rounded-end" type="text" placeholder="Search for courses">
+                    <input type="text" id="InputSearch" class="form-control rounded-end" type="text" placeholder="Search for courses">
                 </div>
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -80,7 +80,7 @@
                 <!-- Search-->
                 <div class="input-group d-lg-none my-3"><i
                         class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
-                    <input class="form-control rounded-start" type="text" placeholder="Search for courses">
+                    <input class="form-control rounded-start" id="InputSearch" type="text" placeholder="Search for courses">
                 </div>
                 <!-- Primary menu-->
                 <ul class="navbar-nav">
