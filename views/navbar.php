@@ -6,7 +6,7 @@
                 <a href="index.php" class="navbar-brand fw-bold d-none-d-sm-block flex-shrink-0">Crealink Digital<span
                         class="text-primary">.</span></a>
                 <div class="input-group d-none d-lg-flex mx-4">
-                    <input type="text" class="form-control rounded-end" type="text" placeholder="Search for courses">
+                    <input type="text" id="InputSearch" class="form-control rounded-end" type="text" placeholder="Search for courses">
                 </div>
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -67,33 +67,6 @@
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
-
-                    <div class="dropdown navbar-tool">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu categories" aria-labelledby="navbarDropdownMenuLink">
-                            <div class="row">
-                                <div class="col-6">
-                                    <li><a class="dropdown-item" href="#">LOGUEADO</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </div>
-                                <div class="col-6">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
 
                     <a href="login.php" class="nav-link navbar-tool d-none d-lg-flex btn-login">Log In</a>
 

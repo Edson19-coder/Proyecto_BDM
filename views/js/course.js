@@ -49,7 +49,7 @@ $(document).ready(() => {
 				price = $('#flexCheckDefault' + i).val();
 				console.log("i: " + i);
 				//if($('#flexCheckDefault' + i).attr('checked')){
-				if($('#flexCheckDefault' + i + ':checked')){
+				if($('#flexCheckDefault' + i).is(":checked")){
 					total += parseInt($('#lessonIndividualPrice' + i).attr('value'), 10);
 					console.log(total + " total");
 				}
