@@ -18,7 +18,7 @@
 <body>
      <!-- NAVBAR -->
      <?php 
-        require_once '../models/course.php';
+        require_once '../models/search.php';
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
@@ -35,12 +35,20 @@
 
                         <div class="mb-3">
                             <label for="InputTitleCourse" class="form-label">Titulo:</label>
-                            <input type="text" class="form-control" id="InputTitleCourse">
+                            <?php if(isset($_GET['search'])) {?>
+                            <input type="text" class="form-control" id="InputTitleCourse" value="<?php echo $_GET['search']; ?>">
+                            <?php } else { ?>
+                            <input type="text" class="form-control" id="InputTitleCourse" value="">
+                            <?php } ?>
                         </div>
 
                         <div class="mb-3">
                             <label for="InputOwnerName" class="form-label">Instructor:</label>
+                            <?php if(isset($_GET['owner'])) {?>
+                            <input type="text" class="form-control" id="InputOwnerName" value="<?php echo $_GET['owner']; ?>">
+                            <?php } else { ?>
                             <input type="text" class="form-control" id="InputOwnerName">
+                            <?php } ?>
                         </div>
 
                         <div class="mb-3">
@@ -53,12 +61,9 @@
                         <div class="mb-3 form-group">
                             <label for="InputCategory">Categories</label>
                             <div class="row">
-                                <div class="col-9">
+                                <div class="col-12">
                                     <select class="form-control" id="InputCategory">
                                     </select>
-                                </div>
-                                <div class="col-3">
-                                  <button type="button" class="btn btn-primary" id="btn-add-category"> <i class="fas fa-plus"></i> </button>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +72,7 @@
 
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="margin-bottom: 10px;">Search</button>
+                        <button type="button" class="btn btn-primary" id="btnSearchFilters" style="margin-bottom: 10px;">Search</button>
 
                     </form>
 
@@ -82,22 +87,57 @@
                         <div class="row" style="display: flex; justify-content:start;">
                             
                         <?php
-                            $courses = Course::selectNewestCourses();
+
+                            if(!isset($_GET['owner']) && !isset($_GET['from']) && !isset($_GET['to']) && !isset($_GET['category'])) {
+                                
+                                if(isset($_GET['search'])) {
+                                    $courses = Search::getCourseByTitle($_GET['search']);
+                                } else {
+                                    $courses = Search::getAllCourses();
+                                }
                             
-                            foreach ($courses as $key => $value) {
-                                echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                        <div class="card p-0" style="width: 18rem;">
-                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
-                                                class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
-                                                <p class="card-text">
-                                                    '.$value["SHORT_DESCRIPTION"].'
-                                                </p>
-                                                <p class="card-text" style="text-align: right;"><small class="cost">'.$value["PRICE"].'</small></p>
+                                foreach ($courses as $key => $value) {
+                                    echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                            <div class="card p-0" style="width: 18rem;">
+                                                <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                    class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                                    <p class="card-text">
+                                                        '.$value["SHORT_DESCRIPTION"].'
+                                                    </p>
+                                                    <p class="card-text" style="text-align: right;"><small class="cost">'.$value["PRICE"].'</small></p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>';
+                                        </a>';
+                                }
+                            } else {
+
+                                $title = isset($_GET['search']) ? $_GET['search'] : null;
+                                $ownerName = isset($_GET['owner']) ? $_GET['owner'] : null;
+                                $fromDate = isset($_GET['from']) ? $_GET['from'] : null;
+                                $toDate = isset($_GET['to']) ? $_GET['to'] : null;
+                                $categoryId = isset($_GET['category']) ? $_GET['category'] : null;
+
+                                $courses = Search::getCourseByFilter($title, $ownerName, $fromDate, $toDate, $categoryId);
+
+                                if($courses != null) {
+                                    foreach ($courses as $key => $value) {
+                                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                                <div class="card p-0" style="width: 18rem;">
+                                                    <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                        class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                                        <p class="card-text">
+                                                            '.$value["SHORT_DESCRIPTION"].'
+                                                        </p>
+                                                        <p class="card-text" style="text-align: right;"><small class="cost">'.$value["PRICE"].'</small></p>
+                                                    </div>
+                                                </div>
+                                            </a>';
+                                    } 
+                                }
                             }
 
                         ?>

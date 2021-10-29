@@ -52,7 +52,11 @@ $(document).ready( () => {
             'Good job!',
             'You clicked the button!',
             'success'
-        );
+        ).then(function (result) {
+            if (result.value) {
+                window.location = "index.php";
+            }
+        });
 
         $("#id-index-payment").removeAttr('style');
         $("#id-index-course-create").attr('style', 'color: #153ff7 !important');
