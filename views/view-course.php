@@ -60,7 +60,7 @@
                                     <a href="../../api/src/files/1821DocumentoDePrueba.docx" class="btn btn-primary" style="color:white;" download="Documento">Descargar Archivo</a>
                                     <br>
                                     <br>
-                                    <h5>Imagen de la lección: </h3>
+                                    <h5>Lesson Image: </h3>
                                     <img src="./src/image/angular.png" style="max-width: 815px; max-height: 476px;" class="card-img-top" alt="...">
                                 </div>
                             </div>
