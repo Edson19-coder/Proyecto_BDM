@@ -19,98 +19,47 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php 
+    <?php
+        require_once('../models/messages.php');
         include 'navbar.php';
     ?>
+
     <!-- /NAVBAR -->
-    
+    <input type="hidden" class="sesion" id="sesion" value="<?php echo $_SESSION['id'] ?>"></input>
     <!-- CONTENT -->
     <div class="message-body container col-12">
         <div class="row">
             <div class="col-4" style="padding: 10px; background-color: white; border: 1px solid black;">
                 <h2>Chats</h2>
-                <input type="text" name="" id="" class="form-control" style="margin-bottom: 10px;" placeholder="Search Chats">
+                <input type="text" name="" id="InputSearchUser" class="form-control" style="margin-bottom: 10px;" placeholder="Search Chats">
                 <!-- PREVIEW MESSAGE -->
-                <div class="card col-12 preview" style="padding: 8px;">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                                height="50" alt="" loading="lazy" />
-                        </div>
-                        <div class="col-10">
-                            <div class="col-12 user_name">
-                                <h5>Nombre de Usurio</h5>
-                            </div>
-                            <div class="col-12 text-muted">
-                                <!-- MAX 34 CHARACTERS -->
-                                Hola bienvenido al curso de html..
-                            </div>
-                        </div>
-                    </div>
+                <div class="previewMessages">
+
                 </div>
-                <div class="card col-12 preview" style="padding: 8px;">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                                height="50" alt="" loading="lazy" />
-                        </div>
-                        <div class="col-10">
-                            <div class="col-12 user_name">
-                                <h5>Nombre de Usurio</h5>
-                            </div>
-                            <div class="col-12 text-muted">
-                                <!-- MAX 34 CHARACTERS -->
-                                Hola bienvenido al curso de html..
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /PREVIEW MESSAGE -->
             </div>
             <div class="col-8" style="padding: 10px; background-color: white; border: 1px solid black;">
-                
-                <!-- Body of messages -->
-				<div class="container global" style="padding: 20px 50px 50px 50px;">
-					
-					<!-- friend -->
-					<div class="card">
-						<div class="card-header message-f">
-							<div class="col-12">
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                                height="50" alt="" loading="lazy" /> Osmar Lugo
-							</div>
-						</div>
-						<div class="card-body">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tempore temporibus sunt modi praesentium, laborum porro cumque quaerat, minima culpa corporis quibusdam libero, esse voluptas quae? Porro repudiandae odit modi?
-						</div>
-					</div>
-					<!-- /friend -->
 
-					<!-- Me -->
-					<div class="card">
-						<div class="card-header message-m">
-							<div class="col-12" style="text-align: right;">
-								Edson Lugo   <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                                height="50" alt="" loading="lazy" />
-							</div>
-						</div>
-						<div class="card-body">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt nihil unde excepturi reprehenderit vitae quibusdam accusamus suscipit, a ut iusto voluptatum sequi cumque at corporis quam quos exercitationem autem nobis?
-						</div>
-					</div>
-					<!-- /Me -->
+        <!-- Body of messages -->
+				<div class="container global" style="padding: 20px 50px 50px 50px;">
+
+          <div style="text-align: center; padding: 100px">
+            <h1>Bienvenido al chat de</h1>
+            <h2 class="fw-bold d-none-d-sm-block flex-shrink-0">Crealink Digital<span
+                    class="text-primary">.</span></h2>
+            <p>Selecciona o busca a una persona para comunicarte.</p>
+          </div>
 
 				</div>
 				<!-- /Body of messages -->
 
-                <!-- Create message -->
-				<form action="">
+        <!-- Create message -->
+				<form action="" id="formMessageInput">
 					<div class="container">
 						<div class="col-12" style="padding-top: 20px;">
 							<div class="col-12" style="padding: 10px; border-radius: 10px;">
 								<div class="row">
 									<div class="col-10">
-										<textarea class="form-control" placeholder="What's in your mind?"></textarea>
+										<textarea class="form-control" id="contentMessage" placeholder=""></textarea>
 									</div>
 									<div class="col-2" style="text-align: center;">
 										<input type="button" value="Enviar"
@@ -129,7 +78,10 @@
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/messages.js"></script>
+    <script src="js/validation/messages.js"></script>
+    <script src="models/message.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

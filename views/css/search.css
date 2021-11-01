@@ -1,0 +1,38 @@
+.search-courses-content a{
+    text-decoration: none;
+    color: black;
+    width: auto !important;
+    margin-bottom: 15px;
+}
+
+.search-courses-content a:hover {
+    color: black;
+}
+
+.filter-container, .search-container {
+    background-color: white;
+    
+}
+
+.filter-container {
+    border-right: 1px solid black;
+}
+
+.card.col-3 {
+    margin-left: 5px;
+}
+
+.row .card.p-0 { 
+    width: 16rem; 
+    margin-right: 20px; 
+    margin-left: 20px;
+}
+
+.cost{
+    font-weight: bold;
+    color: green;
+}
+
+.fa-times {
+    cursor: pointer;
+}

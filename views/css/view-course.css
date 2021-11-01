@@ -49,3 +49,9 @@ p > i {
 	width: auto;
 	overflow-y: scroll;
 }
+
+.lessonName {
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

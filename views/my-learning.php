@@ -207,6 +207,7 @@
     <!-- /CONTENT -->
     <!-- JS -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

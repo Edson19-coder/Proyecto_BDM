@@ -48,6 +48,7 @@ $(document).ready(() => {
 			var lmao = 1;
 			for (var i = 1; i <= inputsCant; i++) {
 				price = $('#flexCheckDefault' + i).val();
+				
 				if($('#flexCheckDefault' + i).is(":checked")){
 					total += parseInt($('#lessonIndividualPrice' + i).attr('value'), 10);
 				}

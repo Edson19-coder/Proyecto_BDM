@@ -299,6 +299,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/validation/course-notifications.js"></script>
     <script src="js/course.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

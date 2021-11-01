@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    
+
     <!-- NAVBAR -->
-    <?php 
+    <?php
         require_once '../models/course.php';
         include 'navbar.php';
     ?>
@@ -133,7 +133,7 @@
             <div class="row" style="display: flex; justify-content:start;">
                 <?php
                     $courses = Course::selectNewestCourses();
-                    //print_r($courses);
+                    
                     foreach ($courses as $key => $value) {
                         echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
                                 <div class="card p-0" style="width: 18rem;">
@@ -170,7 +170,8 @@
         <div class="col-12 in-progress-learning" style="padding: 10px;">
 
             <div class="row" style="display: flex; justify-content:start;">
-                <?php
+
+              <?php
                     $courses = Course::selectPopularCourses();
                     foreach ($courses as $key => $value) {
                         echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
@@ -188,6 +189,7 @@
                             </a>';
                     }
                 ?>
+                
             </div>
         </div>
 
@@ -208,6 +210,7 @@
     crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/validation/notifications.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 
