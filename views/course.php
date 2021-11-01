@@ -147,7 +147,7 @@
                         
                         <div class="col-12">
                             <?php
-                                if($userHasCourse["Bool"] == 0){
+                                if($userHasCourse["Bool"] == 0 && $course["ID_INSTRUCTOR"] != $_SESSION['id']){
                             ?>
                             <button id="btn-buy-course" type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBuyNow">
                                 Buy now
@@ -156,7 +156,11 @@
                              <button id="btn-course-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
                                 You already have this course
                             </button>   
-                        <?php } ?>
+                        <?php }else if($course["ID_INSTRUCTOR"] == $_SESSION['id']){
+                            echo '<button id="btn-course-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
+                                You are the teacher.
+                                </button>';
+                        } ?>
                             <!-- Modal Buy Lesson -->
                             <div class="modal fade" id="modalBuyNow" data-bs-backdrop="static" data-bs-keyboard="false"
                                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -240,7 +244,7 @@
                                 }
                                 //print_r($userHasCourse["Bool"]);
                                 //print_r($userHasLesson["Bool"]);
-                                if($userHasLesson["Bool"] == 0){
+                                if($userHasLesson["Bool"] == 0 && $course["ID_INSTRUCTOR"] != $_SESSION['id']){
                                 echo '<div class="card content-course">
                                         <div class="card-body col-12 video-seen">
                                             <div class="row">
@@ -263,12 +267,18 @@
                                 } ?>
                             </form>
                             <br>
-                            <?php if($userHasCourse["Bool"] == 0){ ?>
+                            <?php if($userHasCourse["Bool"] == 0 && $course["ID_INSTRUCTOR"] != $_SESSION['id']){ ?>
                             <button id="btn-buy-lessons" type="button" class="col-12 btn-shop btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalBuyNow">
                                 Buy Lesson(s)
                             </button>
-                            <?php }else {?>
+                            <?php }
+
+                            else if($course["ID_INSTRUCTOR"] == $_SESSION['id']){
+                                echo '<button id="btn-lessons-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
+                                        You are the teacher.
+                                    </button>';
+                            }else {?>
                                 <button id="btn-lessons-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
                                 You already have this lessons
                             </button>

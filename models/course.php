@@ -109,5 +109,35 @@
 				return 0;
 			}
 		}
+
+		public static function selectUserCourses($idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_purchases('SUCP', null, null, ".$idUser.");");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
+
+		public static function selectTeacherCourses($idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('STC', null, null, null, null, null, null, ".$idUser.");");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
 	}
 ?>
