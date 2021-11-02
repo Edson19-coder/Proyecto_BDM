@@ -68,5 +68,76 @@
 			}
 			Connection::disconnect($db);
 		}
+
+		public static function selectPopularCourses(){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SAPI', null, null, null, null, null, null, null);");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
+
+		public static function selectCourseById($idCourse){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SCID', '".$idCourse."', null, null, null, null, null, null);");
+			if($result){
+				while($course = $result->fetch_assoc()){
+					return $course;
+				}
+			}else{
+				echo("Error, este curso no existe.");
+				return null;
+			}
+		}
+
+		public static function userHasCourse($idCourse, $idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_purchases('UHC', ".$idCourse.", null, ".$idUser.");");
+			if($result){
+				while($course = $result->fetch_assoc()){
+					return $course;
+				}
+			}else{
+				echo("Error, este curso no existe.");
+				return 0;
+			}
+		}
+
+		public static function selectUserCourses($idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_purchases('SUCP', null, null, ".$idUser.");");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
+
+		public static function selectTeacherCourses($idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('STC', null, null, null, null, null, null, ".$idUser.");");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
 	}
 ?>

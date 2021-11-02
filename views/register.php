@@ -94,6 +94,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/validation/validation-register.js"></script>
     <script src="js/register.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

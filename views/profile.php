@@ -21,6 +21,7 @@
 
     <!-- NAVBAR -->
     <?php 
+        require_once '../models/course.php';
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
@@ -60,7 +61,7 @@
                     </div>
                 </div>
             </div>
-
+            <?php if($_SESSION['accountType'] == "1"){ ?>
             <!-- MY COURSES -->
             <div class="home most-new col-12" style="padding: 10px;">
                 <div class="col-12 title text-center">
@@ -68,21 +69,38 @@
                     <hr>
                 </div>
 
-                <div class="col-12 in-progress-learning" style="padding: 10px;">
+                <div class="col-12 my-courses" style="padding: 10px;">
 
                     <div class="row" style="display: flex; justify-content:start;">
-
-
+                       <?php
+                            $teacherCourses = null;
+                            $user = $_SESSION['id'];
+                            $teacherCourses = Course::selectTeacherCourses($user);
+                            //print_r($userCourses);
+                            if($teacherCourses != null){
+                                foreach ($teacherCourses as $key => $value) {
+                                echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                        <div class="card p-0" style="width: 18rem;">
+                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                                <p class="card-text">
+                                                    '.$value["SHORT_DESCRIPTION"].'
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>';
+                                }
+                            }else{
+                                echo "<h1>You haven't bought any courses, go for it!</h1>";
+                            }
+                        ?>
                     </div>
-
-                </div>
-
-                <div class="card-footer" style="text-align: right;">
-                    <a href="#">See more</a>
                 </div>
             </div>
             <!-- /MY COURSES  -->
-
+        <?php } ?>
             <!-- MY LEARNINGS -->
             <div class="home most-new col-12" style="padding: 10px;">
                 <div class="col-12 title text-center">
@@ -93,8 +111,31 @@
                 <div class="col-12 in-progress-learning" style="padding: 10px;">
 
                     <div class="row" style="display: flex; justify-content:start;">
-
-
+                         <?php
+                            $userCourses = null;
+                            $user = $_SESSION['id'];
+                            $userCourses = Course::selectUserCourses($user);
+                            //print_r($userCourses);
+                            if($userCourses != null){
+                                foreach ($userCourses as $key => $value) {
+                                echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                        <div class="card p-0" style="width: 18rem;">
+                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                                <p class="card-text">
+                                                    '.$value["SHORT_DESCRIPTION"].'
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>';
+                                }
+                            }else{
+                                echo "<h1>You haven't bought any courses, go for it!</h1>";
+                            }
+                            
+                        ?>
                     </div>
 
                 </div>
@@ -117,6 +158,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/notifications.js"></script>
+    <script src="js/searchBar.js"></script>
     <!-- /JS -->
 </body>
 

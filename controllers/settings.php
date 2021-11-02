@@ -26,9 +26,6 @@
 			echo "Error en el servicio";
 		}
 	}
-	else if($action == "UUI"){ //Update User Information
-
-	}
 
 	echo json_encode($resp);
 
