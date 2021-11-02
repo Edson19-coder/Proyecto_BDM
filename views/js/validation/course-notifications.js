@@ -1,6 +1,6 @@
 
 $('.add-cart').on('click', notificationAddToCart);
-$("#btn-check-out").on('click', checkOutSuccess);
+//$("#btn-check-out").on('click', checkOutSuccess);
 
 function notificationAddToCart() {
     const Toast = Swal.mixin({
@@ -30,7 +30,7 @@ function checkOutSuccess() {
     )
     .then(function (result) {
         if (result.value) {
-            window.location = "index.html";
+            window.location = "index.php";
         }
     })
 

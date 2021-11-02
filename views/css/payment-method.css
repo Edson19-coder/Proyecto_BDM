@@ -1,41 +1,11 @@
-
-.description-course {
-    background-color: white;
-    padding: 30px;
-    box-shadow: 0px 0px 5px 0px grey;
+p {
+    margin: 0px
 }
 
-p > i {
-    margin-right: 10px;
-}
-
-.btn-shop {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.global {
-    height: 470px;
-    width: auto;
-    overflow-y: scroll;
-}
-
-.content-course {
-    margin-top: 10px;
-    box-shadow: 0px 0px 5px 0px grey;
-}
-
-.content-course > .card-body {
-    padding: 5px !important;
-}
-
-.content-course > .card-body p {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    margin: 5px !important;
-    width: auto;
-    height: auto;
+.h8 {
+    font-size: 25px;
+    font-weight: 600;
+    color: white
 }
 
 .card .atm {
