@@ -12,10 +12,6 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
 
-                    <a href="" class="nav-link navbar-tool d-none d-lg-flex">My course</a>
-
-                    <a href="" class="nav-link navbar-tool d-none d-lg-flex">My learning</a>
-                    
                     <div class="dropdown navbar-tool">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,6 +21,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="profile.php"><span class="fas fa-user-alt"></span> Profile</a></li>
                             <li><a class="dropdown-item" href="settings.php"><span class="fas fa-user-circle"></span> Account</a></li>
+                            <li><a class="dropdown-item" href="payment-method.php"><span class="fas fa-credit-card"></span> Payment method</a></li>
                             <li><a class="dropdown-item" href="chat.php"><span class="fas fa-comment"></span> Chat</a></li>
                             <?php if($_SESSION['accountType'] == "1"){ ?>
                             <li><a class="dropdown-item" href="create-course.php"><span class="fas fa-plus"></span> Create course</a></li>
@@ -43,15 +40,6 @@
                         class="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
                     <input class="form-control rounded-start" id="InputSearch" type="text" placeholder="Search for courses">
                 </div>
-                <!-- Primary menu-->
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="" class="nav-link">My course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">My learning</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

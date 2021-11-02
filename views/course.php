@@ -19,7 +19,7 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php 
+    <?php
         require_once('../models/course.php');
         require_once('../models/lesson.php');
 
@@ -50,7 +50,7 @@
             <div class="col-md-8 description-course">
                 <h2><?php echo $course["TITLE"]; ?></h2>
                 <p><i class="fas fa-user-alt"></i><?php echo $course["FIRST_NAME"]." ".$course["LAST_NAME"]; ?></p>
-                <p><i class="fas fa-calendar"></i>Created <?php 
+                <p><i class="fas fa-calendar"></i>Created <?php
                 $creation_date = date_create($course["CREATION_DATE"]);
                 echo date_format($creation_date, 'd/m/Y'); ?></p>
                 <p><i class="fas fa-calendar"></i>Last update <?php
@@ -58,14 +58,14 @@
                 echo date_format($last_update_date, 'd/m/Y'); ?></p>
                 <p><i class="fas fa-user-graduate"></i><?php
                 if($course["PARTICIPANTS"] != 0){
-                    echo $course["PARTICIPANTS"]; 
+                    echo $course["PARTICIPANTS"];
                 }else{
                     echo "Este curso aún no tiene estudiantes inscritos.";
                 }
                 ?></p>
-                <p><i class="fas fa-thumbs-up"></i><?php 
+                <p><i class="fas fa-thumbs-up"></i><?php
                 if($course["QUALIFICATION"] != null){
-                    echo $course["QUALIFICATION"]."/10"; 
+                    echo $course["QUALIFICATION"]."/10";
                 }else{
                     echo "Este curso aún no tiene calificaciones.";
                 }
@@ -88,7 +88,7 @@
                                 <div class="card-header message-m">
                                     <div class="col-12" style="text-align: right;">Edson19 <img
                                             src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                            class="rounded-circle" height="50" alt="" loading="lazy"> 
+                                            class="rounded-circle" height="50" alt="" loading="lazy">
                                     </div>
                                 </div>
                                 <div class="card-body">Este es un bonito comentario - 2021-05-22</div>
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-12">
                             <?php
                                 if($userHasCourse["Bool"] == 0 && $course["ID_INSTRUCTOR"] != $_SESSION['id']){
@@ -155,7 +155,7 @@
                             <?php }else if($userHasCourse["Bool"] == 1){ ?>
                              <button id="btn-course-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
                                 You already have this course
-                            </button>   
+                            </button>
                         <?php }else if($course["ID_INSTRUCTOR"] == $_SESSION['id']){
                             echo '<button id="btn-course-bought" type="button" class="col-12 btn-shop btn btn-primary" disabled>
                                 You are the teacher.
@@ -185,28 +185,18 @@
                                                     </div>
                                                     <hr>
                                                     <h5>Card</h5>
-                                                    <form class="credit-card-div">
-                                                        <div class="col-12 mb-3">
-                                                            <input type="number" class="form-control" name="" id="card-number" placeholder="Enter Card Number">
+
+                                                    <div class="col-12 card" style="overflow-y: scroll; height: 440px;">
+                                                        <div class="px-4" id="payment-method-cards">
+
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-4 mb-3">
-                                                                <span class="help-block text-muted small-font">Expiration Month</span>
-                                                                <input type="number" minlength="0" max="2" name="" id="card-mouth" class="form-control" placeholder="MM">
-                                                            </div>
-                                                            <div class="col-4 mb-3">
-                                                                <span class="help-block text-muted small-font">Expiration Year</span>
-                                                                <input type="number" name="" id="card-year" class="form-control" placeholder="YYYY">
-                                                            </div>
-                                                            <div class="col-4 mb-3">
-                                                                <span class="help-block text-muted small-font">CCV</span>
-                                                                <input type="number" name="" id="card-ccv" class="form-control" placeholder="CCV">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <input type="text" class="form-control" name="" id="card-titular" placeholder="Name On The Card">
-                                                        </div>
-                                                    </form>
+                                                    </div>
+
+                                                    <div class="col-12 mb-3">
+                                                        <span class="help-block text-muted small-font">Confirm CCV</span>
+                                                        <input type="text" name="" id="cvv" class="form-control" maxlength="3" placeholder="123">
+                                                    </div>
+
                                                     <hr>
                                                     <p style="font-size: x-small;">
                                                         Crealink Digital está obligado por ley a recaudar los impuestos
@@ -221,7 +211,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Cancel</button>
                                                     <button type="submit" id="btn-check-out" data-bs-dismiss="modal"
-                                                        class="btn btn-primary">Check out</button>
+                                                        class="btn btn-primary" disabled>Check out</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -261,7 +251,7 @@
                                             </div>
                                         </div>
                                     </div>';
-                                
+
                                     $i++;
                                     }
                                 } ?>
@@ -298,6 +288,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/validation/course-notifications.js"></script>
+    <script src="models/paymentCard.js"></script>
     <script src="js/course.js"></script>
     <script src="js/searchBar.js"></script>
     <!-- /JS -->
