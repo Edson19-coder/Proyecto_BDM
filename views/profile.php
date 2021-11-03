@@ -20,7 +20,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <?php 
+    <?php
         require_once '../models/course.php';
         include 'navbar.php';
     ?>
@@ -36,14 +36,14 @@
                     class="rounded-circle" height="200" alt="" loading="lazy">
             </div>
             <div class="col-12" style="padding: 20px;">
-                <h1 id="user-name-view"><?php 
+                <h1 id="user-name-view"><?php
                 if(isset($_SESSION['secondName'])){
                     echo $_SESSION['firstName']." ".$_SESSION['secondName']." ".$_SESSION['lastNames'];
                 } else{
                     echo $_SESSION['firstName']." ".$_SESSION['lastNames'];
                 }
                  ?></h1>
-                
+
             </div>
             <div class="col-4" style="margin-left: auto; margin-right: auto;">
                 <div class="row">
@@ -51,7 +51,7 @@
                         <h4 id="user-username-view"><?php echo "@".$_SESSION['username']; ?></h4>
                     </div>
                     <div class="col-6">
-                        <h4 id="user-rol-view"><?php 
+                        <h4 id="user-rol-view"><?php
                         if($_SESSION['accountType'] == "0"){
                             echo "Estudiante";
                         }else{
@@ -76,11 +76,11 @@
                             $teacherCourses = null;
                             $user = $_SESSION['id'];
                             $teacherCourses = Course::selectTeacherCourses($user);
-                            //print_r($userCourses);
                             if($teacherCourses != null){
                                 foreach ($teacherCourses as $key => $value) {
-                                echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                echo '
                                         <div class="card p-0" style="width: 18rem;">
+                                          <a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
                                             <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                                 class="card-img-top" alt="...">
                                             <div class="card-body">
@@ -88,9 +88,13 @@
                                                 <p class="card-text">
                                                     '.$value["SHORT_DESCRIPTION"].'
                                                 </p>
+                                              </div>
+                                            </a>
+                                            <div class="card-footer">
+                                                <a type="button" class="form-control btn btn-primary" href="update-course.php?course='.$value["COURSE_ID"].'">Editar</a>
                                             </div>
                                         </div>
-                                    </a>';
+                                    ';
                                 }
                             }else{
                                 echo "<h1>You haven't bought any courses, go for it!</h1>";
@@ -134,7 +138,7 @@
                             }else{
                                 echo "<h1>You haven't bought any courses, go for it!</h1>";
                             }
-                            
+
                         ?>
                     </div>
 
