@@ -1,4 +1,15 @@
 $( document ).ready(function() {
+
+    var cant = $(":checkbox:checked").length;
+    var checkCant = document.getElementById('lessonList');
+    var inputsCant = checkCant.getElementsByTagName('input').length;
+
+    function checkCertificate(){
+        if(cant == inputsCant){
+        $("#btn-get-certificate").prop('disabled', false);
+        }
+    }
+    
     
     $("#lessonList").click(function(){
         var b = $(event.target);
@@ -12,7 +23,7 @@ $( document ).ready(function() {
             var courseId = $("form.courseId").attr('courseId');
             var userId = $("form.userId").attr('userId');
             var checkboxId = $(b).attr('id');
-            var insertLessonViewed ={
+            var insertLessonViewed = {
                 vAction: 'ILV',
                 lessonId:lessonId,
                 courseId:courseId,
@@ -40,5 +51,10 @@ $( document ).ready(function() {
                 }
             });
         }
+    });
+
+    $(".form-check-input").on('change', function(){
+        cant = $(":checkbox:checked").length;
+        checkCertificate();
     });
 });
