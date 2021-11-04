@@ -17,6 +17,7 @@
   				echo("Error, este curso no existe.");
   				return 0;
   			}
+        Connection::disconnect($db);
   		}
 
       public static function getLessonInformationUpdate($idCourse){
@@ -32,7 +33,16 @@
   				echo("Error, este curso no existe.");
   				return 0;
   			}
+        Connection::disconnect($db);
   		}
+
+      public static function updateLessonData($lessonId, $lessonTitle, $lessonDescription, $lessonPrice) {
+        $db = Connection::connect();
+        $result = $db->query("CALL proc_lesson('U', ".$lessonId.", '".$lessonTitle."', '".$lessonDescription."', '".$lessonPrice."', null);");
+        return $result;
+        Connection::disconnect($db);
+      }
+
   }
 
  ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	header('Access-Control-Allow-Origin: *');
 	require_once('../db/db.php');
@@ -12,11 +12,11 @@
 	$action = $_POST["vAction"];
 
 	/* CATEGORIAS */
-	
+
 	if($action == 'CC') {
 		$categoryName = $_POST["InputNameCategoryAdd"];
 		$resp = Category::getCategoryByName($categoryName);
-	} 
+	}
 	else if($action == 'IC') {
 		$categoryName = $_POST["InputNameCategoryAdd"];
 		$resp = Category::createCategory($categoryName);
@@ -32,7 +32,7 @@
 		$priceCourse = $_POST["InputPrice"];
 		$instructorCourse = $_POST["InstructorCourse"];
 
-		if (($_FILES["InputImage"]["type"] == "image/pjpeg") || ($_FILES["InputImage"]["type"] == "image/jpeg") || 
+		if (($_FILES["InputImage"]["type"] == "image/pjpeg") || ($_FILES["InputImage"]["type"] == "image/jpeg") ||
 			($_FILES["InputImage"]["type"] == "image/png") || ($_FILES["InputImage"]["type"] == "image/gif")) {
 
 			$imageCourse = addslashes(file_get_contents($_FILES["InputImage"]["tmp_name"]));
@@ -44,7 +44,7 @@
 
 		$idCategory = $_POST["InputCategoryId"];
 		$idCourse = $_POST["InputCourseId"];
-		
+
 		$resp = Course::createCourseCategories($idCategory, $idCourse);
 	}
 	else if($action == 'IL') {
@@ -64,8 +64,8 @@
 
 		if($idLesson) {
 			$videoLesson = $_FILES["InputVideoLesson"]["name"];
-			$imageLesson = $_FILES["InputImageLesson"]["tmp_name"] ? addslashes(file_get_contents($_FILES["InputImageLesson"]["tmp_name"])) : null;
-			$documentLesson = $_FILES["InputFileLesson"]["name"];
+			$imageLesson = isset($_FILES["InputImageLesson"]) ? addslashes(file_get_contents($_FILES["InputImageLesson"]["tmp_name"])) : null;
+			$documentLesson = isset($_FILES["InputFileLesson"]) ? $_FILES["InputFileLesson"]["name"] : null;
 
 			if($videoLesson) {
 				$ruta = $_FILES["InputVideoLesson"]["tmp_name"];

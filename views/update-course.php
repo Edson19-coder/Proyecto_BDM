@@ -190,6 +190,7 @@
                     <!-- /Modal Add lesson -->
 
                     <table class="table">
+                        <h2 style="text-align: center;">Created lessons</h2>
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -202,7 +203,74 @@
                         </tbody>
                     </table>
 
+                    <table class="table">
+                        <h2 style="text-align: center;">New lessons</h2>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Lesson title</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newLessonTBody">
+
+                        </tbody>
+                    </table>
+
                     <!-- Modal Edit Lesson -->
+                    <div class="modal fade" id="editUpdateLesson" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fw-bold" id="staticBackdropLabel">EDIT LESSON<span
+                                            class="text-primary">.</span></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="InputUpdateLessonTitleEdit" class="form-label">Lesson title</label>
+                                            <input type="text" class="form-control" id="InputUpdateLessonTitleEdit">
+                                            <span class="hide" id="span-lesson-title" style="color: red">*Lesson title is required</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputUpdateLessonDescriptionEdit" class="form-label">Description</label>
+                                            <textarea class="form-control" id="InputUpdateLessonDescriptionEdit"></textarea>
+                                            <span class="hide" id="span-lessson-description" style="color: red">*Description is required</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputUpdateLessonPriceEdit" class="form-label">Price</label>
+                                            <input type="number" min="0" class="form-control" name="" id="InputUpdateLessonPriceEdit">
+                                            <span class="hide" id="span-lessson-price" style="color: red">*Price is required</span>
+                                            <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputVideoUpdateLessonEdit">Video lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="video/*" id="InputVideoUpdateLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputImageUpdateLessonEdit">Image lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="image/*" id="InputImageUpdateLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputFileUpdateLessonEdit">File lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf" id="InputFileUpdateLessonEdit">
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" id="btn-edit-update-lesson">Edit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Modal Edit Lesson -->
+
+                    <!-- Modal Edit New Lesson -->
                     <div class="modal fade" id="editLesson" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -231,6 +299,18 @@
                                             <span class="hide" id="span-lessson-price" style="color: red">*Price is required</span>
                                             <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
                                         </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputVideoLessonAdd">Video lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="video/*" id="InputVideoLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputImageLessonAdd">Image lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="image/*" id="InputImageLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputFileLessonAdd">File lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf" id="InputFileLessonEdit">
+                                        </div>
                                         <div class="text-end">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
@@ -241,7 +321,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /Modal Edit Lesson -->
+                    <!-- /Modal Edit New Lesson -->
 
                     <div class="col-12">
                         <div class="row">

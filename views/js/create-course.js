@@ -287,9 +287,15 @@ $(document).ready(() => {
 
         var formData = new FormData();
         formData.append('vAction','IML');
-        formData.append('InputVideoLesson', lesson.lessonVideo);
-        formData.append('InputImageLesson', lesson.lessonImage);
-        formData.append('InputFileLesson', lesson.lessonFile);
+        if(lesson.lessonVideo != undefined) {
+            formData.append('InputVideoLesson', lesson.lessonVideo);
+        }
+        if(lesson.lessonImage != undefined) {
+            formData.append('InputImageLesson', lesson.lessonImage);
+        }
+        if(lesson.lessonFile != undefined) {
+            formData.append('InputFileLesson', lesson.lessonFile);
+        }
         formData.append('InputLessonId', lastIdLesson);
 
         $.ajax({

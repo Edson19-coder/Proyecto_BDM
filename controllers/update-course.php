@@ -51,7 +51,75 @@
 
     $resp = Category::deleteCategoryCourse($courseId, $categoryId);
   }
+  else if($action == 'ULD') {
+    $lessonId = $_POST["lessonId"];
+    $lessonTitle = $_POST["InputLessonTitle"];
+		$lessonDescription = $_POST["InputLessonDescription"];
+		$lessonPrice = $_POST["InputLessonPrice"];
+
+    $resp = UpdateCourse::updateLessonData($lessonId, $lessonTitle, $lessonDescription, $lessonPrice);
+  }
+  else if($action == 'UML') {
+    $destinoVideo = null;
+    $destinoDocument = null;
+
+    $lessonId = $_POST["lessonId"];
+
+    if($lessonId) {
+      $videoLesson = isset($_FILES["InputVideoLessonEdit"]) ? $_FILES["InputVideoLessonEdit"]["name"] : null;
+      $imageLesson = isset($_FILES["InputImageLessonEdit"]) ? addslashes(file_get_contents($_FILES["InputImageLessonEdit"]["tmp_name"])) : null;
+      $documentLesson = isset($_FILES["InputFileLessonEdit"]) ? $_FILES["InputFileLessonEdit"]["name"] : null;
+
+      if($videoLesson) {
+        $ruta = $_FILES["InputVideoLessonEdit"]["tmp_name"];
+        $destinoVideo = "../views/src/videos/".$lessonId."/".$videoLesson;
+
+        $micarpeta = "../views/src/videos/".$lessonId;
+
+        if (!file_exists($micarpeta)) {
+					mkdir($micarpeta, 0777, true);
+				} else {
+          deleteDirectory($micarpeta);
+          mkdir($micarpeta, 0777, true);
+        }
+
+        move_uploaded_file($ruta, $destinoVideo);
+      }
+
+      if($documentLesson) {
+        $ruta = $_FILES["InputFileLessonEdit"]["tmp_name"];
+        $destinoDocument = "../views/src/documents/".$lessonId."/".$documentLesson;
+
+        $micarpeta = "../views/src/documents/".$lessonId;
+
+        if (!file_exists($micarpeta)) {
+					mkdir($micarpeta, 0777, true);
+				} else {
+          deleteDirectory($micarpeta);
+          mkdir($micarpeta, 0777, true);
+        }
+
+        move_uploaded_file($ruta, $destinoDocument);
+      }
+
+      $resp = MediaLesson::updateMediaLesson($destinoVideo, $imageLesson, $destinoDocument, $lessonId);
+    }
+
+  }
 
   echo json_encode($resp);
+
+
+  function deleteDirectory($dir) {
+    if(!$dh = @opendir($dir)) return;
+    while (false !== ($current = readdir($dh))) {
+        if($current != '.' && $current != '..') {
+            if (!@unlink($dir.'/'.$current))
+                deleteDirectory($dir.'/'.$current);
+        }
+    }
+    closedir($dh);
+    @rmdir($dir);
+}
 
  ?>

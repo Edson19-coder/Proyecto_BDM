@@ -50,8 +50,8 @@ LessonUpdate.prototype = {
             html += '<th scope="row" class="rowLesson">'+ this.id +'</th>';
             html += '<td class="titleCol">'+ this.lessonTitle +'</td>';
             html += '<td>';
-            html += '<button type="button" style="margin-right: 5px;" class="btn btn-edit-lesson btn-primary btn-sm px-3" data-bs-toggle="modal"';
-            html += 'data-bs-target="#editLesson" data-lessonCurrentId="'+this.lessonId+'">';
+            html += '<button type="button" style="margin-right: 5px;" class="btn btn-edit-lesson-u btn-primary btn-sm px-3" data-bs-toggle="modal"';
+            html += 'data-bs-target="#editUpdateLesson" data-lessonCurrentId="'+this.lessonId+'">';
             html += '<i class="fas fa-edit"></i>';
             html += '</button>';
             html += '</td>';
