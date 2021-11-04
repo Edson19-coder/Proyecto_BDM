@@ -7,17 +7,17 @@
 		private $db;
 
 		public function __construct(){
-      
+
         }
 
 
 		public static function createCourse($titleCourse, $shortDescriptionCourse, $longDescriptionCourse, $priceCourse, $imageCourse, $instructorCourse) {
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_course('I', null, '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."', 
+			$result = $db->query("CALL proc_course('I', null, '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."',
 									'".$imageCourse."', ".$instructorCourse.")");
 
 			if($result){
-                while ($lastId = $result->fetch_assoc()) { 
+                while ($lastId = $result->fetch_assoc()) {
                     return $lastId;
                 }
 			} else {
@@ -33,7 +33,7 @@
 			$result = $db->query("CALL proc_course_categories('I', null, ".$idCategory.", ".$idCourse.")");
 
 			return $result;
-			
+
 			Connection::disconnect($db);
 		}
 
@@ -139,5 +139,18 @@
 				return null;
 			}
 		}
+
+		public static function updateCourse($courseId, $titleCourse, $shortDescriptionCourse, $longDescriptionCourse, $priceCourse, $imageCourse) {
+			$imageCourse = !empty($imageCourse) ? "'".$imageCourse."'" : 'null';
+
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('UCI', ".$courseId.", '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."',
+													".$imageCourse.", null)");
+
+			return $result;
+
+			Connection::disconnect($db);
+		}
+
 	}
 ?>

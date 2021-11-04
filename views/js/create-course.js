@@ -5,7 +5,7 @@ $(document).ready(() => {
     var lessonCategories = [];
     var lessonList = [];
     var indiceEditActive = -1;
-    
+
     getAllCategories();
 
     /* GESTIÓN DE CATEGORIAS DEL CURSO */
@@ -17,7 +17,7 @@ $(document).ready(() => {
             $('#btn-add-category').prop('disabled', true);
 
         } else {
-            $('#btn-add-category').prop('disabled', false);        
+            $('#btn-add-category').prop('disabled', false);
         }
     });
 
@@ -40,7 +40,7 @@ $(document).ready(() => {
         var categoryId = $('#InputCategory').val();
 
         if(categoryId == toRemove) {
-            $('#btn-add-category').prop('disabled', false);   
+            $('#btn-add-category').prop('disabled', false);
         }
     });
 
@@ -58,7 +58,7 @@ $(document).ready(() => {
             InputNameCategoryAdd: categoryName
         };
 
-        $.ajax({     
+        $.ajax({
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
@@ -73,9 +73,9 @@ $(document).ready(() => {
                   'success'
                 )
            },
-           error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-            }  
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
         });
     }
 
@@ -85,7 +85,7 @@ $(document).ready(() => {
             InputNameCategoryAdd: categoryName
         };
 
-        $.ajax({     
+        $.ajax({
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
@@ -101,15 +101,15 @@ $(document).ready(() => {
                     )
                 }
            },
-           error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-            }  
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
         });
     }
 
 
     /* GESTIÓN DE LECCIÓNES */
-    
+
     $('#btn-add-lesson').on('click', (event) => {
         event.preventDefault();
 
@@ -153,7 +153,7 @@ $(document).ready(() => {
         $('#InputLessonTitleEdit').val(lessonList[indiceEditActive].lessonTitle);
         $('#InputLessonDescriptionEdit').val(lessonList[indiceEditActive].lessonDescription);
         $('#InputLessonPriceEdit').val(lessonList[indiceEditActive].lessonPrice);
-        
+
         var videoLesson = document.getElementById('InputVideoLessonAdd');
         var imageLesson = document.getElementById('InputImageLessonAdd');
         var docLesson = document.getElementById('InputFileLessonAdd');
@@ -162,11 +162,11 @@ $(document).ready(() => {
     $('#btn-edit-lesson').on('click', (event) => {
         event.preventDefault();
 
-        lessonList[indiceEditActive].lessonTitle = $('#InputLessonTitleEdit').val(); 
+        lessonList[indiceEditActive].lessonTitle = $('#InputLessonTitleEdit').val();
         lessonList[indiceEditActive].lessonDescription = $('#InputLessonDescriptionEdit').val();
         lessonList[indiceEditActive].lessonPrice = $('#InputLessonPriceEdit').val();
 
-        $(".table tbody tr").remove(); 
+        $(".table tbody tr").remove();
 
         for(let lesson of lessonList) {
             var newLesson = new Lesson(lesson.lessonTitle, lesson.lessonDescription, lesson.lessonPrice, "", "", "");
@@ -199,12 +199,12 @@ $(document).ready(() => {
         formData.append('InputImage', imageCourse);
         formData.append('InstructorCourse', parseInt(instructorCourse));
 
-        $.ajax({     
+        $.ajax({
            url: "../controllers/create-course.php",
            async: true,
            type: "POST",
            data: formData,
-           processData: false, 
+           processData: false,
             contentType: false,
             dataType: 'json',
             success: function(data) {
@@ -215,9 +215,9 @@ $(document).ready(() => {
                     createLesson();
                 }
            },
-           error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-            }  
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
         });
     }
 
@@ -233,7 +233,7 @@ $(document).ready(() => {
                 InputCourseId: lastIdCourse
             };
 
-            var promsie = $.ajax({     
+            var promsie = $.ajax({
                url: "../controllers/create-course.php",
                type: "POST",
                data: lessonData,
@@ -241,9 +241,9 @@ $(document).ready(() => {
                 success: function(data) {
                     console.log(data);
                },
-               error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-                }  
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                }
             });
         }
     }
@@ -263,17 +263,18 @@ $(document).ready(() => {
                 InputCourseId: lastIdCourse
             };
 
-            var promsie = $.ajax({     
+            var promsie = $.ajax({
                url: "../controllers/create-course.php",
                type: "POST",
                data: lessonData,
                dataType: 'json',
+               async: false,
                 success: function(data) {
                     createMediLesson(data.LAST_LESSON_ID, lesson);
                },
-               error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-                }  
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                }
             });
 
 
@@ -286,24 +287,30 @@ $(document).ready(() => {
 
         var formData = new FormData();
         formData.append('vAction','IML');
-        formData.append('InputVideoLesson', lesson.lessonVideo);
-        formData.append('InputImageLesson', lesson.lessonImage);
-        formData.append('InputFileLesson', lesson.lessonFile);
+        if(lesson.lessonVideo != undefined) {
+            formData.append('InputVideoLesson', lesson.lessonVideo);
+        }
+        if(lesson.lessonImage != undefined) {
+            formData.append('InputImageLesson', lesson.lessonImage);
+        }
+        if(lesson.lessonFile != undefined) {
+            formData.append('InputFileLesson', lesson.lessonFile);
+        }
         formData.append('InputLessonId', lastIdLesson);
 
-        $.ajax({     
+        $.ajax({
            url: "../controllers/create-course.php",
            async: true,
            type: "POST",
            data: formData,
-           processData: false, 
+           processData: false,
             contentType: false,
             success: function(data) {
                 console.log(data);
            },
-           error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-            }  
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
         });
     }
 
@@ -314,7 +321,7 @@ $(document).ready(() => {
             vAction: 'SAC'
         };
 
-        $.ajax({     
+        $.ajax({
            url: "../controllers/create-course.php",
            type: "POST",
            data: categoryData,
@@ -327,9 +334,9 @@ $(document).ready(() => {
                     }));
                });
            },
-           error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-            }  
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
         });
     }
 });
