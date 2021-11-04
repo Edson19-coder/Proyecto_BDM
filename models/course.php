@@ -10,7 +10,6 @@
 
         }
 
-
 		public static function createCourse($titleCourse, $shortDescriptionCourse, $longDescriptionCourse, $priceCourse, $imageCourse, $instructorCourse) {
 			$db = Connection::connect();
 			$result = $db->query("CALL proc_course('I', null, '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."',
@@ -149,6 +148,22 @@
 
 			return $result;
 
+			Connection::disconnect($db);
+		}
+
+		public static function getCourseFromLessonPurchased($idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('GCFLP', null, null, null, null, null, null, ".$idUser.");");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
 			Connection::disconnect($db);
 		}
 
