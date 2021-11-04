@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Watch Lesson</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/navbar.css">
@@ -31,7 +31,8 @@
     <?php 
     $i = 1;
         $courseId = $_GET['course'];
-        $lessons = Lesson::getLessonsDataFromCourse($courseId);
+        $userId = $_SESSION['id'];
+        $lessons = Lesson::getLessonDaraFromLessonBought($userId, $courseId);
         if(isset($_GET['lesson'])){ $ln = $_GET['lesson'] - 1; }
     ?>
     <form type="hidden" class="courseId" courseId="<?php echo $_GET['course']; ?>"></form>
@@ -44,7 +45,8 @@
                         <h3>Leccion numero <?php if(isset($_GET['lesson'])){ echo $_GET['lesson']; }else{ echo "1"; } ?> </h3>
                         <hr>
                     </div>
-                    <?php 
+                    
+                        <?php 
                             if(isset($_GET['lesson'])){
                                 if($lessons[$ln]["VIDEO"] != null){
                                     echo '<h3>Video de la clase:</h3><video controls="" id="videoArea">
@@ -61,6 +63,7 @@
                                 echo '<h5>This lesson has no video.</h5>';
                             }
                         ?>
+                    
                     <hr>
 
                     <!-- RESOURCES -->
@@ -79,7 +82,7 @@
 
                                     <h5>Lesson document: </h3>
                                     <?php 
-                                         if(isset($_GET['lesson'])){
+                                        if(isset($_GET['lesson'])){
                                             if($lessons[$ln]["DOCUMENT"] != null){
                                                 echo '<a href="'.$lessons[$ln]["DOCUMENT"].'" class="btn btn-primary" style="color:white;" download="Documento">Descargar Archivo</a>';
                                             }else{
@@ -134,7 +137,7 @@
                             $lessonsViewed = Lesson::getLessonViewed($_SESSION['id'], $_GET['course'], $value["LESSON_ID"]);
                             if($lessonsViewed != null){
                                 if($lessonsViewed["ID_LESSON"] == $value["LESSON_ID"]){
-                                    echo '<a class="lessonViewBtn" href="view-course.php?course='.$_GET['course'].'&lesson='.$i.'" style="cursor: pointer;" id="'.$i.'" value="'.$value["LESSON_ID"].'" leccionNumero="'.$value["LESSON_ID"].'">
+                                    echo '<a class="lessonViewBtn" href="view-lesson.php?course='.$_GET['course'].'&lesson='.$i.'" style="cursor: pointer;" id="'.$i.'" value="'.$value["LESSON_ID"].'" leccionNumero="'.$value["LESSON_ID"].'">
                                     <div class="card content-course">
                                         <div class="card-body col-12 video-seen">
                                             <div class="row">
@@ -152,7 +155,7 @@
                                 </a>';
                                 }
                             }else{
-                                echo '<a class="lessonViewBtn" href="view-course.php?course='.$_GET['course'].'&lesson='.$i.'" style="cursor: pointer;" id="'.$i.'" value="'.$value["LESSON_ID"].'" leccionNumero="'.$value["LESSON_ID"].'">
+                                echo '<a class="lessonViewBtn" href="view-lesson.php?course='.$_GET['course'].'&lesson='.$i.'" style="cursor: pointer;" id="'.$i.'" value="'.$value["LESSON_ID"].'" leccionNumero="'.$value["LESSON_ID"].'">
                                     <div class="card content-course">
                                         <div class="card-body col-12 video-seen">
                                             <div class="row">
@@ -175,10 +178,6 @@
                     ?>
                     
                 </div>
-
-                <button type="button" id="btn-get-certificate" disabled class="btn btn-primary" style="width: 100%; margin-top: 20px;">
-                GET CERTIFICATE
-                </button>
             </div>
         </div>
     </div>
