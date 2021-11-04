@@ -150,6 +150,50 @@
             </div>
             <!-- /MY LEARNINGS  -->
 
+            <!-- COURSES BY LESSON -->
+            <div class="home courses-by-lesson-title col-12" style="padding: 10px;">
+                <div class="col-12 title text-center">
+                    <h3>Courses by Lessons</h3>
+                    <hr>
+                </div>
+
+                <div class="col-12 courses-by-lesson" style="padding: 10px;">
+
+                    <div class="row" style="display: flex; justify-content:start;">
+                         <?php
+                            $userCoursesbyLesson = null;
+                            $user = $_SESSION['id'];
+                            $userCoursesbyLesson = Course::getCourseFromLessonPurchased($user);
+                            //print_r($userCourses);
+                            if($userCoursesbyLesson != null){
+                                foreach ($userCoursesbyLesson as $key => $value) {
+                                echo '<a href="view-course.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
+                                        <div class="card p-0" style="width: 18rem;">
+                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                                <p class="card-text">
+                                                    '.$value["SHORT_DESCRIPTION"].'
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>';
+                                }
+                            }else{
+                                echo "<h1>You haven't bought any courses, go for it!</h1>";
+                            }
+
+                        ?>
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="text-align: right;">
+
+                </div>
+            </div>
+            <!-- /COURSES BY LESSON -->
         </div>
     </div>
 
