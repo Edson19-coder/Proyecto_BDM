@@ -167,7 +167,7 @@
                             //print_r($userCourses);
                             if($userCoursesbyLesson != null){
                                 foreach ($userCoursesbyLesson as $key => $value) {
-                                echo '<a href="view-course.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
+                                echo '<a href="view-lesson.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
                                         <div class="card p-0" style="width: 18rem;">
                                             <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                                 class="card-img-top" alt="...">
