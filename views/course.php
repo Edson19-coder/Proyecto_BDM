@@ -22,6 +22,7 @@
     <?php
         require_once('../models/course.php');
         require_once('../models/lesson.php');
+        require_once('../models/comments.php');
 
         include 'navbar.php';
 
@@ -82,19 +83,26 @@
                     <h1 style="text-align: center;">Comments</h1>
 
                     <div class="col-12">
-
                         <div class="container global container-comments" style="padding: 10px 50px;">
-                            <div class="card" style="margin-top: 20px">
-                                <div class="card-header message-m">
-                                    <div class="col-12" style="text-align: right;">Edson19 <img
-                                            src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                            class="rounded-circle" height="50" alt="" loading="lazy">
+                        <!-- SECCION DE COMENTARIOS -->
+                        <?php
+                            $userId = $_SESSION['id'];
+                            $courseId = $_GET['course'];
+                            $comment = Comment::selectCourseComments($courseId);
+                            foreach ($comment as $key => $value) {
+                                echo'<div class="card" style="margin-top: 20px">
+                                    <div class="card-header message-m">
+                                        <div class="col-12" style="text-align: right;">'.$value["USERNAME"].' <img
+                                                src="data:image/jpeg;base64,'.base64_encode($value["PROFILE_PICTURE"]).'"
+                                                class="rounded-circle" height="50" alt="" loading="lazy">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">Este es un bonito comentario - 2021-05-22</div>
-                            </div>
+                                    <div class="card-body">'.$value["CONTENT"].' - '.$value["CREATION_DATE"].'</div>
+                                </div>';
+                            }
+                        ?>
                         </div>
-
+                        <!-- /SECCION DE COMENTARIOS -->
                         <form action="">
                             <div class="container">
                                 <div class="col-12" style="padding-top: 20px;">
@@ -113,7 +121,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

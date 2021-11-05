@@ -4,9 +4,12 @@ $( document ).ready(function() {
     var checkCant = document.getElementById('lessonList');
     var inputsCant = checkCant.getElementsByTagName('input').length;
 
+    checkCertificate();
+
     function checkCertificate(){
         if(cant == inputsCant){
         $("#btn-get-certificate").prop('disabled', false);
+        $("#btn-send-comment").prop('disabled', false);
         }
     }
     
@@ -56,5 +59,41 @@ $( document ).ready(function() {
     $(".form-check-input").on('change', function(){
         cant = $(":checkbox:checked").length;
         checkCertificate();
+    });
+
+    $("#btn-qualify-course").on('click', function(){
+        var courseId = $("form.courseId").attr('courseId');
+        var userId = $("form.userId").attr('userId');
+        var content = $("#txtComment").val();
+        var qualification = $("#txtQualification").val();
+
+        var insertComment = {
+            vAction: 'I',
+            courseId:courseId,
+            userId:userId,
+            content:content,
+            qualification:qualification
+        }
+
+        $.ajax({
+            url: '../controllers/comments.php',
+            type: 'POST',
+            data: insertComment,
+            dataType: 'json',
+            success: function(data){
+                Swal.fire(
+                      'Thank you for your opinion.',
+                      '',
+                      'success'
+                    )
+                $("#btn-send-comment").prop('disabled', true);
+                console.log("NO ENTRO PERO SI ENTRO");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.warn(XMLHttpRequest.responseText);
+            $("#btn-send-comment").prop('disabled', true);
+            }
+        });
+        console.log(insertComment);
     });
 });
