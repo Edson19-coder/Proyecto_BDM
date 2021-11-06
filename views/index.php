@@ -133,7 +133,7 @@
             <div class="row" style="display: flex; justify-content:start;">
                 <?php
                     $courses = Course::selectNewestCourses();
-                    
+
                     foreach ($courses as $key => $value) {
                         echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
                                 <div class="card p-0" style="width: 18rem;">
@@ -152,10 +152,6 @@
 
                 ?>
             </div>
-        </div>
-
-        <div class="card-footer" style="text-align: right;">
-            <a href="#">See more</a>
         </div>
     </div>
     <!-- /NEWEST  -->
@@ -189,17 +185,13 @@
                             </a>';
                     }
                 ?>
-                
-            </div>
-        </div>
 
-        <div class="card-footer" style="text-align: right;">
-            <a href="#">See more</a>
+            </div>
         </div>
     </div>
 
     <!-- /POPULAR -->
-    
+
     <!-- /Content -->
 
     <!-- JS -->
