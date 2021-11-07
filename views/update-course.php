@@ -131,10 +131,10 @@
                         <hr>
                     </div>
 
-                    <button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal"
+                    <!--<button type="button" class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal"
                         data-bs-target="#addLesson">
                         <i class="fas fa-plus"></i> Add lesson
-                    </button>
+                    </button> -->
 
                     <!-- Modal Add lesson -->
                     <div class="modal fade" id="addLesson" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -203,6 +203,7 @@
                         </tbody>
                     </table>
 
+                    <!--
                     <table class="table">
                         <h2 style="text-align: center;">New lessons</h2>
                         <thead>
@@ -216,7 +217,8 @@
 
                         </tbody>
                     </table>
-
+                    -->
+                    
                     <!-- Modal Edit Lesson -->
                     <div class="modal fade" id="editUpdateLesson" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

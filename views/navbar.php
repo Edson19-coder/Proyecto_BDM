@@ -25,7 +25,7 @@
                             <li><a class="dropdown-item" href="chat.php"><span class="fas fa-comment"></span> Chat</a></li>
                             <?php if($_SESSION['accountType'] == "1"){ ?>
                             <li><a class="dropdown-item" href="create-course.php"><span class="fas fa-plus"></span> Create course</a></li>
-                            <li><a class="dropdown-item" href="#"><span class="fas fa-project-diagram"></span> Report</a></li>
+                            <li><a class="dropdown-item" href="sales.php"><span class="fas fa-project-diagram"></span> Report</a></li>
                             <?php } ?>
                             <li><a class="dropdown-item" href="../controllers/logout.php"><span class="fas fa-sign-out-alt"></span> Logout</a></li>
                         </ul>

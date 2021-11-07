@@ -8,7 +8,7 @@ $(document).ready( () => {
 
     $("#btn-prev-payment").on('click', prevPayment);
 
-    $("#btn-create-course").on('click', createSuccess);
+    //$("#btn-create-course").on('click', createSuccess);
 
     function nextCourseInformation() {
         if($("#id-course-lessons").hasClass("un-active")){

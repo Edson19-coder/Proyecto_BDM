@@ -20,11 +20,11 @@
 <body>
 
     <!-- NAVBAR -->
-    <?php 
+    <?php
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
-
+    <input type="hidden" class="sesion" id="sesion" value="<?php echo $_SESSION['id'] ?>"></input>
     <!-- Content -->
 
     <div class="container col-12 text-center" style="padding: 30px;">
@@ -45,25 +45,8 @@
                                 <th scope="col">Sales</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><a href="#">Curso de Java</a></th>
-                                <td>1200</td>
-                                <td>3</td>
-                                <td>$52,000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">Curso de Laravel</a></th>
-                                <td>200</td>
-                                <td>5</td>
-                                <td>$5,000</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">Curso de Ruby</a></th>
-                                <td>30</td>
-                                <td>6</td>
-                                <td>$0</td>
-                            </tr>
+                        <tbody id="tableBodyReport1">
+
                         </tbody>
                     </table>
                 </div>
@@ -82,15 +65,15 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Visa</th>
-                                        <td>$28,500</td>
+                                        <td id="visaTotal"></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Cash</th>
-                                        <td>$28,500</td>
+                                        <th scope="row">MasterCard</th>
+                                        <td id="masterCardTotal"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Total</th>
-                                        <td class="totalMoney">$57,000</td>
+                                        <td class="totalMoney" id="totalMoney"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -107,10 +90,8 @@
                 <hr>
                 <div class="mb-3">
                     <label for="InputAccountType">Course</label>
-                    <select class="form-control" id="InputAccountType">
-                        <option value="0">Curso de Java</option>
-                        <option value="1">Curso de Laravel</option>
-                        <option value="1">Curso de Ruby</option>
+                    <select class="form-control" id="InputCourses">
+
                     </select>
                 </div>
 
@@ -120,33 +101,13 @@
                             <tr>
                                 <th scope="col">Student</th>
                                 <th scope="col">Enrollment date</th>
-                                <th scope="col">Last lesson</th>
+                                <th scope="col">Percentage completion</th>
                                 <th scope="col">Price paid</th>
                                 <th scope="col">Payment method</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><a href="#">Edson Lugo</a></th>
-                                <td>19/06/2021</td>
-                                <td>3</td>
-                                <td>$1,000</td>
-                                <td>Visa</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">Roberto Martinez</a></th>
-                                <td>23/05/2021</td>
-                                <td>5</td>
-                                <td>$500</td>
-                                <td>Cash</td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">Jose Garcia</a></th>
-                                <td>23/08/2021</td>
-                                <td>6</td>
-                                <td>$0</td>
-                                <td>Visa</td>
-                            </tr>
+                        <tbody id="tableBodyReport2">
+
                         </tbody>
                     </table>
                 </div>
@@ -159,14 +120,14 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Total:</th>
-                                        <td class="totalMoney">$1500</td>
+                                        <td class="totalMoney" id="totalMoneyR2"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
         </div>
@@ -180,6 +141,8 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/searchBar.js"></script>
+    <script src="js/sales.js"></script>
+    <script src="models/reports.js"></script>
     <!--<script src="js/validation-settings.js"></script>-->
     <!-- /JS -->
 </body>

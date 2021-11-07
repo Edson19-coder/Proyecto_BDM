@@ -20,16 +20,17 @@
 <body>
 
     <!-- NAVBAR -->
-    <?php 
+    <?php
         require_once('../models/course.php');
         require_once('../models/lesson.php');
         require_once('../models/comments.php');
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
-
+    <input type="hidden" class="sesionFirstName" id="sesionFirstName" value="<?php echo $_SESSION['firstName'] ?>"></input>
+    <input type="hidden" class="sesionLastName" id="sesionLastName" value="<?php echo $_SESSION['lastNames'] ?>"></input>
     <!-- Content -->
-    <?php 
+    <?php
     $i = 1;
         $courseId = $_GET['course'];
         $lessons = Lesson::getLessonsDataFromCourse($courseId);
@@ -45,7 +46,7 @@
                         <h3>Leccion numero <?php if(isset($_GET['lesson'])){ echo $_GET['lesson']; }else{ echo "1"; } ?> </h3>
                         <hr>
                     </div>
-                    <?php 
+                    <?php
                             if(isset($_GET['lesson'])){
                                 if($lessons[$ln]["VIDEO"] != null){
                                     echo '<h3>Video de la clase:</h3><video controls="" id="videoArea">
@@ -54,7 +55,7 @@
                                 }else{
                                     echo '<h5>This lesson has no video.</h5>';
                                 }
-                            }else if($lessons[0]["VIDEO"] != null){ 
+                            }else if($lessons[0]["VIDEO"] != null){
                                 echo '<h3>Video de la clase:</h3><video controls="" id="videoArea">
                                 <source src="'.$lessons[$ln]['VIDEO'].'" type="video/mp4">
                                 </video>';
@@ -79,13 +80,13 @@
                                 <div class="accordion-body">
 
                                     <h5>Lesson document: </h3>
-                                    <?php 
+                                    <?php
                                          if(isset($_GET['lesson'])){
                                             if($lessons[$ln]["DOCUMENT"] != null){
                                                 echo '<a href="'.$lessons[$ln]["DOCUMENT"].'" class="btn btn-primary" style="color:white;" download="Documento">Descargar Archivo</a>';
                                             }else{
                                                 echo "<h5>Ths lesson does not have a document no download.</h5>";
-                                            }           
+                                            }
                                         }else if($lessons[0]["DOCUMENT"] != null){
                                             echo '<a href="'.$lessons[0]["DOCUMENT"].'" class="btn btn-primary" style="color:white;" download="Documento">Descargar Archivo</a>';
                                         }else{
@@ -98,7 +99,7 @@
                                     if(isset($_GET['lesson'])){
                                         if($lessons[$ln]['IMAGES'] != null){
                                             echo '<h5>Lesson Image: </h3>
-                                            <img src="data:image/jpeg;base64,'.base64_encode($lessons[$ln]["IMAGES"]).'" style="max-width: 815px; max-height: 476px;" class="card-img-top" alt="...">'; 
+                                            <img src="data:image/jpeg;base64,'.base64_encode($lessons[$ln]["IMAGES"]).'" style="max-width: 815px; max-height: 476px;" class="card-img-top" alt="...">';
                                         }else{
                                             echo '<h5>No image available.</h5>';
                                         }
@@ -170,11 +171,11 @@
                                     </div>
                                 </a>';
                             }
-                            
+
                                 $i++;
                         }
                     ?>
-                    
+
                 </div>
 
                 <button type="button" id="btn-get-certificate" disabled class="btn btn-primary" style="width: 100%; margin-top: 20px;">

@@ -4,7 +4,16 @@ $( document ).ready(function() {
     var checkCant = document.getElementById('lessonList');
     var inputsCant = checkCant.getElementsByTagName('input').length;
 
+    var student = String($(".sesionFirstName").val()+" "+$(".sesionLastName").val());
+    var teacher = null;
+    var courseName = null;
+
     checkCertificate();
+
+    $('#btn-get-certificate').click(() => {
+        var userId = $("form.userId").attr('userId');
+        window.location.href = "./services/DiplomaService/DiplomaGenerate.php?user="+student+"&nomcourse="+courseName+"&nommaestro="+teacher;
+    })
 
     function checkCertificate(){
         console.log();
@@ -13,6 +22,7 @@ $( document ).ready(function() {
                 $("#btn-send-comment").prop('disabled', false);
             }
             $("#btn-get-certificate").prop('disabled', false);
+            getCertData();
         }
     }
     
@@ -25,7 +35,7 @@ $( document ).ready(function() {
             console.log(noteName);
         }
     });
-    
+  
     $("#lessonList").click(function(){
         var b = $(event.target);
 
@@ -45,7 +55,7 @@ $( document ).ready(function() {
                 courseId:courseId,
                 userId:userId
             }
-            
+
             $.ajax({
                 url: '../controllers/view-course.php',
                 type: 'POST',
@@ -60,10 +70,10 @@ $( document ).ready(function() {
                     $(b).prop('disabled', true);
                     console.log(checkboxId);
                 },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.warn(XMLHttpRequest.responseText);
-                alert("Status de papu: " + textStatus); 
-                alert("Error papu: " + errorThrown); 
+                alert("Status de papu: " + textStatus);
+                alert("Error papu: " + errorThrown);
                 }
             });
         }
@@ -102,11 +112,34 @@ $( document ).ready(function() {
                 $("#btn-send-comment").prop('disabled', true);
                 console.log("NO ENTRO PERO SI ENTRO");
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.warn(XMLHttpRequest.responseText);
             $("#btn-send-comment").prop('disabled', true);
             }
         });
         console.log(insertComment);
     });
+
+    function getCertData() {
+        var course = $("form.courseId").attr('courseId');
+
+        var reportData = {
+            vAction: 'CERT',
+            courseId: course
+        };
+
+        $.ajax({
+           url: "../controllers/reports.php",
+           type: "POST",
+           data: reportData,
+           dataType: 'json',
+            success: function(data) {
+              teacher = String(data.FIRST_NAME+" "+data.LAST_NAME);
+              courseName = data.TITLE;
+           },
+           error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
+        });
+    }
 });

@@ -121,59 +121,67 @@
                             $userCourses = Course::selectUserCourses($user);
                             if($userCourses != null){
                                 foreach ($userCourses as $key => $value) {
-                                echo '<a href="view-course.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
-                                        <div class="card p-0" style="width: 18rem;">
-                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
-                                                class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
 
-                                                <div class="col-12">
-                                                  <div class="col-12">
-                                                      <div class="row">
-                                                          <div class="col-6">
-                                                              <p class="card-text" style="font-size: x-small;">Enrollment date:</p>
+                                  if($value["COURSE_ID"] != null) {
+
+                                    $courseDates = Course::getDatesCoursesHistoryByUser($value["COURSE_ID"], $user);
+
+                                    echo '<a href="view-course.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
+                                            <div class="card p-0" style="width: 18rem;">
+                                                <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                    class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">'.$value["TITLE"].'</h5>
+
+                                                    <div class="col-12">
+                                                      <div class="col-12">
+                                                          <div class="row">
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: x-small;">Enrollment date:</p>
+                                                              </div>
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["ENROLLMENT_DATE"].'</p>
+                                                              </div>
                                                           </div>
-                                                          <div class="col-6">
-                                                              <p class="card-text" style="font-size: small;">09/09/2021</p>
+                                                      </div>
+
+                                                      <div class="col-12">
+                                                          <div class="row">
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: x-small;">Last activity date:</p>
+                                                              </div>
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["LAST_ACTIVITY_DATE"].'</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-12">
+                                                          <div class="row">
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: x-small;">Finish date:</p>
+                                                              </div>
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["FINISH_DATE"].'</p>
+                                                              </div>
                                                           </div>
                                                       </div>
                                                   </div>
 
-                                                  <div class="col-12">
-                                                      <div class="row">
-                                                          <div class="col-6">
-                                                              <p class="card-text" style="font-size: x-small;">Last activity date:</p>
-                                                          </div>
-                                                          <div class="col-6">
-                                                              <p class="card-text" style="font-size: small;">09/09/2021</p>
-                                                          </div>
-                                                      </div>
+                                                  <br>
+
+                                                  <div class="progress">
+                                                      <div class="progress-bar" role="progressbar" style="width: '.$value["PERCENTAGE"].'%;" aria-valuenow="25"
+                                                          aria-valuemin="0" aria-valuemax="100">'.$value["PERCENTAGE"].'%</div>
                                                   </div>
 
-                                                  <div class="col-12">
-                                                      <div class="row">
-                                                          <div class="col-6">
-                                                              <p class="card-text" style="font-size: x-small;">Finish date:</p>
-                                                          </div>
-                                                          <div class="col-6">
-                                                              <p class="card-text" style="font-size: small;">09/09/2021</p>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-
-                                              <br>
-
-                                              <div class="progress">
-                                                  <div class="progress-bar" role="progressbar" style="width: '.$value["PERCENTAGE"].'%;" aria-valuenow="25"
-                                                      aria-valuemin="0" aria-valuemax="100">'.$value["PERCENTAGE"].'%</div>
-                                              </div>
-
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>';
-                                }
+                                        </a>';
+                                    } else {
+                                        echo "<h1>You haven't bought any courses, go for it!</h1>";
+                                    }
+                                  }
                             }else{
                                 echo "<h1>You haven't bought any courses, go for it!</h1>";
                             }
@@ -205,6 +213,9 @@
                             $userCoursesbyLesson = Course::getCourseFromLessonPurchased($user);
                             if($userCoursesbyLesson != null){
                                 foreach ($userCoursesbyLesson as $key => $value) {
+
+                                  $courseDates = Course::getDatesCoursesHistoryByUser($value["COURSE_ID"], $user);
+
                                 echo '<a href="view-lesson.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
                                         <div class="card p-0" style="width: 18rem;">
                                             <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
@@ -219,7 +230,7 @@
                                                               <p class="card-text" style="font-size: x-small;">Enrollment date:</p>
                                                           </div>
                                                           <div class="col-6">
-                                                              <p class="card-text" style="font-size: small;">09/09/2021</p>
+                                                              <p class="card-text" style="font-size: small;">'.$courseDates["ENROLLMENT_DATE"].'</p>
                                                           </div>
                                                       </div>
                                                   </div>
@@ -230,7 +241,7 @@
                                                               <p class="card-text" style="font-size: x-small;">Last activity date:</p>
                                                           </div>
                                                           <div class="col-6">
-                                                              <p class="card-text" style="font-size: small;">09/09/2021</p>
+                                                              <p class="card-text" style="font-size: small;">'.$courseDates["LAST_ACTIVITY_DATE"].'</p>
                                                           </div>
                                                       </div>
                                                   </div>
@@ -241,7 +252,7 @@
                                                               <p class="card-text" style="font-size: x-small;">Finish date:</p>
                                                           </div>
                                                           <div class="col-6">
-                                                              <p class="card-text" style="font-size: small;">09/09/2021</p>
+                                                              <p class="card-text" style="font-size: small;">'.$courseDates["FINISH_DATE"].'</p>
                                                           </div>
                                                       </div>
                                                   </div>

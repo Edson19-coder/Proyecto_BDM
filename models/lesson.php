@@ -5,7 +5,7 @@
 		private $db;
 
 		public function __construct(){
-      
+
         }
 
 
@@ -14,7 +14,7 @@
 			$result = $db->query("CALL proc_lesson('I', null, '".$titleLesson."', '".$descriptionLesson."', '".$priceLesson."', '".$idCourse."')");
 
 			if($result){
-                while ($lastId = $result->fetch_assoc()) { 
+                while ($lastId = $result->fetch_assoc()) {
                     return $lastId;
                 }
 			} else {
@@ -94,7 +94,7 @@
 
 		public static function userHasLesson($idLesson, $idUser){
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_purchases('UHL', null, ".$idLesson.", ".$idUser.");");
+			$result = $db->query("CALL proc_purchases('UHL', null, ".$idLesson.", ".$idUser.", null);");
 			if($result){
 				while($lesson = $result->fetch_assoc()){
 					return $lesson;
@@ -118,6 +118,19 @@
 
 			}else{
 				echo('No hay lecciones de este curso');
+			}
+			Connection::disconnect($db);
+		}
+
+		public static function getLessonById($idLesson){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_lesson('S', ".$idLesson.", null, null, null, null);");
+			if($result){
+				while($lesson = $result->fetch_assoc()){
+					return $lesson;
+				}
+			}else{
+				return 0;
 			}
 			Connection::disconnect($db);
 		}
