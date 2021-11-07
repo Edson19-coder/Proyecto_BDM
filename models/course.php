@@ -98,7 +98,7 @@
 
 		public static function userHasCourse($idCourse, $idUser){
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_purchases('UHC', ".$idCourse.", null, ".$idUser.");");
+			$result = $db->query("CALL proc_purchases('UHC', ".$idCourse.", null, ".$idUser.", null);");
 			if($result){
 				while($course = $result->fetch_assoc()){
 					return $course;
@@ -111,7 +111,7 @@
 
 		public static function selectUserCourses($idUser){
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_purchases('SUCP', null, null, ".$idUser.");");
+			$result = $db->query("CALL proc_purchases('SUCP', null, null, ".$idUser.", null);");
 			if($result){
 				$courses = array();
 				while ($course = $result->fetch_assoc()) {
@@ -162,6 +162,21 @@
                 return $courses;
 			}else{
 				echo("Error, no trae nada de la db.");
+				return null;
+			}
+			Connection::disconnect($db);
+		}
+
+		public static function getDatesCoursesHistoryByUser($courseId, $userId){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_dates_courses(".$userId.", ".$courseId.")");
+
+			if($result){
+				while ($dates = $result->fetch_assoc()){
+					return $dates;
+				}
+			}else{
+				echo("Error.");
 				return null;
 			}
 			Connection::disconnect($db);

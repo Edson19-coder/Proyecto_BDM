@@ -24,7 +24,7 @@ Card.prototype = {
                               <p class="mt-2 mb-4 text-white fw-bold">${this.cardHolder}</p>
                           </div>
                           <div class="input">
-                            <input type="radio" name="card" class="cardSelectedPM" data-cardid="${this.paymentMethodId}" data-cardnumber="${this.cardNumber}">
+                            <input type="radio" name="card" class="cardSelectedPM" data-cardid="${this.paymentMethodId}" data-cardnumber="${this.cardNumber}" data-cardtype="${this.method}">
                           </div>
                       </div>
                   </label>
@@ -46,7 +46,7 @@ Card.prototype = {
                               <p class="text-white fw-bold">${this.cardHolder}</p>
                           </div>
                           <div class="input">
-                            <input type="radio" name="card" class="cardSelectedPM" data-cardId="${this.paymentMethodId}" data-cardnumber="${this.cardNumber}">
+                            <input type="radio" name="card" class="cardSelectedPM" data-cardId="${this.paymentMethodId}" data-cardnumber="${this.cardNumber}" data-cardtype="${this.method}">
                           </div>
                       </div>
                   </label>

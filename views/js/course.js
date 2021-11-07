@@ -8,6 +8,7 @@ $(document).ready(() => {
 
 	var cardSelected = null;
 	var cardSelectedNumber = null;
+	var cardTypeSelect = null;
 	var cardCvvNumber = null;
 
 	getCardsByUserId();
@@ -84,7 +85,8 @@ $(document).ready(() => {
 				var courseBought = {
 					vAction: 'I',
 					userId: userId,
-					courseId: courseId
+					courseId: courseId,
+					cardType: cardTypeSelect
 				};
 
 				$.ajax({
@@ -93,15 +95,17 @@ $(document).ready(() => {
 					data: courseBought,
 					dataType: 'json',
 					success: function(data){
-						Swal.fire(
-              'You bought this course.',
-              '',
-              'success'
-            ).then(function (result) {
-                if (result.value) {
-                    window.location.reload();
-                }
-            })
+						if(data) {
+							Swal.fire(
+	              'You bought this course.',
+	              '',
+	              'success'
+	            ).then(function (result) {
+	                if (result.value) {
+	                    window.location.reload();
+	                }
+	            })
+						}
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
 					console.warn(XMLHttpRequest.responseText);
@@ -117,7 +121,8 @@ $(document).ready(() => {
 						var lessonBought = {
 							vAction: 'IL',
 							userId: userId,
-							lessonId: idLesson
+							lessonId: idLesson,
+							cardType: cardTypeSelect
 						};
 
 						$.ajax({
@@ -126,15 +131,17 @@ $(document).ready(() => {
 						data: lessonBought,
 						dataType: 'json',
 						success: function(data){
-							Swal.fire(
-                'You bought this course.',
-                '',
-                'success'
-              ).then(function (result) {
-                  if (result.value) {
-                      window.location.reload();
-                  }
-              })
+							if(data) {
+								Swal.fire(
+	                'You bought this course.',
+	                '',
+	                'success'
+	              ).then(function (result) {
+	                  if (result.value) {
+	                      window.location.reload();
+	                  }
+	              })
+							}
 						},
 						error: function(XMLHttpRequest, textStatus, errorThrown) {
 						console.warn(XMLHttpRequest.responseText);
@@ -160,6 +167,7 @@ $(document).ready(() => {
 	$(document).on('click','.cardSelectedPM', function(){
      cardSelected = $(this).data("cardid");
 		 cardSelectedNumber = $(this).data("cardnumber");
+		 cardTypeSelect = $(this).data("cardtype");
 
 		 checkValCardSelect();
    });

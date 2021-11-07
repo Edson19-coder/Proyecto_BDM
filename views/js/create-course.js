@@ -306,7 +306,20 @@ $(document).ready(() => {
            processData: false,
             contentType: false,
             success: function(data) {
-                console.log(data);
+                if (data) {
+                  Swal.fire(
+                      'Good job!',
+                      'Course created successfully!',
+                      'success'
+                  ).then(function (result) {
+                      if (result.value) {
+                          window.location = "index.php";
+                      }
+                  });
+
+                  $("#id-index-payment").removeAttr('style');
+                  $("#id-index-course-create").attr('style', 'color: #153ff7 !important');
+                }
            },
            error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus); alert("Error: " + errorThrown);
