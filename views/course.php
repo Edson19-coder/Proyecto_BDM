@@ -103,24 +103,6 @@
                         ?>
                         </div>
                         <!-- /SECCION DE COMENTARIOS -->
-                        <form action="">
-                            <div class="container">
-                                <div class="col-12" style="padding-top: 20px;">
-                                    <div class="col-12" style="padding: 10px; border-radius: 10px;">
-                                        <div class="row">
-                                            <div class="col-10">
-                                                <textarea class="form-control"
-                                                    placeholder="Comment on the course"></textarea>
-                                            </div>
-                                            <div class="col-2" style="align-items: center;">
-                                                <input type="button" value="Send" class="btn btn-primary publicar-btn"
-                                                    style="line-height: 35px;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -141,13 +123,11 @@
 
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-6">Lesson:</div>
                                 <div class="col-6">
                                     <?php
                                     $lessonCourse = Lesson::getAllLessonsFromCourse($_GET['course']);
                                     ?>
                                     <input type="hidden" id="IndividualLessonPrice" value="<?php echo $lessonCourse[0]["PRICE"]; ?>">
-                                    <h5 class="card-title" style="text-align: center; color: green;">$<?php echo $lessonCourse[0]["PRICE"]; ?> MXN</h5>
                                 </div>
                             </div>
                         </div>
@@ -239,8 +219,7 @@
                                 }else{
                                     $userHasLesson["Bool"] = 0;
                                 }
-                                //print_r($userHasCourse["Bool"]);
-                                //print_r($userHasLesson["Bool"]);
+
                                 if($userHasLesson["Bool"] == 0 && $course["ID_INSTRUCTOR"] != $_SESSION['id']){
                                 echo '<div class="card content-course">
                                         <div class="card-body col-12 video-seen">
@@ -248,11 +227,11 @@
                                                 <div class="col-6">
                                                     <p>'.$value["TITLE"].'</p>
                                                 </div>
-                                                <div class="col-4" id="divCheckbox">
+                                                <div class="col-2" id="divCheckbox">
                                                     <input class="form-check-input" type="checkbox" value="'.$value["LESSON_ID"].'"
                                                         id="flexCheckDefault'.$i.'"'; if($userHasCourse["Bool"] != 0 || $userHasLesson["Bool"] != 0){ echo ' checked disabled';}  echo '>
                                                 </div>
-                                                <div id="lessonIndividualPrice'.$i.'" value="'.$value["PRICE"].'" class="col-2">
+                                                <div id="lessonIndividualPrice'.$i.'" value="'.$value["PRICE"].'" class="col-4">
                                                     <p>'.$value["PRICE"].'</p>
                                                 </div>
                                             </div>
