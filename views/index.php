@@ -135,8 +135,12 @@
                     $courses = Course::selectNewestCourses();
 
                     foreach ($courses as $key => $value) {
-                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                <div class="card p-0" style="width: 18rem;">
+                        if(isset($_SESSION['email'])){
+                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                        }else{
+                            echo '<a href="#" class="a-course">';
+                        }
+                        echo ' <div class="card p-0" style="width: 18rem;">
                                     <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                         class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -149,7 +153,6 @@
                                 </div>
                             </a>';
                     }
-
                 ?>
             </div>
         </div>
@@ -163,15 +166,19 @@
             <hr>
         </div>
 
-        <div class="col-12 in-progress-learning" style="padding: 10px;">
+        <div class="col-12 popular-courses" style="padding: 10px;">
 
             <div class="row" style="display: flex; justify-content:start;">
 
               <?php
                     $courses = Course::selectPopularCourses();
                     foreach ($courses as $key => $value) {
-                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                <div class="card p-0" style="width: 18rem;">
+                        if(isset($_SESSION['email'])){
+                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                        }else{
+                            echo '<a href="#" class="a-course">';
+                        }
+                        echo '<div class="card p-0" style="width: 18rem;">
                                     <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                         class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -192,6 +199,50 @@
 
     <!-- /POPULAR -->
 
+        <!-- MOST LIKED -->
+    <div class="home most-popular col-12" style="padding: 10px;">
+        <div class="col-12 title text-center">
+            <h3>Best Rated</h3>
+            <hr>
+        </div>
+
+        <div class="col-12 popular-courses" style="padding: 10px;">
+
+            <div class="row" style="display: flex; justify-content:start;">
+
+              <?php
+                    $bestRated = Course::selectBestRated();
+                    foreach ($bestRated as $key => $value) {
+                        if(isset($_SESSION['email'])){
+                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                        }else{
+                            echo '<a href="#" class="a-course">';
+                        }
+                        echo '<div class="card p-0" style="width: 18rem;">
+                                    <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                        class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                        <p class="card-text">
+                                            '.$value["SHORT_DESCRIPTION"].'
+                                        </p>
+                                        <p class="card-text" style="text-align: right;"><small class="cost">'.$value["PRICE"].'</small></p>
+                                    </div>
+                                </div>
+                            </a>';
+                    }
+                ?>
+                
+            </div>
+        </div>
+
+        <div class="card-footer" style="text-align: right;">
+            <a href="#">See more</a>
+        </div>
+    </div>
+
+    <!-- /MOST LIKED -->
+    
     <!-- /Content -->
 
     <!-- JS -->
