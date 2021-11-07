@@ -18,6 +18,7 @@
     $TBS->MergeField('pro.namecourse', $nomcourse);
     $TBS->MergeField('pro.nomalumno', $nomalumno);
     $TBS->MergeField('pro.nommaestro', $nommaestro);
+    $TBS->MergeField('pro.fechaalumno', $fechaalumno);
     $TBS->VarRef['x'] = $firmadecano;
 
     $TBS->PlugIn(OPENTBS_DELETE_COMMENTS);
