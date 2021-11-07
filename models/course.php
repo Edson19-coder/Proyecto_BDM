@@ -83,6 +83,21 @@
 			}
 		}
 
+		public static function selectBestRated(){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SBR', null, null, null, null, null, null, null);");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
+
 		public static function selectCourseById($idCourse){
 			$db = Connection::connect();
 			$result = $db->query("CALL proc_course('SCID', '".$idCourse."', null, null, null, null, null, null);");
