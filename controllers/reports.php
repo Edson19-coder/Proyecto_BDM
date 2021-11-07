@@ -3,6 +3,7 @@
   header('Access-Control-Allow-Origin: *');
   require_once('../db/db.php');
   require_once('../models/reports.php');
+  require_once('../models/lesson.php');
 
   $resp = null;
   $action = $_POST['vAction'];
@@ -44,6 +45,14 @@
       $user = $_POST['userId'];
       $course = $_POST['courseId'];
       $resp = Reports::getDatesCoursesHistoryByUser($course, $user);
+    }else{
+      echo "Error en el servicio";
+    }
+  }
+  else if($action == 'SL') {
+    if(isset($_POST['idLesson'])){
+      $idLesson = $_POST['idLesson'];
+      $resp = Lesson::getLessonById($idLesson);
     }else{
       echo "Error en el servicio";
     }

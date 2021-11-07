@@ -121,5 +121,18 @@
 			}
 			Connection::disconnect($db);
 		}
+
+		public static function getLessonById($idLesson){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_lesson('S', ".$idLesson.", null, null, null, null);");
+			if($result){
+				while($lesson = $result->fetch_assoc()){
+					return $lesson;
+				}
+			}else{
+				return 0;
+			}
+			Connection::disconnect($db);
+		}
 	}
 ?>

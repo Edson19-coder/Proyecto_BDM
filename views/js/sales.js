@@ -24,11 +24,12 @@ $(document).ready(() => {
          type: "POST",
          data: reportData,
          dataType: 'json',
+         async: false,
           success: function(data) {
             $('#tableBodyReport1').empty();
 
             data.forEach(rep => {
-                var newRep = new Report1(rep.COURSE_ID, rep.TITLE, rep.PARTICIPANTS, rep.LESSON_MOST_COMPLETED, rep.SALES);
+                var newRep = new Report1(rep.COURSE_ID, rep.TITLE, rep.PARTICIPANTS, getLessonById(rep.LESSON_MOST_COMPLETED), rep.SALES);
 
                 $('#tableBodyReport1').append(newRep.getHtml());
             });
@@ -89,6 +90,7 @@ $(document).ready(() => {
   }
 
   function getReport2() {
+    if(course != undefined) {
       var reportData = {
           vAction: 'R2',
           courseId: course
@@ -120,6 +122,10 @@ $(document).ready(() => {
               alert("Status: " + textStatus); alert("Error: " + errorThrown);
           }
       });
+    } else {
+      $('#totalMoneyR2').empty();
+      $('#totalMoneyR2').append('$0');
+    }
   }
 
   function getReportEnDate(userCurrentId) {
@@ -145,5 +151,34 @@ $(document).ready(() => {
           }
       });
       return date;
+  }
+
+  function getLessonById(lesson) {
+      var lessonTitle;
+
+      var reportData = {
+          vAction: 'SL',
+          idLesson: lesson
+      };
+
+      $.ajax({
+         url: "../controllers/reports.php",
+         type: "POST",
+         data: reportData,
+         dataType: 'json',
+         async: false,
+          success: function(data) {
+            lessonTitle = data.TITLE;
+         },
+         error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("Status: " + textStatus); alert("Error: " + errorThrown);
+          }
+      });
+
+      if(lessonTitle == undefined){
+        lessonTitle = "No views";
+      }
+
+      return lessonTitle;
   }
 })
