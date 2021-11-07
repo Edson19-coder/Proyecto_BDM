@@ -23,6 +23,7 @@
     <?php
         require_once('../models/course.php');
         require_once('../models/lesson.php');
+        require_once('../models/comments.php');
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
@@ -180,10 +181,16 @@
                 <button type="button" id="btn-get-certificate" disabled class="btn btn-primary" style="width: 100%; margin-top: 20px;">
                 GET CERTIFICATE
                 </button>
+                <?php
+                    $userId = $_SESSION['id'];
+                    $courseId = $_GET['course'];
+                    $userHasCommented = Comment::userHasCommented($userId, $courseId);
+                    echo '<form type="hidden" class="userHasCommentedForm" value="'.$userHasCommented["COUNT(COMMENT_ID)"].'"></form>';
+                ?>
                 <button  type="button" id="btn-send-comment" disabled class="btn btn-primary" style="width: 100%; margin-top: 20px;" data-bs-toggle="modal" data-bs-target="#modalCommentCourse">
                             Qualificate Course
                     </button>
-                <!-- Modal CALIFICAR Lesson -->
+                <!-- Modal CALIFICAR course -->
                     <div class="modal fade" id="modalCommentCourse" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="xdlmaolol" aria-hidden="true">
                         <div class="modal-dialog">
@@ -221,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /Modal CALIFICAR Lesson -->
+                    <!-- /Modal CALIFICAR course -->
             </div>
         </div>
     </div>

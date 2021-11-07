@@ -16,16 +16,29 @@ $( document ).ready(function() {
     })
 
     function checkCertificate(){
+        console.log();
         if(cant == inputsCant){
-        $("#btn-get-certificate").prop('disabled', false);
-        $("#btn-send-comment").prop('disabled', false);
-        getCertData();
+            if($(".userHasCommentedForm").attr('value') != "1"){
+                $("#btn-send-comment").prop('disabled', false);
+            }
+            $("#btn-get-certificate").prop('disabled', false);
+            getCertData();
         }
     }
-
-
+    
+    $(".btnEditar").click(function(){
+        var xd = $(event.target);
+        console.log(xd);
+        if(xd.parents().is("button.btnEditar")){
+            var noteName = $(xd).attr('id');
+            $("#"+noteName).modal('show');
+            console.log(noteName);
+        }
+    });
+  
     $("#lessonList").click(function(){
         var b = $(event.target);
+
         if(b.parents().is("a")){
             var lessonId = $(b).parents("a").attr('leccionNumero');
             $("#videoArea").attr('leccionNumero', lessonId);

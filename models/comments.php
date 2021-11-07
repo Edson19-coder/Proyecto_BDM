@@ -28,5 +28,18 @@
 				return null;
 			}
         }
+
+        public static function userHasCommented($userId, $courseId){
+        	$db = Connection::connect();
+        	$result = $db->query("CALL proc_comments('UHC', ".$courseId.", ".$userId.", null, null);");
+        	if($result){
+				while($comment = $result->fetch_assoc()){
+					return $comment;
+				}
+			}else{
+				return 0;
+			}
+			Connection::disconnect($db);
+        }
 	}
 ?>
