@@ -88,6 +88,21 @@
       Connection::disconnect($db);
     }
 
+		public static function getCertData($courseId){
+      $db = Connection::connect();
+      $result = $db->query("CALL  proc_reports('CERT', ".$courseId.", null);");
+
+      if($result){
+        while ($dates = $result->fetch_assoc()){
+          return $dates;
+        }
+      }else{
+        echo("Error.");
+        return null;
+      }
+      Connection::disconnect($db);
+    }
+
 	}
 
  ?>

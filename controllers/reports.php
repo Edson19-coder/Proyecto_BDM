@@ -57,6 +57,14 @@
       echo "Error en el servicio";
     }
   }
+  else if($action == 'CERT') {
+    if(isset($_POST['courseId'])){
+      $course = $_POST['courseId'];
+      $resp = Reports::getCertData($course);
+    }else{
+      echo "Error en el servicio";
+    }
+  }
 
   echo json_encode($resp);
 
