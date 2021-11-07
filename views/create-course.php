@@ -19,7 +19,7 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php 
+    <?php
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
@@ -197,7 +197,7 @@
                             </tr>
                         </thead>
                         <tbody id="lessonTBody">
-                            
+
                         </tbody>
                     </table>
 
@@ -229,6 +229,18 @@
                                             <input type="number" min="0" class="form-control" name="" id="InputLessonPriceEdit">
                                             <span class="hide" id="span-lessson-price" style="color: red">*Price is required</span>
                                             <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputVideoLessonEdit">Video lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="video/*" id="InputVideoLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputImageLessonEdit">Image lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept="image/*" id="InputImageLessonEdit">
+                                        </div>
+                                        <div class="mb-3 form-group">
+                                            <label for="InputFileLessonEdit">File lesson</label>
+                                            <input type="file" class="form-control-file form-control" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf" id="InputFileLessonEdit">
                                         </div>
                                         <div class="text-end">
                                             <button type="button" class="btn btn-secondary"
@@ -266,29 +278,6 @@
                         <input type="number" min="0" class="form-control" name="" id="InputPrice">
                     </div>
                     <p style="color: #ff0000;">* If the cost is $0 it will marked as FREE</p>
-                    <h5 class="mb-3">Payment destination:</h5>
-                    <form class="credit-card-div">
-                        <div class="col-12 mb-3">
-                            <input type="text" class="form-control" name="" id="" placeholder="Enter Card Number">
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-4 credit-card-inp">
-                                <span class="help-block text-muted small-font">Expiry Month</span>
-                                <input type="text" name="" id="" class="form-control" placeholder="MM">
-                            </div>
-                            <div class="col-4 credit-card-inp">
-                                <span class="help-block text-muted small-font">Expiry Year</span>
-                                <input type="text" name="" id="" class="form-control" placeholder="YYYY">
-                            </div>
-                            <div class="col-4 credit-card-inp">
-                                <span class="help-block text-muted small-font">CCV</span>
-                                <input type="text" name="" id="" class="form-control" placeholder="CCV">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <input type="text" class="form-control" name="" id="" placeholder="Name On The Card">
-                        </div>
-                    </form>
 
                     <div class="col-12">
                         <div class="row">
@@ -309,7 +298,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/validation/notification-create-course.js"></script>
-    <script src="js/validation/validation-create-course.js"></script>
+    <!--<script src="js/validation/validation-create-course.js"></script>-->
     <script src="models/lesson.js"></script>
     <script src="js/create-course.js"></script>
     <script src="js/searchBar.js"></script>
