@@ -151,7 +151,7 @@
                                                                   <p class="card-text" style="font-size: x-small;">Last activity date:</p>
                                                               </div>
                                                               <div class="col-6">
-                                                                  <p class="card-text" style="font-size: small;">'.$value["LAST_ACTIVITY_DATE"].'</p>
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["LAST_ACTIVITY_DATE"].'</p>
                                                               </div>
                                                           </div>
                                                       </div>
