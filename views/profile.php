@@ -208,15 +208,19 @@
 
                     <div class="row" style="display: flex; justify-content:start;">
                          <?php
+                            $userHasCourse = 
                             $userCoursesbyLesson = null;
                             $user = $_SESSION['id'];
                             $userCoursesbyLesson = Course::getCourseFromLessonPurchased($user);
                             if($userCoursesbyLesson != null){
                                 foreach ($userCoursesbyLesson as $key => $value) {
-
-                                  $courseDates = Course::getDatesCoursesHistoryByUser($value["COURSE_ID"], $user);
-
-                                echo '<a href="view-lesson.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
+                                $userHasCourse = Course::userHasCourse($value["COURSE_ID"], $user);
+                                if($userHasCourse["Bool"] != 1){
+                                    $userHasCourse["Bool"] == 0;
+                                }
+                                $courseDates = Course::getDatesCoursesHistoryByUser($value["COURSE_ID"], $user);
+                                if($userHasCourse["Bool"] == 0){
+                                    echo '<a href="view-lesson.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
                                         <div class="card p-0" style="width: 18rem;">
                                             <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                                 class="card-img-top" alt="...">
@@ -268,6 +272,7 @@
                                             </div>
                                         </div>
                                     </a>';
+                                    }
                                 }
                             }else{
                                 echo "<h1>You haven't bought any courses, go for it!</h1>";
