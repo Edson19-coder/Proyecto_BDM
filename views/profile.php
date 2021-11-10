@@ -20,7 +20,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <?php 
+    <?php
         require_once '../models/course.php';
         include 'navbar.php';
     ?>
@@ -36,14 +36,14 @@
                     class="rounded-circle" height="200" alt="" loading="lazy">
             </div>
             <div class="col-12" style="padding: 20px;">
-                <h1 id="user-name-view"><?php 
+                <h1 id="user-name-view"><?php
                 if(isset($_SESSION['secondName'])){
                     echo $_SESSION['firstName']." ".$_SESSION['secondName']." ".$_SESSION['lastNames'];
                 } else{
                     echo $_SESSION['firstName']." ".$_SESSION['lastNames'];
                 }
                  ?></h1>
-                
+
             </div>
             <div class="col-4" style="margin-left: auto; margin-right: auto;">
                 <div class="row">
@@ -51,7 +51,7 @@
                         <h4 id="user-username-view"><?php echo "@".$_SESSION['username']; ?></h4>
                     </div>
                     <div class="col-6">
-                        <h4 id="user-rol-view"><?php 
+                        <h4 id="user-rol-view"><?php
                         if($_SESSION['accountType'] == "0"){
                             echo "Estudiante";
                         }else{
@@ -76,11 +76,11 @@
                             $teacherCourses = null;
                             $user = $_SESSION['id'];
                             $teacherCourses = Course::selectTeacherCourses($user);
-                            //print_r($userCourses);
                             if($teacherCourses != null){
                                 foreach ($teacherCourses as $key => $value) {
-                                echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
+                                echo '
                                         <div class="card p-0" style="width: 18rem;">
+                                          <a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
                                             <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                                 class="card-img-top" alt="...">
                                             <div class="card-body">
@@ -88,9 +88,13 @@
                                                 <p class="card-text">
                                                     '.$value["SHORT_DESCRIPTION"].'
                                                 </p>
+                                              </div>
+                                            </a>
+                                            <div class="card-footer">
+                                                <a type="button" class="form-control btn btn-primary" href="update-course.php?course='.$value["COURSE_ID"].'">Editar</a>
                                             </div>
                                         </div>
-                                    </a>';
+                                    ';
                                 }
                             }else{
                                 echo "<h1>You haven't bought any courses, go for it!</h1>";
@@ -115,26 +119,73 @@
                             $userCourses = null;
                             $user = $_SESSION['id'];
                             $userCourses = Course::selectUserCourses($user);
-                            //print_r($userCourses);
                             if($userCourses != null){
                                 foreach ($userCourses as $key => $value) {
-                                echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                        <div class="card p-0" style="width: 18rem;">
-                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
-                                                class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
-                                                <p class="card-text">
-                                                    '.$value["SHORT_DESCRIPTION"].'
-                                                </p>
+
+                                  if($value["COURSE_ID"] != null) {
+
+                                    $courseDates = Course::getDatesCoursesHistoryByUser($value["COURSE_ID"], $user);
+
+                                    echo '<a href="view-course.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
+                                            <div class="card p-0" style="width: 18rem;">
+                                                <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                    class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">'.$value["TITLE"].'</h5>
+
+                                                    <div class="col-12">
+                                                      <div class="col-12">
+                                                          <div class="row">
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: x-small;">Enrollment date:</p>
+                                                              </div>
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["ENROLLMENT_DATE"].'</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-12">
+                                                          <div class="row">
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: x-small;">Last activity date:</p>
+                                                              </div>
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["LAST_ACTIVITY_DATE"].'</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-12">
+                                                          <div class="row">
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: x-small;">Finish date:</p>
+                                                              </div>
+                                                              <div class="col-6">
+                                                                  <p class="card-text" style="font-size: small;">'.$courseDates["FINISH_DATE"].'</p>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+
+                                                  <br>
+
+                                                  <div class="progress">
+                                                      <div class="progress-bar" role="progressbar" style="width: '.$value["PERCENTAGE"].'%;" aria-valuenow="25"
+                                                          aria-valuemin="0" aria-valuemax="100">'.$value["PERCENTAGE"].'%</div>
+                                                  </div>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>';
-                                }
+                                        </a>';
+                                    } else {
+                                        echo "<h1>You haven't bought any courses, go for it!</h1>";
+                                    }
+                                  }
                             }else{
                                 echo "<h1>You haven't bought any courses, go for it!</h1>";
                             }
-                            
+
                         ?>
                     </div>
 
@@ -146,6 +197,97 @@
             </div>
             <!-- /MY LEARNINGS  -->
 
+            <!-- COURSES BY LESSON -->
+            <div class="home courses-by-lesson-title col-12" style="padding: 10px;">
+                <div class="col-12 title text-center">
+                    <h3>Courses by Lessons</h3>
+                    <hr>
+                </div>
+
+                <div class="col-12 courses-by-lesson" style="padding: 10px;">
+
+                    <div class="row" style="display: flex; justify-content:start;">
+                         <?php
+                            $userHasCourse = 
+                            $userCoursesbyLesson = null;
+                            $user = $_SESSION['id'];
+                            $userCoursesbyLesson = Course::getCourseFromLessonPurchased($user);
+                            if($userCoursesbyLesson != null){
+                                foreach ($userCoursesbyLesson as $key => $value) {
+                                $userHasCourse = Course::userHasCourse($value["COURSE_ID"], $user);
+                                if($userHasCourse["Bool"] != 1){
+                                    $userHasCourse["Bool"] == 0;
+                                }
+                                $courseDates = Course::getDatesCoursesHistoryByUser($value["COURSE_ID"], $user);
+                                if($userHasCourse["Bool"] == 0){
+                                    echo '<a href="view-lesson.php?course='.$value["COURSE_ID"].'&lesson=1" class="a-course">
+                                        <div class="card p-0" style="width: 18rem;">
+                                            <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                                class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">'.$value["TITLE"].'</h5>
+
+                                                <div class="col-12">
+                                                  <div class="col-12">
+                                                      <div class="row">
+                                                          <div class="col-6">
+                                                              <p class="card-text" style="font-size: x-small;">Enrollment date:</p>
+                                                          </div>
+                                                          <div class="col-6">
+                                                              <p class="card-text" style="font-size: small;">'.$courseDates["ENROLLMENT_DATE"].'</p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-12">
+                                                      <div class="row">
+                                                          <div class="col-6">
+                                                              <p class="card-text" style="font-size: x-small;">Last activity date:</p>
+                                                          </div>
+                                                          <div class="col-6">
+                                                              <p class="card-text" style="font-size: small;">'.$courseDates["LAST_ACTIVITY_DATE"].'</p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-12">
+                                                      <div class="row">
+                                                          <div class="col-6">
+                                                              <p class="card-text" style="font-size: x-small;">Finish date:</p>
+                                                          </div>
+                                                          <div class="col-6">
+                                                              <p class="card-text" style="font-size: small;">'.$courseDates["FINISH_DATE"].'</p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+
+                                              <br>
+
+                                              <div class="progress">
+                                                  <div class="progress-bar" role="progressbar" style="width: '.$value["PERCENTAGE"].'%;" aria-valuenow="25"
+                                                      aria-valuemin="0" aria-valuemax="100">'.$value["PERCENTAGE"].'%</div>
+                                              </div>
+
+                                            </div>
+                                        </div>
+                                    </a>';
+                                    }
+                                }
+                            }else{
+                                echo "<h1>You haven't bought any courses, go for it!</h1>";
+                            }
+
+                        ?>
+                    </div>
+
+                </div>
+
+                <div class="card-footer" style="text-align: right;">
+
+                </div>
+            </div>
+            <!-- /COURSES BY LESSON -->
         </div>
     </div>
 

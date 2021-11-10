@@ -7,17 +7,16 @@
 		private $db;
 
 		public function __construct(){
-      
-        }
 
+        }
 
 		public static function createCourse($titleCourse, $shortDescriptionCourse, $longDescriptionCourse, $priceCourse, $imageCourse, $instructorCourse) {
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_course('I', null, '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."', 
+			$result = $db->query("CALL proc_course('I', null, '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."',
 									'".$imageCourse."', ".$instructorCourse.")");
 
 			if($result){
-                while ($lastId = $result->fetch_assoc()) { 
+                while ($lastId = $result->fetch_assoc()) {
                     return $lastId;
                 }
 			} else {
@@ -33,7 +32,7 @@
 			$result = $db->query("CALL proc_course_categories('I', null, ".$idCategory.", ".$idCourse.")");
 
 			return $result;
-			
+
 			Connection::disconnect($db);
 		}
 
@@ -84,6 +83,21 @@
 			}
 		}
 
+		public static function selectBestRated(){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('SBR', null, null, null, null, null, null, null);");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+		}
+
 		public static function selectCourseById($idCourse){
 			$db = Connection::connect();
 			$result = $db->query("CALL proc_course('SCID', '".$idCourse."', null, null, null, null, null, null);");
@@ -99,7 +113,7 @@
 
 		public static function userHasCourse($idCourse, $idUser){
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_purchases('UHC', ".$idCourse.", null, ".$idUser.");");
+			$result = $db->query("CALL proc_purchases('UHC', ".$idCourse.", null, ".$idUser.", null);");
 			if($result){
 				while($course = $result->fetch_assoc()){
 					return $course;
@@ -112,7 +126,7 @@
 
 		public static function selectUserCourses($idUser){
 			$db = Connection::connect();
-			$result = $db->query("CALL proc_purchases('SUCP', null, null, ".$idUser.");");
+			$result = $db->query("CALL proc_purchases('SUCP', null, null, ".$idUser.", null);");
 			if($result){
 				$courses = array();
 				while ($course = $result->fetch_assoc()) {
@@ -139,5 +153,49 @@
 				return null;
 			}
 		}
+
+		public static function updateCourse($courseId, $titleCourse, $shortDescriptionCourse, $longDescriptionCourse, $priceCourse, $imageCourse) {
+			$imageCourse = !empty($imageCourse) ? "'".$imageCourse."'" : 'null';
+
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('UCI', ".$courseId.", '".$titleCourse."', '".$shortDescriptionCourse."', '".$longDescriptionCourse."', '".$priceCourse."',
+													".$imageCourse.", null)");
+
+			return $result;
+
+			Connection::disconnect($db);
+		}
+
+		public static function getCourseFromLessonPurchased($idUser){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_course('GCFLP', null, null, null, null, null, null, ".$idUser.");");
+			if($result){
+				$courses = array();
+				while ($course = $result->fetch_assoc()) {
+                    $courses[] = $course;
+                }
+                return $courses;
+			}else{
+				echo("Error, no trae nada de la db.");
+				return null;
+			}
+			Connection::disconnect($db);
+		}
+
+		public static function getDatesCoursesHistoryByUser($courseId, $userId){
+			$db = Connection::connect();
+			$result = $db->query("CALL proc_dates_courses(".$userId.", ".$courseId.")");
+
+			if($result){
+				while ($dates = $result->fetch_assoc()){
+					return $dates;
+				}
+			}else{
+				echo("Error.");
+				return null;
+			}
+			Connection::disconnect($db);
+		}
+
 	}
 ?>

@@ -29,3 +29,33 @@ Lesson.prototype = {
         return html;
     }
 };
+
+var LessonUpdate = function (lessonId, lessonTitle, lessonDescription, lessonPrice, lessonVideo, lessonImage, lessonFile) {
+    this.id = 0;
+    this.lessonId = lessonId;
+    this.lessonTitle = lessonTitle;
+    this.lessonDescription = lessonDescription;
+    this.lessonPrice = lessonPrice;
+    this.lessonVideo = lessonVideo;
+    this.lessonImage = lessonImage;
+    this.lessonFile = lessonFile;
+};
+
+LessonUpdate.prototype = {
+    setId: function (id) {
+        this.id = id;
+    },
+    getHtml: function () {
+        var html = '<tr>';
+            html += '<th scope="row" class="rowLesson">'+ this.id +'</th>';
+            html += '<td class="titleCol">'+ this.lessonTitle +'</td>';
+            html += '<td>';
+            html += '<button type="button" style="margin-right: 5px;" class="btn btn-edit-lesson-u btn-primary btn-sm px-3" data-bs-toggle="modal"';
+            html += 'data-bs-target="#editUpdateLesson" data-lessonCurrentId="'+this.lessonId+'">';
+            html += '<i class="fas fa-edit"></i>';
+            html += '</button>';
+            html += '</td>';
+            html += '</tr>';
+        return html;
+    }
+};

@@ -1,5 +1,5 @@
 $(document).ready( () => {
-    
+
     $("#btn-next-course-information").on('click', nextCourseInformation);
 
     $("#btn-next-course-lesson").on('click', nextCourseLesson);
@@ -8,7 +8,7 @@ $(document).ready( () => {
 
     $("#btn-prev-payment").on('click', prevPayment);
 
-    $("#btn-create-course").on('click', createSuccess);
+    //$("#btn-create-course").on('click', createSuccess);
 
     function nextCourseInformation() {
         if($("#id-course-lessons").hasClass("un-active")){
@@ -18,7 +18,7 @@ $(document).ready( () => {
             $("#id-index-course-lessons").attr('style', 'color: #153ff7 !important');
         }
     }
-    
+
     function nextCourseLesson() {
         if($("#id-price-payment").hasClass("un-active")){
             $("#id-price-payment").removeClass("un-active");
@@ -62,4 +62,3 @@ $(document).ready( () => {
         $("#id-index-course-create").attr('style', 'color: #153ff7 !important');
     }
 });
-

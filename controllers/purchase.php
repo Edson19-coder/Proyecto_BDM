@@ -12,7 +12,8 @@
 		if(isset($_POST['userId'])){
 			$user = $_POST['userId'];
 			$course = $_POST['courseId'];
-			$resp = Purchase::purchaseCourse($course, $user);
+			$cardType = $_POST['cardType'];
+			$resp = Purchase::purchaseCourse($course, $user, $cardType);
 		}else{
 			echo "Error en el servicio";
 		}
@@ -21,12 +22,13 @@
 		if(isset($_POST['userId'])){
 			$user = $_POST['userId'];
 			$lesson = $_POST['lessonId'];
+			$cardType = $_POST['cardType'];
 
-			$resp = Purchase::purchaseLesson($lesson, $user);
+			$resp = Purchase::purchaseLesson($lesson, $user, $cardType);
 		}else{
 			echo "Error en el servicio";
 		}
 	}
-	
+
 	echo json_encode($resp);
 ?>

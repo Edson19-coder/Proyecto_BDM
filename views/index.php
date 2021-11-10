@@ -48,78 +48,7 @@
         </div>
     </div>
     <!-- WELCOME BACK -->
-
-    <!-- IN PROGRESS -->
-    <div class="home in-progress col-12" style="padding: 10px;">
-        <div class="col-12 title text-center">
-            <h3>In progress</h3>
-            <hr>
-        </div>
-
-        <div class="col-12 in-progress-learning" style="padding: 10px;">
-
-            <div class="row" style="display: flex; justify-content:start;">
-
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;">
-                        <img src="src/image/php-curso.png"
-                            class="card-img-top" alt="">
-                        <div class="card-body">
-                            <p class="card-text">Curso de PHP basico.</p>
-                            <h5 class="card-title">1. Herramientas basicas.</h5>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">25%</div>
-                            </div>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <p class="card-text"><small class="text-muted">30 mins</small></p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;">
-                        <img src="src/image/gestion-de-desarollo.png"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Gestión y desarollo de proyec...</p> <!-- MAX CHARACTERS 32 -->
-                            <h5 class="card-title">4. Metodologia SCRUM.</h5> <!-- MAX CHARACTERS 22 -->
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">80%</div>
-                            </div>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <p class="card-text"><small class="text-muted">10 mins</small></p>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="" class="a-course">
-                    <div class="card p-0" style="width: 18rem;">
-                        <img src="src/image/aprende-marketing-digital.png"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Aprende Marketing Digital.</p>
-                            <h5 class="card-title">2. Google Ads.</h5>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                        </div>
-                        <div class="card-footer" style="text-align: right;">
-                            <p class="card-text"><small class="text-muted">18 mins</small></p>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-    <!-- /IN PROGRESS -->
+    
  <?php } ?>
     <!-- NEWEST -->
     <div class="home most-new col-12" style="padding: 10px;">
@@ -133,10 +62,14 @@
             <div class="row" style="display: flex; justify-content:start;">
                 <?php
                     $courses = Course::selectNewestCourses();
-                    
+
                     foreach ($courses as $key => $value) {
-                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                <div class="card p-0" style="width: 18rem;">
+                        if(isset($_SESSION['email'])){
+                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                        }else{
+                            echo '<a href="#" class="a-course">';
+                        }
+                        echo ' <div class="card p-0" style="width: 18rem;">
                                     <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                         class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -149,13 +82,8 @@
                                 </div>
                             </a>';
                     }
-
                 ?>
             </div>
-        </div>
-
-        <div class="card-footer" style="text-align: right;">
-            <a href="#">See more</a>
         </div>
     </div>
     <!-- /NEWEST  -->
@@ -167,15 +95,19 @@
             <hr>
         </div>
 
-        <div class="col-12 in-progress-learning" style="padding: 10px;">
+        <div class="col-12 popular-courses" style="padding: 10px;">
 
             <div class="row" style="display: flex; justify-content:start;">
 
               <?php
                     $courses = Course::selectPopularCourses();
                     foreach ($courses as $key => $value) {
-                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                <div class="card p-0" style="width: 18rem;">
+                        if(isset($_SESSION['email'])){
+                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                        }else{
+                            echo '<a href="#" class="a-course">';
+                        }
+                        echo '<div class="card p-0" style="width: 18rem;">
                                     <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                         class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -189,7 +121,47 @@
                             </a>';
                     }
                 ?>
-                
+
+            </div>
+        </div>
+    </div>
+
+    <!-- /POPULAR -->
+
+        <!-- MOST LIKED -->
+    <div class="home most-popular col-12" style="padding: 10px;">
+        <div class="col-12 title text-center">
+            <h3>Best Rated</h3>
+            <hr>
+        </div>
+
+        <div class="col-12 popular-courses" style="padding: 10px;">
+
+            <div class="row" style="display: flex; justify-content:start;">
+
+              <?php
+                    $bestRated = Course::selectBestRated();
+                    foreach ($bestRated as $key => $value) {
+                        if(isset($_SESSION['email'])){
+                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                        }else{
+                            echo '<a href="#" class="a-course">';
+                        }
+                        echo '<div class="card p-0" style="width: 18rem;">
+                                    <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
+                                        class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">'.$value["TITLE"].'</h5>
+                                        <p class="card-text">
+                                            '.$value["SHORT_DESCRIPTION"].'
+                                        </p>
+                                        <p class="card-text" style="text-align: right;"><small class="cost">'.$value["PRICE"].'</small></p>
+                                    </div>
+                                </div>
+                            </a>';
+                    }
+                ?>
+
             </div>
         </div>
 
@@ -198,8 +170,8 @@
         </div>
     </div>
 
-    <!-- /POPULAR -->
-    
+    <!-- /MOST LIKED -->
+
     <!-- /Content -->
 
     <!-- JS -->
