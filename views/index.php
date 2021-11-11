@@ -164,10 +164,6 @@
 
             </div>
         </div>
-
-        <div class="card-footer" style="text-align: right;">
-            <a href="#">See more</a>
-        </div>
     </div>
 
     <!-- /MOST LIKED -->

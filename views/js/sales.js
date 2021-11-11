@@ -108,12 +108,14 @@ $(document).ready(() => {
             $('#tableBodyReport2').empty();
 
             data.forEach(rep => {
-                var newRep = new Report2(rep.FIRST_NAME, rep.LAST_NAME, rep.PERCENTAGE_COMPLETION, rep.TOTAL_SPENT, rep.PAYMENT_METHOD);
-                var date = getReportEnDate(rep.USER_ID);
-                newRep.setEnrollment(date);
-                var moneyInt = parseInt(rep.TOTAL_SPENT, 10);
-                total = total + moneyInt;
-                $('#tableBodyReport2').append(newRep.getHtml());
+                if(rep.USER_ID != undefined) {
+                    var newRep = new Report2(rep.FIRST_NAME, rep.LAST_NAME, rep.PERCENTAGE_COMPLETION, rep.TOTAL_SPENT, rep.PAYMENT_METHOD);
+                    var date = getReportEnDate(rep.USER_ID);
+                    newRep.setEnrollment(date);
+                    var moneyInt = parseInt(rep.TOTAL_SPENT, 10);
+                    total = total + moneyInt;
+                    $('#tableBodyReport2').append(newRep.getHtml());
+                }
             });
             $('#totalMoneyR2').empty();
             $('#totalMoneyR2').append('$'+total);

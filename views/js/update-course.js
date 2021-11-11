@@ -445,7 +445,14 @@ $(document).ready(() => {
 
                   if(imageLessonEdit != undefined || videoLessonEdit != undefined || docLessonEdit != undefined) {
                     updateMediLesson(lessonId, imageLessonEdit, videoLessonEdit, docLessonEdit);
+                  } else {
+                    Swal.fire(
+                        'Good job!',
+                        'Lesson updated successfully!',
+                        'success'
+                    );
                   }
+
                 }
            },
            error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -479,7 +486,19 @@ $(document).ready(() => {
          processData: false,
           contentType: false,
           success: function(data) {
-              console.log(data);
+              if(data) {
+                Swal.fire(
+                    'Good job!',
+                    'Lesson updated successfully!',
+                    'success'
+                );
+              } else {
+                Swal.fire(
+                    'Oh no!',
+                    'Lesson not updated correctly!',
+                    'error'
+                );
+              }
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) {
               alert("Status: " + textStatus); alert("Error: " + errorThrown);
