@@ -19,7 +19,7 @@
 
 <body>
     <!-- NAVBAR -->
-    <?php 
+    <?php
         include 'navbar.php';
     ?>
     <!-- /NAVBAR -->
@@ -45,10 +45,6 @@
                             <label for="InputPasswordLogin" class="form-label">Password</label>
                             <input type="password" minlength="8" class="form-control" id="InputPasswordLogin">
                             <span class="hide" id="span-password" style="color: red">*Password is required</span>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div>
                         <button id="btn-sign-in" type="submit" class="col-12 btn btn-primary" style="margin-bottom: 20px ;">Sign In</button>
                         <a href="register.php" class="register-a" style="margin-top: 10px; color: black; text-decoration: none;">Register</a>

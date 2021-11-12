@@ -8,6 +8,8 @@ $(document).ready(() => {
   var newLessonList = [];
   var indiceEditActive = -1;
 
+  $( "#loader" ).hide();
+
   getCourseInformationUpdate();
   getAllCategories();
   getAllCategoriesByCourse();
@@ -74,6 +76,8 @@ $(document).ready(() => {
 
   $('#btn-edit-update-lesson').on('click', (event) => {
       event.preventDefault();
+
+      $( "#loader" ).show();
 
       var titleEdit = $('#InputUpdateLessonTitleEdit').val();
       var descriptionEdit = $('#InputUpdateLessonDescriptionEdit').val();
@@ -197,8 +201,22 @@ $(document).ready(() => {
           contentType: false,
           dataType: 'json',
           success: function(data) {
-              if(data && newLessonList.length > 0) {
-                createLesson();
+              if(data) {
+                Swal.fire(
+                    'Good job!',
+                    'Course updated successfully!',
+                    'success'
+                ).then(function (result) {
+                    if (result.value) {
+                        window.location = "index.php";
+                    }
+                });
+              } else {
+                Swal.fire(
+                    'Oh no!',
+                    'The course did not update correctly!',
+                    'error'
+                );
               }
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -446,6 +464,7 @@ $(document).ready(() => {
                   if(imageLessonEdit != undefined || videoLessonEdit != undefined || docLessonEdit != undefined) {
                     updateMediLesson(lessonId, imageLessonEdit, videoLessonEdit, docLessonEdit);
                   } else {
+                    $( "#loader" ).hide();
                     Swal.fire(
                         'Good job!',
                         'Lesson updated successfully!',
@@ -479,20 +498,30 @@ $(document).ready(() => {
       formData.append('lessonId', lessonId);
 
       $.ajax({
+        xhr: function() {
+              var xhr = new window.XMLHttpRequest();
+              xhr.upload.addEventListener("progress", function(evt) {
+                  if (evt.lengthComputable) {
+                      var percentComplete = ((evt.loaded / evt.total) * 100);
+                      if(percentComplete == 100) {
+                        $( "#loader" ).hide();
+                        Swal.fire(
+                            'Good job!',
+                            'Lesson updated successfully!',
+                            'success'
+                        );
+                      }
+                  }
+              }, false);
+              return xhr;
+          },
          url: "../controllers/update-course.php",
-         async: true,
          type: "POST",
          data: formData,
          processData: false,
           contentType: false,
           success: function(data) {
-              if(data) {
-                Swal.fire(
-                    'Good job!',
-                    'Lesson updated successfully!',
-                    'success'
-                );
-              } else {
+              if(!data) {
                 Swal.fire(
                     'Oh no!',
                     'Lesson not updated correctly!',

@@ -6,6 +6,10 @@ $(document).ready(() => {
     var lessonList = [];
     var indiceEditActive = -1;
 
+    var countProcess = 0;
+
+    $( "#loader" ).hide();
+
     validateListIsEmpty();
 
     getAllCategories();
@@ -210,7 +214,9 @@ $(document).ready(() => {
     $('#btn-create-course').on('click', (event) => {
         event.preventDefault();
 
+        $( "#loader" ).show();
         createCourse($('#InputTitle').val(), $('#InputShortDescription').val(), $('#InputLongDescription').val(), $('#InputPrice').val(), userId);
+
     });
 
     var lastIdCourse;
@@ -230,12 +236,12 @@ $(document).ready(() => {
 
           $.ajax({
              url: "../controllers/create-course.php",
-             async: true,
              type: "POST",
              data: formData,
              processData: false,
               contentType: false,
               dataType: 'json',
+              async: false,
               success: function(data) {
                   lastIdCourse = data.LAST_ID;
 
@@ -243,6 +249,7 @@ $(document).ready(() => {
                       createCourseCategories();
                       createLesson();
                   }
+
              },
              error: function(XMLHttpRequest, textStatus, errorThrown) {
                   alert("Status: " + textStatus); alert("Error: " + errorThrown);
@@ -336,24 +343,38 @@ $(document).ready(() => {
         formData.append('InputLessonId', lastIdLesson);
 
         $.ajax({
+          xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                        if(percentComplete == 100) {
+                          countProcess = countProcess + 1;
+                          if(countProcess == lessonList.length) {
+                            $( "#loader" ).hide();
+
+                            Swal.fire(
+                                'Good job!',
+                                'Course created successfully!',
+                                'success'
+                            ).then(function (result) {
+                                if (result.value) {
+                                    window.location = "index.php";
+                                }
+                            });
+                          }
+                        }
+                    }
+                }, false);
+                return xhr;
+            },
            url: "../controllers/create-course.php",
-           async: true,
            type: "POST",
            data: formData,
            processData: false,
             contentType: false,
             success: function(data) {
                 if (data) {
-                  Swal.fire(
-                      'Good job!',
-                      'Course created successfully!',
-                      'success'
-                  ).then(function (result) {
-                      if (result.value) {
-                          window.location = "index.php";
-                      }
-                  });
-
                   $("#id-index-payment").removeAttr('style');
                   $("#id-index-course-create").attr('style', 'color: #153ff7 !important');
                 }
@@ -362,6 +383,7 @@ $(document).ready(() => {
                 alert("Status: " + textStatus); alert("Error: " + errorThrown);
             }
         });
+
     }
 
     /* TRAER TODAS LAS CATEGORIAS */
