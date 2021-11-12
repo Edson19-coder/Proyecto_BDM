@@ -201,8 +201,22 @@ $(document).ready(() => {
           contentType: false,
           dataType: 'json',
           success: function(data) {
-              if(data && newLessonList.length > 0) {
-                createLesson();
+              if(data) {
+                Swal.fire(
+                    'Good job!',
+                    'Course updated successfully!',
+                    'success'
+                ).then(function (result) {
+                    if (result.value) {
+                        window.location = "index.php";
+                    }
+                });
+              } else {
+                Swal.fire(
+                    'Oh no!',
+                    'The course did not update correctly!',
+                    'error'
+                );
               }
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) {
