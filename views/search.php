@@ -97,8 +97,12 @@
                                 }
                             
                                 foreach ($courses as $key => $value) {
-                                    echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                            <div class="card p-0" style="width: 18rem;">
+                                    if(isset($_SESSION['email'])){
+                                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                                    }else{
+                                        echo '<a href="#" class="a-course">';
+                                    }
+                                    echo '<div class="card p-0" style="width: 18rem;">
                                                 <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                                     class="card-img-top" alt="...">
                                                 <div class="card-body">
@@ -123,8 +127,12 @@
 
                                 if($courses != null) {
                                     foreach ($courses as $key => $value) {
-                                        echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">
-                                                <div class="card p-0" style="width: 18rem;">
+                                        if(isset($_SESSION['email'])){
+                                            echo '<a href="course.php?course='.$value["COURSE_ID"].'" class="a-course">';
+                                        }else{
+                                            echo '<a href="#" class="a-course">';
+                                        }
+                                        echo '<div class="card p-0" style="width: 18rem;">
                                                     <img src="data:image/jpeg;base64,'.base64_encode($value["COURSE_PICTURE"]).'"
                                                         class="card-img-top" alt="...">
                                                     <div class="card-body">
